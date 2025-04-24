@@ -1,0 +1,103 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "role": "admin",
+      "username": "admin",
+      "password": "hashed_password_here",
+      "name": "Admin User",
+      "phone": "+1-555-123-4567",
+      "email": "admin@example.com"
+    },
+    {
+      "id": "2",
+      "role": "customer",
+      "username": "john_doe",
+      "password": "hashed_password_1",
+      "name": "John Doe",
+      "phone": "+1-555-234-5678",
+      "email": "john.doe@example.com"
+    },
+    {
+      "id": "3",
+      "role": "customer",
+      "username": "jane_smith",
+      "password": "hashed_password_2",
+      "name": "Jane Smith",
+      "phone": "+1-555-345-6789",
+      "email": "jane.smith@example.com"
+    },
+    {
+      "id": "4",
+      "role": "customer",
+      "username": "robert_jones",
+      "password": "hashed_password_3",
+      "name": "Robert Jones",
+      "phone": "+1-555-456-7890",
+      "email": "robert.jones@example.com"
+    },
+    {
+      "id": "5",
+      "role": "customer",
+      "username": "sarah_wilson",
+      "password": "hashed_password_4",
+      "name": "Sarah Wilson",
+      "phone": "+1-555-567-8901",
+      "email": "sarah.wilson@example.com"
+    },
+    {
+      "id": "6",
+      "role": "customer",
+      "username": "michael_brown",
+      "password": "hashed_password_5",
+      "name": "Michael Brown",
+      "phone": "+1-555-678-9012",
+      "email": "michael.brown@example.com"
+    },
+    {
+      "id": "7",
+      "role": "customer",
+      "username": "emily_davis",
+      "password": "hashed_password_6",
+      "name": "Emily Davis",
+      "phone": "+1-555-789-0123",
+      "email": "emily.davis@example.com"
+    },
+    {
+      "id": "8",
+      "role": "customer",
+      "username": "david_miller",
+      "password": "hashed_password_7",
+      "name": "David Miller",
+      "phone": "+1-555-890-1234",
+      "email": "david.miller@example.com"
+    },
+    {
+      "id": "9",
+      "role": "customer",
+      "username": "lisa_taylor",
+      "password": "hashed_password_8",
+      "name": "Lisa Taylor",
+      "phone": "+1-555-901-2345",
+      "email": "lisa.taylor@example.com"
+    },
+    {
+      "id": "10",
+      "role": "customer",
+      "username": "james_anderson",
+      "password": "hashed_password_9",
+      "name": "James Anderson",
+      "phone": "+1-555-012-3456",
+      "email": "james.anderson@example.com"
+    },
+    {
+      "id": "11",
+      "role": "customer",
+      "username": "emma_thomas",
+      "password": "hashed_password_10",
+      "name": "Emma Thomas",
+      "phone": "+1-555-123-4567",
+      "email": "emma.thomas@example.com"
+    }
+  ]
+}

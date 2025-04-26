@@ -1,5 +1,4 @@
-{
-  "cars": [
+[
     {
       "id": "1",
       "brand": "Toyota",
@@ -171,4 +170,3 @@
       "description": "Elegant luxury sedan offering exceptional comfort and cutting-edge technology."
     }
   ]
-}

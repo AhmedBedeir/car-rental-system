@@ -1,5 +1,4 @@
-{
-  "users": [
+[
     {
       "id": "1",
       "role": "admin",
@@ -100,4 +99,3 @@
       "email": "emma.thomas@example.com"
     }
   ]
-}

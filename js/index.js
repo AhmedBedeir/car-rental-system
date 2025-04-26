@@ -1,8 +1,10 @@
-import Cars from "./Cars.js";
+import Cars from "./classes/Cars.js";
+import Users from "./classes/Users.js";
 
-async function loadAllCars() {
-  const cars = new Cars();
-  const allCars = await cars.getAllCars();
-  console.log(allCars);
-}
-loadAllCars();
+const cars = new Cars();
+await cars.ready;
+console.log(cars.getAllCars());
+
+const users = new Users();
+await users.ready;
+console.log(users.getUsers());

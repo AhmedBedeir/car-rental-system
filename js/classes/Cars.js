@@ -63,6 +63,19 @@ class Cars {
       return matchesFilter;
     });
   }
+
+  searchCars(searchText) {
+    const text = searchText.trim().toLowerCase();
+    if (!text) return this.cars;
+
+    return this.cars.filter((car) => {
+      return (
+        car.brand.toLowerCase().includes(text) ||
+        car.model.toLowerCase().includes(text) ||
+        car.type.toLowerCase().includes(text)
+      );
+    });
+  }
 }
 
 export default Cars;

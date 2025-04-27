@@ -9,8 +9,10 @@ const typesFilter = document.getElementById("typeFilter");
 const brandsFilter = document.getElementById("brandFilter");
 const minPriceFilter = document.getElementById("minPriceFilter");
 const maxPriceFilter = document.getElementById("maxPriceFilter");
+const availableFilter = document.getElementById("availableFilter");
 const brands = carsClass.carsBrands;
 const types = carsClass.carsTypes;
+const searchInput = document.getElementById("searchInput");
 
 // Fill DropDowns
 brands.forEach((brand) => {
@@ -37,9 +39,14 @@ document.getElementById("filter-form").addEventListener("submit", (e) => {
 
   const brand = brandsFilter.value;
   const type = typesFilter.value;
-  const minPrice = minPriceFilter.value
-    ? Number(minPriceFilter.value)
-    : undefined;
+  const minPrice = minPriceFilter.value;
+  console.log(availableFilter.checked);
+  const available =
+    availableFilter.checked === true
+      ? true
+      : undefined
+      ? Number(minPriceFilter.value)
+      : undefined;
   const maxPrice = maxPriceFilter.value
     ? Number(maxPriceFilter.value)
     : undefined;
@@ -48,6 +55,7 @@ document.getElementById("filter-form").addEventListener("submit", (e) => {
     type,
     minPrice,
     maxPrice,
+    available,
     brand,
   });
   showCards(filteredCars);
@@ -63,17 +71,31 @@ document.getElementById("reset-filter").addEventListener("click", () => {
 });
 
 //////////////////////////////
+searchInput.addEventListener("input", () => {
+  const searchText = searchInput.value;
+  const searchedCars = carsClass.searchCars(searchText);
+
+  showCards(searchedCars);
+});
+
+//////////////////////////////
 
 function showCards(cars) {
   carsContainer.innerHTML = "";
 
   cars.forEach((car) => {
     const col = document.createElement("div");
-    col.className = "col-sm-1 col-md-6 col-lg-4";
+    col.className = " col-md-6 col-lg-4";
+
+    let availabilitySpan =
+      car.available === true
+        ? `<span id="available"><i class="bi bi-check-circle me-1"></i> Available</span>`
+        : `<span id="booked"><i class="bi bi-x-circle"></i> Booked</span>`;
 
     col.innerHTML = `
         <div class="car-card">
           <img src="${car.images[0]}" alt="${car.brand} ${car.model}">
+          ${availabilitySpan}
           <div class="car-card-body">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <h5 class="car-card-title mb-0">${car.brand}</h5>

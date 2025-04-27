@@ -1,0 +1,24 @@
+{
+  "bookings": [
+    {
+      "booking_id": 1,
+      "carId": 1,
+      "userId": 1,
+      "pickup_date": "April 25, 2025",
+      "return_date": "April 28, 2025",
+      "number_Of_days": 3,
+      "total": 255,
+      "status": "pending"
+    },
+    {
+      "booking_id": 2,
+      "carId": 2,
+      "userId": 2,
+      "pickupDate": "April 26, 2025",
+      "returnDate": "April 29, 2025",
+      "number_Of_days": 3,
+      "total": 300,
+      "status": "confirmed"
+    }
+  ]
+}

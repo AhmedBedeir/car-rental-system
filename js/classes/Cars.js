@@ -1,4 +1,4 @@
-import { carTypes, carBrands, carModels } from "../constants.js";
+import { carBrands, carModels, carTypes } from "../constants.js";
 
 class Cars {
   constructor() {
@@ -32,6 +32,11 @@ class Cars {
   getAllCars() {
     return this.cars;
   }
+
+  getCarById(id) {
+    return this.cars.find((car) => car.id === id);
+  }
+
   filterCars({ type, minPrice, maxPrice, available, model, brand }) {
     return this.cars.filter((car) => {
       let matchesFilter = true;

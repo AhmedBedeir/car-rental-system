@@ -1,10 +1,13 @@
+import { getBooking } from "./booking/booking.ui.js";
 import Cars from "./classes/Cars.js";
 import Users from "./classes/Users.js";
 
 const cars = new Cars();
 await cars.ready;
-console.log(cars.getAllCars());
+// console.log(cars.getAllCars());
 
 const users = new Users();
 await users.ready;
-console.log(users.getUsers());
+// console.log(users.getUsers());
+
+await getBooking();

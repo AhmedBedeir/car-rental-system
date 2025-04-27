@@ -114,7 +114,7 @@ function showCards(cars) {
                 .join("")}
             </div>
     
-            <a href="#" class="car-card-btn">View Details</a>
+            <a href="carDetails.html?car_id=${car.id}" class="car-card-btn">View Details</a>
           </div>
         </div>
       `;

@@ -44,7 +44,8 @@
         #other-images-container{
             max-width: 100%;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: flex-start;
+            gap: 3em;
         }
         
         .other-imgs{
@@ -155,7 +156,7 @@
             font-weight: var(--font-weight-bold);
         }
         
-        .car-equips i{
+        #feature-columns i{
             color: var(--main-color);
         }
 

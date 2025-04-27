@@ -1,7 +1,7 @@
 class Users {
   constructor() {
     this.users = [];
-    this.currentUser = null;
+    this.currentUser = 1;
     this.ready = this.loadUsers();
   }
 

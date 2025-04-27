@@ -2,19 +2,42 @@ import Cars from "./Cars.js";
 import Users from "./Users.js";
 
 class Booking {
-  constructor(customer, car, startDate, endDate) {
-    this.customer = customer;
-    this.car = car;
-    this.startDate = startDate;
-    this.endDate = endDate;
+  constructor() {
+    this.bookings = [];
+    this.ready = this.loadBookings();
   }
-  async getBookingDetails(userId) {
-    try {
-      const booking = await fetch(`../data/bookings.json`);
-      const data = await booking.json();
 
-      const userBookings = data.bookings.find(
-        (booking) => booking.userId === userId
+  saveToLocalStorage() {
+    localStorage.setItem("bookings", JSON.stringify(this.bookings));
+  }
+  // load bookings
+  async loadBookings() {
+    const booking = await fetch(`../data/bookings.json`);
+    const data = await booking.json();
+    this.bookings = data.bookings;
+
+    try {
+      if (!localStorage.getItem("bookings")) {
+        const booking = await fetch(`../data/bookings.json`);
+        const data = await booking.json();
+        this.bookings = data.bookings;
+        this.saveToLocalStorage();
+      } else {
+        this.bookings = JSON.parse(localStorage.getItem("bookings"));
+      }
+    } catch (error) {
+      console.error("Error loading initial booking data:", error);
+    }
+  }
+
+  getBookings() {
+    return this.bookings;
+  }
+
+  getBookingDetails(userId) {
+    try {
+      const userBookings = this.bookings.filter(
+        (booking) => booking.userId == userId
       );
 
       if (!userBookings) {
@@ -22,12 +45,17 @@ class Booking {
       }
 
       const users = new Users();
-      const user = await users.getUserById(String(userBookings.userId));
-      userBookings.user = user;
-
       const cars = new Cars();
-      const car = await cars.getCarById(String(userBookings.userId));
-      userBookings.car = car;
+
+      userBookings.forEach((booking) => {
+        //user
+        const user = users.getUserById(String(booking.userId));
+        booking.user = user;
+        // Car
+        const car = cars.getCarById(String(booking.carId));
+        booking.car = car;
+      });
+
       return userBookings;
     } catch (error) {
       console.error("Error fetching booking details:", error);

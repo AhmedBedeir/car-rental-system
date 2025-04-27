@@ -10,8 +10,8 @@
     "available": true,
     "features": ["GPS", "Bluetooth", "Backup Camera"],
     "images": [
-      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb",
       "https://images.unsplash.com/photo-1552519507-da3b142c6e3d",
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb",
       "https://images.unsplash.com/photo-1550355291-bbee04a92027"
     ],
     "description": "Comfortable and fuel-efficient sedan perfect for city driving."

@@ -68,6 +68,7 @@ document.getElementById("reset-filter").addEventListener("click", () => {
   typesFilter.value = "all";
   minPriceFilter.value = undefined;
   maxPriceFilter.value = undefined;
+  availableFilter.checked = false;
 
   showCards(cars);
 });

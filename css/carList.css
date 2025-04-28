@@ -126,3 +126,13 @@ body {
 div > .bi-check-circle {
   color: var(--secondary-color);
 }
+
+/* ///////////////////////// */
+
+#noCars {
+  text-align: center;
+}
+
+#noCars p {
+  color: var(--secondary-text-color);
+}

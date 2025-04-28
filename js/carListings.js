@@ -58,6 +58,7 @@ document.getElementById("filter-form").addEventListener("submit", (e) => {
     available,
     brand,
   });
+
   showCards(filteredCars);
 });
 
@@ -67,10 +68,12 @@ document.getElementById("reset-filter").addEventListener("click", () => {
   typesFilter.value = "all";
   minPriceFilter.value = undefined;
   maxPriceFilter.value = undefined;
+  availableFilter.checked = false;
+
   showCards(cars);
 });
 
-//////////////////////////////
+//Search Functionality
 searchInput.addEventListener("input", () => {
   const searchText = searchInput.value;
   const searchedCars = carsClass.searchCars(searchText);
@@ -82,6 +85,20 @@ searchInput.addEventListener("input", () => {
 
 function showCards(cars) {
   carsContainer.innerHTML = "";
+  if (cars.length === 0) {
+    carsContainer.innerHTML = `
+    <div id="noCars">
+  <h2>No cars matched your search.</h2>
+  <p>Try adjusting your search/filter for better results!</p>
+  <img
+    src="../assets/noCar.svg"
+    alt="no cars"
+    width="150"
+    height="150"
+  />
+  </div>
+  `;
+  }
 
   cars.forEach((car) => {
     const col = document.createElement("div");

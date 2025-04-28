@@ -167,6 +167,22 @@
         .inputs label{
             color: var(--main-color);
         }
+
+        [data-vc-theme=light] .vc-time__hour input,
+        [data-vc-theme=light] .vc-time__minute input{
+            color: var(--main-color);
+        }
+        
+        [data-vc-theme=light] .vc-time__hour input:hover,
+        [data-vc-theme=light] .vc-time__minute input:hover,
+        [data-vc-theme=light] .vc-time__keeping:hover{
+            background-color: var(--border-color);
+        }
+
+        #show-register-link,
+        #show-login-link{
+            color: var(--link-color);
+        }
         
         @media screen and (max-width: 768px){
             #right{

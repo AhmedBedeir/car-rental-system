@@ -1,0 +1,93 @@
+.booking-table-container {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.booking-table {
+  width: 100%;
+}
+
+.booking-table thead {
+  background-color: #213448;
+  color: var(--light-text-color);
+  position: sticky;
+  top: 0;
+}
+
+.booking-table th {
+  padding: var(--spacing-md);
+  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
+}
+
+.booking-table td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.booking-table .user-info,
+.booking-table .car-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.booking-table .user-info .name,
+.booking-table .car-info .model {
+  font-weight: var(--font-weight-bold);
+}
+
+.booking-table .user-info .username,
+.booking-table .car-info .details {
+  color: var(--secondary-text-color);
+  font-size: var(--font-size-sm);
+}
+
+select {
+  border: none;
+  border-radius: 6px;
+  background: #213448;
+  padding: 10px;
+  transition: 0.4s;
+  outline: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+option {
+  transition: 0.4s;
+  background-color: #213448;
+}
+
+.status-select.pending {
+  background-color: #ffa500;
+}
+
+.status-select.confirmed {
+  background-color: #4caf50;
+}
+
+.status-select.cancelled {
+  background-color: #f44336;
+}
+
+.booking-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 768px) {
+  .booking-table-container {
+    border-radius: 0;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .booking-table th,
+  .booking-table td {
+    padding: var(--spacing-sm);
+  }
+}

@@ -1,5 +1,5 @@
-import Booking from "../classes/booking.js";
-import Users from "../classes/Users.js";
+import Booking from "./classes/booking.js";
+import Users from "./classes/Users.js";
 
 let bookings = [];
 let currentNumber = 0;

@@ -18,3 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     calendar = new Calendar('#calendar', options);
     calendar.init();
 });
+
+/*TODO:
+display time
+display date and time range(disabled dates)
+handle events*/

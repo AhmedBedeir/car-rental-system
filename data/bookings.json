@@ -1,0 +1,45 @@
+{
+  "bookings": [
+    {
+      "booking_id": 1,
+      "carId": 6,
+      "userId": 1,
+      "pickupDate": "April 25, 2025",
+      "returnDate": "April 28, 2025",
+      "numberOfDays": 3,
+      "total": 255,
+      "status": "pending"
+    },
+
+    {
+      "booking_id": 2,
+      "carId": 2,
+      "userId": 2,
+      "pickupDate": "April 26, 2025",
+      "returnDate": "April 29, 2025",
+      "numberOfDays": 3,
+      "total": 300,
+      "status": "confirmed"
+    },
+    {
+      "booking_id": 3,
+      "carId": 3,
+      "userId": 2,
+      "pickupDate": "April 24, 2025",
+      "returnDate": "April 30, 2025",
+      "numberOfDays": 3,
+      "total": 300,
+      "status": "confirmed"
+    },
+    {
+      "booking_id": 4,
+      "carId": 4,
+      "userId": 1,
+      "pickupDate": "April 25, 2025",
+      "returnDate": "April 28, 2025",
+      "numberOfDays": 3,
+      "total": 255,
+      "status": "confirmed"
+    }
+  ]
+}

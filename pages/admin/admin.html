@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/admin/admin_layout.css" />
+    <link rel="stylesheet" href="../../css/index.css" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Admin</title>
+  </head>
+  <body>
+    <main>
+      <!-- Sidebar -->
+      <aside id="sidebar" class="sidebar">
+        <!-- sidebar header -->
+        <div class="sidebar-header">
+          <h3>Car Rental</h3>
+        </div>
+
+        <!-- sidebar profile -->
+        <div class="sidebar-profile">
+          <div class="profile-img">
+            <img
+              src="https://avatars.githubusercontent.com/u/133179089?v=4"
+              alt="Profile Image"
+            />
+          </div>
+          <div class="profile-info">
+            <h5>Abdelrhman</h5>
+            <p>Administrator</p>
+          </div>
+        </div>
+
+        <!-- links -->
+        <ul class="list-unstyled components">
+          <li class="active">
+            <a href="/" class="dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/" class="dashboard">
+              <i class="fas fa-car"></i>
+              <span>Management Cars </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="management_booking.html">
+              <i class="fas fa-calendar-check"></i>
+              <span>Manage Booking</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- sidebar footer  -->
+        <div class="sidebar-footer">
+          <a href="#" class="btn btn-logout">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Dashboard Content -->
+      <div id="dashboard-content" class="overflow-hidden">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <h2 class="h6">Dashboard</h2>
+
+            <!-- Actions Container -->
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Icon Toggle Sidebar -->
+              <button
+                class="nav-item d-flex align-items-center border-0 bg-transparent"
+              >
+                <i id="sidebarCollapse" class="fa fa-list fs-4 mx-2"></i>
+              </button>
+
+              <!-- Navbar Icons -->
+              <div class="profile-img">
+                <img
+                  src="https://avatars.githubusercontent.com/u/133179089?v=4"
+                  alt="Profile Image"
+                />
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="dashboard-content-area">
+          <!-- Cards Section -->
+          <div class="cards mt-4">
+            <div class="row g-2">
+              <!-- Total Cars Card -->
+              <div class="col-md-6 col-lg-3">
+                <div class="item p-3">
+                  <div
+                    class="icon d-flex justify-content-center align-items-center"
+                  >
+                    <i class="fa fa-car"></i>
+                  </div>
+                  <p class="title">Total Cars</p>
+                  <h2>24</h2>
+                  <p class="small mt-1">5 currently booked</p>
+                </div>
+              </div>
+
+              <!-- Available Cars Card -->
+              <div class="col-md-6 col-lg-3">
+                <div class="item p-3">
+                  <div
+                    class="icon d-flex justify-content-center align-items-center"
+                  >
+                    <i class="fa fa-car-side"></i>
+                  </div>
+                  <p class="title">Available Cars</p>
+                  <h2>19</h2>
+                  <p class="small mt-1">79% availability</p>
+                </div>
+              </div>
+
+              <!-- Active Bookings Card -->
+              <div class="col-md-6 col-lg-3">
+                <div class="item p-3">
+                  <div
+                    class="icon d-flex justify-content-center align-items-center"
+                  >
+                    <i class="fa fa-calendar-check"></i>
+                  </div>
+                  <p class="title">Active Bookings</p>
+                  <h2>12</h2>
+                  <p class="small mt-1">3 ending today</p>
+                </div>
+              </div>
+
+              <!-- Registered Users Card -->
+              <div class="col-md-6 col-lg-3">
+                <div class="item p-3">
+                  <div
+                    class="icon d-flex justify-content-center align-items-center"
+                  >
+                    <i class="fa fa-users"></i>
+                  </div>
+                  <p class="title">Registered Users</p>
+                  <h2>48</h2>
+                  <p class="small mt-1">8 active now</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="../../js/sidebar.js"></script>
+    <script type="module" src="../../js/index.js"></script>
+  </body>
+</html>

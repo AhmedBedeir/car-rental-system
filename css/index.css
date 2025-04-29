@@ -22,6 +22,7 @@
   --secondary-text-color: #8d8d8d;
   --link-color: var(--main-color);
   --link-hover-color: var(--main-color-hover);
+  --light-text-color: #fff;
 
   /* Radius & Shadows */
   --border-radius: 10px;
@@ -45,4 +46,8 @@
 
   /* Transitions */
   --transition: 0.3s ease;
+
+  /* Sidebar Width */
+  --sidebar-width: 250px;
+  --sidebar-collapsed-width: 80px;
 }

@@ -31,6 +31,17 @@ class Booking {
   }
 
   getBookings() {
+    this.bookings.forEach((booking) => {
+      //user
+      const users = new Users();
+      const user = users.getUserById(String(booking.userId));
+      booking.user = user;
+      // Car
+      const cars = new Cars();
+      const car = cars.getCarById(String(booking.carId));
+      booking.car = car;
+    });
+
     return this.bookings;
   }
 

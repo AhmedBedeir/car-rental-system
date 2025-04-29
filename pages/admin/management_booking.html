@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/admin/admin_layout.css" />
+    <link rel="stylesheet" href="../../css/admin/management_booking.css" />
+    <link rel="stylesheet" href="../../css/index.css" />
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Management Booking</title>
+  </head>
+  <body>
+    <main>
+      <!-- Sidebar -->
+      <aside id="sidebar" class="sidebar">
+        <!-- sidebar header -->
+        <div class="sidebar-header">
+          <h3>Car Rental</h3>
+        </div>
+
+        <!-- sidebar profile -->
+        <div class="sidebar-profile">
+          <div class="profile-img">
+            <img
+              src="https://avatars.githubusercontent.com/u/133179089?v=4"
+              alt="Profile Image"
+            />
+          </div>
+          <div class="profile-info">
+            <h5>Abdelrhman</h5>
+            <p>Administrator</p>
+          </div>
+        </div>
+
+        <!-- links -->
+        <ul class="list-unstyled components">
+          <li class="">
+            <a href="/" class="dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="/" class="dashboard">
+              <i class="fas fa-car"></i>
+              <span>Management Cars </span>
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="/pages/management_booking.html">
+              <i class="fas fa-calendar-check"></i>
+              <span>Manage Booking</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- sidebar footer  -->
+        <div class="sidebar-footer">
+          <a href="#" class="btn btn-logout">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Dashboard Content -->
+      <div id="dashboard-content" class="overflow-hidden">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <h2 class="h6">Dashboard</h2>
+
+            <!-- Actions Container -->
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Icon Toggle Sidebar -->
+              <button
+                class="nav-item d-flex align-items-center border-0 bg-transparent"
+              >
+                <i id="sidebarCollapse" class="fa fa-list fs-4 mx-2"></i>
+              </button>
+
+              <!-- Navbar Icons -->
+              <div class="profile-img">
+                <img
+                  src="https://avatars.githubusercontent.com/u/133179089?v=4"
+                  alt="Profile Image"
+                />
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="dashboard-content-area">
+          <!-- Table  -->
+          <div class="booking-table-container">
+            <table class="booking-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>User</th>
+                  <th>Car</th>
+                  <th>Pickup Date</th>
+                  <th>Return Date</th>
+                  <th>Days</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="booking-data"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="../../js/mangementBooking.js"></script>
+    <script type="module" src="../../js/sidebar.js"></script>
+    <script type="module" src="../../js/index.js"></script>
+  </body>
+</html>

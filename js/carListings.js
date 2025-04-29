@@ -1,5 +1,5 @@
 import Cars from "./classes/Cars.js";
-import showCards from "./helpers.js";
+import { showCards } from "./helpers.js";
 
 const carsClass = new Cars();
 await carsClass.ready;

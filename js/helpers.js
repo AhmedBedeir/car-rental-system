@@ -1,4 +1,4 @@
-export default function showCards(cars, carsContainer, carDetailsPath) {
+export function showCards(cars, carsContainer, carDetailsPath) {
   carsContainer.innerHTML = "";
   if (cars.length === 0) {
     carsContainer.innerHTML = `

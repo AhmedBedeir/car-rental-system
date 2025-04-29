@@ -1,6 +1,6 @@
 import Cars from "./classes/Cars.js";
 import Users from "./classes/Users.js";
-import showCards from "./helpers.js";
+import { showCards } from "./helpers.js";
 
 const cars = new Cars();
 await cars.ready;

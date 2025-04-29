@@ -11,49 +11,20 @@ const init = async () => {
     setupAuthorizationCheck();
 };
 
+//extarct car details from url
 function extractDetails() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const carId = urlParams.get('car_id');
+    const carId = new URLSearchParams(window.location.search).get('car_id');
     const car = carsClass.getCarById(carId);
     console.log(car);
     
+    //car exists
     if (car) {
-        document.getElementById("car-name").textContent = `${car.brand} ${car.model}`;
-        document.getElementById("price").textContent = `$${car.pricePerDay}/day`;
-        
-        document.getElementById("main-car-img").src = car.images[0];
-        document.getElementById("main-car-img").alt = `${car.brand} ${car.model}`;
-        
-        const otherImagesContainer = document.getElementById("other-images-container");
-        otherImagesContainer.innerHTML = "";
-        for (let i = 1; i < car.images.length; i++) {
-            const img = document.createElement("img");
-            img.className = "other-imgs";
-            img.src = car.images[i];
-            img.alt = `${car.brand} ${car.model} - image ${i + 1}`;
-            otherImagesContainer.appendChild(img);
-        }
-        
-        const featureColumnsContainer = document.getElementById("feature-columns");
-        featureColumnsContainer.innerHTML = "";
-        
-        for (let i = 0; i < car.features.length; i += 3) {
-            const column = document.createElement("div");
-            column.className = "col-12 col-md-4 d-flex flex-column gap-2";
-            
-            for (let j = i; j < i + 3 && j < car.features.length; j++) {
-                const item = document.createElement("div");
-                item.className = "car-equips d-flex align-items-center";
-                item.innerHTML = `
-                    <i class="bi bi-check-circle-fill me-2"></i>
-                    <p class="mb-0">${car.features[j]}</p>
-                `;
-                column.appendChild(item);
-            }
-            
-            featureColumnsContainer.appendChild(column);
-        }
-    } else {
+        updateNamePrice(car);
+        updateImgs(car);
+        updateFeatures(car);
+    }
+    // car not found 
+    else {
         document.querySelector("main").innerHTML = `
             <div id="car-not-found" class="d-flex flex-column justify-content-center align-items-center text-center w-100" style="height: 100vh;">
                 <div>
@@ -64,6 +35,7 @@ function extractDetails() {
             </div>
         `;
         
+        //redirect back to home in 3 seconds
         let count = 4;
         const interval = setInterval(() => {
             count--;
@@ -76,6 +48,66 @@ function extractDetails() {
         }, 1000);
     }
 }
+
+
+function updateNamePrice(car){
+    //display car name and price / day
+    document.getElementById("car-name").textContent = `${car.brand} ${car.model}`;
+    document.getElementById("price").textContent = `$${car.pricePerDay}/day`;
+}
+
+function updateImgs(car){
+    // display main image
+    document.getElementById("main-car-img").src = car.images[0];
+    document.getElementById("main-car-img").alt = `${car.brand} ${car.model}`;
+    
+    //display other images
+    const otherImagesContainer = document.getElementById("other-images-container");
+    otherImagesContainer.innerHTML = "";
+    for (let i = 1; i < car.images.length; i++) {
+        const img = document.createElement("img");
+        img.className = "other-imgs";
+        img.src = car.images[i];
+        img.alt = `${car.brand} ${car.model} - image ${i + 1}`;
+        otherImagesContainer.appendChild(img);
+    }
+}
+
+function updateFeatures(car){
+    // display car features
+    const featureColumnsContainer = document.getElementById("feature-columns");
+    featureColumnsContainer.innerHTML = "";
+    
+    for (let i = 0; i < car.features.length; i += 3) {
+        const column = document.createElement("div");
+        column.className = "col-12 col-md-4 d-flex flex-column gap-2";
+        
+        for (let j = i; j < i + 3 && j < car.features.length; j++) {
+            const item = document.createElement("div");
+            item.className = "car-equips d-flex align-items-center";
+            item.innerHTML = `
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <p class="mb-0">${car.features[j]}</p>
+            `;
+            column.appendChild(item);
+        }
+        
+        featureColumnsContainer.appendChild(column);
+    }
+}
+
+//TODO: refactor not found and redirection to home
+
+
+
+
+
+
+
+
+
+
+
 
 function setupAuthorizationCheck() {
     const rentButton = document.getElementById('rent-btn');
@@ -312,3 +344,45 @@ function setupAuthorizationCheck() {
 }
 // Initialize the page
 init();
+
+//when hovering over time sliders change hour and minute background colors
+document.addEventListener('DOMContentLoaded', () => {
+    const hourRange = document.querySelector('label[data-vc-time-range="hour"] input');
+    const minuteRange = document.querySelector('label[data-vc-time-range="minute"] input');
+    
+    const hourInput = document.querySelector('label[data-vc-time-input="hour"] input');
+    const minuteInput = document.querySelector('label[data-vc-time-input="minute"] input');
+    
+    // hour
+    hourRange.addEventListener('mouseenter', () => {
+        hourInput.style.backgroundColor = 'var(--border-color)'; // custom hover background
+    });
+    hourRange.addEventListener('mouseleave', () => {
+        hourInput.style.backgroundColor = '';
+    });
+    
+    // minute
+    minuteRange.addEventListener('mouseenter', () => {
+        minuteInput.style.backgroundColor = 'var(--border-color)';
+    });
+    minuteRange.addEventListener('mouseleave', () => {
+        minuteInput.style.backgroundColor = '';
+    });
+});
+
+const showRegisterLink = document.getElementById('show-register-link');
+const showLoginLink = document.getElementById('show-login-link');
+const confirmPasswordContainer = document.getElementById('confirm-password-container');
+const registerLinkContainer = document.getElementById('register-link-container');
+
+showRegisterLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    confirmPasswordContainer.style.display = 'block';
+    registerLinkContainer.style.display = 'none';
+});
+
+showLoginLink.addEventListener('click', function(event) {
+    event.preventDefault();
+    confirmPasswordContainer.style.display = 'none';
+    registerLinkContainer.style.display = 'block';
+});

@@ -57,6 +57,7 @@
     </nav>
 </header>
 
+<!--manage car main image height so it stays teh same for all cars-->
 <main>
     <section id="car-details" class="d-flex flex-column flex-md-row p-3">
         <article id="left" class="w-100 w-md-50 d-flex flex-column gap-3">
@@ -129,52 +130,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="../js/calendarInit.js"></script>
 <script src="../js/CarDetails.js" type="module"></script>
-<script>
-    //when hovering over time sliders change hour and minute background colors
-    document.addEventListener('DOMContentLoaded', () => {
-        const hourRange = document.querySelector('label[data-vc-time-range="hour"] input');
-        const minuteRange = document.querySelector('label[data-vc-time-range="minute"] input');
-        
-        const hourInput = document.querySelector('label[data-vc-time-input="hour"] input');
-        const minuteInput = document.querySelector('label[data-vc-time-input="minute"] input');
-        
-        // hour
-        hourRange.addEventListener('mouseenter', () => {
-            hourInput.style.backgroundColor = 'var(--border-color)'; // custom hover background
-        });
-        hourRange.addEventListener('mouseleave', () => {
-            hourInput.style.backgroundColor = '';
-        });
-        
-        // minute
-        minuteRange.addEventListener('mouseenter', () => {
-            minuteInput.style.backgroundColor = 'var(--border-color)';
-        });
-        minuteRange.addEventListener('mouseleave', () => {
-            minuteInput.style.backgroundColor = '';
-        });
-    });
-</script>
-<script>
-    const showRegisterLink = document.getElementById('show-register-link');
-    const showLoginLink = document.getElementById('show-login-link');
-    const confirmPasswordContainer = document.getElementById('confirm-password-container');
-    const registerLinkContainer = document.getElementById('register-link-container');
-    
-    showRegisterLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        confirmPasswordContainer.style.display = 'block';
-        registerLinkContainer.style.display = 'none';
-    });
-    
-    showLoginLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        confirmPasswordContainer.style.display = 'none';
-        registerLinkContainer.style.display = 'block';
-    });
-</script>
-
-
-
 </body>
 </html>

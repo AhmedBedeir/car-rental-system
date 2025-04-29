@@ -99,38 +99,6 @@ input:focus {
   box-shadow: 0 0 0 3px rgba(89, 55, 224, 0.1);
 }
 
-.forgot-password {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: var(--spacing-md) 0 var(--spacing-xl);
-}
-
-.remember-me {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.remember-me input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--main-color);
-}
-
-.forgot-password a {
-  color: var(--link-color);
-  text-decoration: none;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  transition: color var(--transition);
-}
-
-.forgot-password a:hover {
-  color: var(--link-hover-color);
-  text-decoration: underline;
-}
-
 .btn-primary {
   width: 100%;
   padding: 12px;
@@ -146,60 +114,6 @@ input:focus {
 
 .btn-primary:hover {
   background-color: var(--main-color-hover);
-}
-
-.social-login {
-  margin-top: var(--spacing-xl);
-}
-
-.social-login-title {
-  text-align: center;
-  color: var(--secondary-text-color);
-  position: relative;
-  margin-bottom: var(--spacing-lg);
-}
-
-.social-login-title::before,
-.social-login-title::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 30%;
-  height: 1px;
-  background-color: var(--border-color);
-}
-
-.social-login-title::before {
-  left: 0;
-}
-
-.social-login-title::after {
-  right: 0;
-}
-
-.social-buttons {
-  display: flex;
-  gap: var(--spacing-md);
-}
-
-.social-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  padding: 10px;
-  border-radius: var(--border-radius);
-  background-color: var(--surface-color);
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-  transition: background-color var(--transition);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-}
-
-.social-btn:hover {
-  background-color: var(--background-color);
 }
 
 .form {

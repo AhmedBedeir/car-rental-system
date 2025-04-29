@@ -14,6 +14,7 @@ const availableFilter = document.getElementById("availableFilter");
 const brands = carsClass.carsBrands;
 const types = carsClass.carsTypes;
 const searchInput = document.getElementById("searchInput");
+const carDetailsPath = "./carDetails.html";
 
 // Fill DropDowns
 brands.forEach((brand) => {
@@ -30,7 +31,7 @@ types.forEach((type) => {
   typesFilter.appendChild(option);
 });
 
-showCards(cars, carsContainer);
+showCards(cars, carsContainer, carDetailsPath);
 
 //Filter Functionality
 
@@ -60,7 +61,7 @@ document.getElementById("filter-form").addEventListener("submit", (e) => {
     brand,
   });
 
-  showCards(filteredCars, carsContainer);
+  showCards(filteredCars, carsContainer, carDetailsPath);
 });
 
 //Reset
@@ -71,7 +72,7 @@ document.getElementById("reset-filter").addEventListener("click", () => {
   maxPriceFilter.value = undefined;
   availableFilter.checked = false;
 
-  showCards(cars, carsContainer);
+  showCards(cars, carsContainer, carDetailsPath);
 });
 
 //Search Functionality
@@ -79,5 +80,5 @@ searchInput.addEventListener("input", () => {
   const searchText = searchInput.value;
   const searchedCars = carsClass.searchCars(searchText);
 
-  showCards(searchedCars, carsContainer);
+  showCards(searchedCars, carsContainer, carDetailsPath);
 });

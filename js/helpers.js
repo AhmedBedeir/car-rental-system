@@ -1,4 +1,4 @@
-export default function showCards(cars, carsContainer) {
+export default function showCards(cars, carsContainer, carDetailsPath) {
   carsContainer.innerHTML = "";
   if (cars.length === 0) {
     carsContainer.innerHTML = `
@@ -46,9 +46,9 @@ export default function showCards(cars, carsContainer) {
                   .join("")}
               </div>
       
-              <a href="carDetails.html?car_id=${
-                car.id
-              }" class="car-card-btn">View Details</a>
+              <a href="${carDetailsPath}?car_id=${
+      car.id
+    }" class="car-card-btn">View Details</a>
             </div>
           </div>
         `;

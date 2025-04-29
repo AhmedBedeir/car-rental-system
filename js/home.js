@@ -9,5 +9,6 @@ const users = new Users();
 await users.ready;
 
 const carsContainer = document.getElementById("car-cards-container");
+const carDetailsPath = "./pages/carDetails.html";
 
-showCards(cars.getAllCars().slice(0, 6), carsContainer);
+showCards(cars.getAllCars().slice(0, 6), carsContainer, carDetailsPath);

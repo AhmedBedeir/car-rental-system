@@ -29,7 +29,6 @@ function extractDisplayDetails() {
     }
 }
 
-
 function updateNamePrice(car){
     //display car name and price / day
     document.getElementById("car-name").textContent = `${car.brand} ${car.model}`;
@@ -340,48 +339,55 @@ function setupAuthorizationCheck() {
     
     
 }
+
 // Initialize the page
 init();
 
+// const showRegisterLink = document.getElementById('show-register-link');
+// const showLoginLink = document.getElementById('show-login-link');
+// const confirmPasswordContainer = document.getElementById('confirm-password-container');
+// const registerLinkContainer = document.getElementById('register-link-container');
 
-//when hovering over time sliders change hour and minute background colors
+// showRegisterLink.addEventListener('click', function(event) {
+//     event.preventDefault();
+//     confirmPasswordContainer.style.display = 'block';
+//     registerLinkContainer.style.display = 'none';
+// });
+
+// showLoginLink.addEventListener('click', function(event) {
+//     event.preventDefault();
+//     confirmPasswordContainer.style.display = 'none';
+//     registerLinkContainer.style.display = 'block';
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
-    const hourRange = document.querySelector('label[data-vc-time-range="hour"] input');
-    const minuteRange = document.querySelector('label[data-vc-time-range="minute"] input');
-    
-    const hourInput = document.querySelector('label[data-vc-time-input="hour"] input');
-    const minuteInput = document.querySelector('label[data-vc-time-input="minute"] input');
-    
-    // hour
-    hourRange.addEventListener('mouseenter', () => {
-        hourInput.style.backgroundColor = 'var(--border-color)'; // custom hover background
-    });
-    hourRange.addEventListener('mouseleave', () => {
-        hourInput.style.backgroundColor = '';
-    });
-    
-    // minute
-    minuteRange.addEventListener('mouseenter', () => {
-        minuteInput.style.backgroundColor = 'var(--border-color)';
-    });
-    minuteRange.addEventListener('mouseleave', () => {
-        minuteInput.style.backgroundColor = '';
-    });
+    // Hover effect on range INPUTS (hour and minute) when RANGES are hovered 
+    rangeHoverEffects();
+
+    // TODO: refactor Toggle between Register and Login forms
 });
 
-const showRegisterLink = document.getElementById('show-register-link');
-const showLoginLink = document.getElementById('show-login-link');
-const confirmPasswordContainer = document.getElementById('confirm-password-container');
-const registerLinkContainer = document.getElementById('register-link-container');
+function rangeHoverEffects() {
+    const ranges = [
+        { selector: 'label[data-vc-time-range="hour"] input', inputSelector: 'label[data-vc-time-input="hour"] input' },
+        { selector: 'label[data-vc-time-range="minute"] input', inputSelector: 'label[data-vc-time-input="minute"] input' }
+    ];
 
-showRegisterLink.addEventListener('click', function(event) {
-    event.preventDefault();
-    confirmPasswordContainer.style.display = 'block';
-    registerLinkContainer.style.display = 'none';
-});
+    ranges.forEach(({ selector, inputSelector }) => {
+        const range = document.querySelector(selector);
+        const input = document.querySelector(inputSelector);
 
-showLoginLink.addEventListener('click', function(event) {
-    event.preventDefault();
-    confirmPasswordContainer.style.display = 'none';
-    registerLinkContainer.style.display = 'block';
-});
+        if (range && input) {
+            range.addEventListener('mouseenter', () => changeInputBackground(input, true)); // doesnt work as a direct callbaxk
+            range.addEventListener('mouseleave', () => changeInputBackground(input, false));
+        }
+    });
+}
+
+function changeInputBackground(input, isHovered) {
+    if (isHovered) {
+        input.style.backgroundColor = 'var(--border-color)';
+    } else {
+        input.style.backgroundColor = '';
+    }
+}

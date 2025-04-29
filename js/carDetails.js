@@ -7,12 +7,12 @@ const usersClass = new Users();
 const init = async () => {
     await carsClass.ready;
     await usersClass.ready;
-    extractDetails();
+    extractDisplayDetails();
     setupAuthorizationCheck();
 };
 
 //extarct car details from url
-function extractDetails() {
+function extractDisplayDetails() {
     const carId = new URLSearchParams(window.location.search).get('car_id');
     const car = carsClass.getCarById(carId);
     console.log(car);
@@ -25,27 +25,7 @@ function extractDetails() {
     }
     // car not found 
     else {
-        document.querySelector("main").innerHTML = `
-            <div id="car-not-found" class="d-flex flex-column justify-content-center align-items-center text-center w-100" style="height: 100vh;">
-                <div>
-                    <img src="../assets/noCar.svg" alt="Car not found" class="img-fluid" style="max-width: 300px;">
-                    <h2 class="mt-3">Car not found</h2>
-                    <p id="redirect-msg" class="mt-2 fs-5">Redirecting you to the home page in 3...</p>
-                </div>
-            </div>
-        `;
-        
-        //redirect back to home in 3 seconds
-        let count = 4;
-        const interval = setInterval(() => {
-            count--;
-            if (count > 0) {
-                document.getElementById("redirect-msg").textContent = `Redirecting you to the home page in ${count}...`;
-            } else {
-                clearInterval(interval);
-                window.location.href = "../index.html";
-            }
-        }, 1000);
+        carNotFoundRedirect();
     }
 }
 
@@ -96,11 +76,29 @@ function updateFeatures(car){
     }
 }
 
-//TODO: refactor not found and redirection to home
+function carNotFoundRedirect(){
+    document.querySelector("main").innerHTML = `
+            <div id="car-not-found" class="d-flex flex-column justify-content-center align-items-center text-center w-100" style="height: 100vh;">
+                <div>
+                    <img src="../assets/noCar.svg" alt="Car not found" class="img-fluid" style="max-width: 300px;">
+                    <h2 class="mt-3">Car not found</h2>
+                    <p id="redirect-msg" class="mt-2 fs-5">Redirecting you to the home page in 3...</p>
+                </div>
+            </div>
+        `;
 
-
-
-
+    //redirect back to home in 3 seconds
+    let count = 4;
+    const interval = setInterval(() => {
+        count--;
+        if (count > 0) {
+            document.getElementById("redirect-msg").textContent = `Redirecting you to the home page in ${count}...`;
+        } else {
+            clearInterval(interval);
+            window.location.href = "../index.html";
+        }
+    }, 1000);
+}
 
 
 
@@ -344,6 +342,7 @@ function setupAuthorizationCheck() {
 }
 // Initialize the page
 init();
+
 
 //when hovering over time sliders change hour and minute background colors
 document.addEventListener('DOMContentLoaded', () => {

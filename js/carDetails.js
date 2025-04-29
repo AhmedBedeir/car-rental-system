@@ -100,184 +100,8 @@ function carNotFoundRedirect(){
 }
 
 
-
-
-
-
-
 //TODO: Refactor this
-/* function setupAuthorizationCheck() {
-const rentButton = document.getElementById('rent-btn');
-const loginSection = document.getElementById('login-signup');
-const currentUser = usersClass.getCurrentUser();
-const confirmPasswordContainer = document.getElementById('confirm-password-container');
-const registerLinkContainer = document.getElementById('register-link-container');
-
-if (!document.getElementById('toast-container')) {
-const toastContainer = document.createElement('div');
-toastContainer.id = 'toast-container';
-toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
-document.body.appendChild(toastContainer);
-}
-
-function showToast(message, type = 'success') {
-const toastContainer = document.getElementById('toast-container');
-const toastId = `toast-${Date.now()}`;
-
-const toastHtml = `
-<div id="${toastId}" class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
-<div class="d-flex">
-<div class="toast-body">
-${message}
-</div>
-<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-</div>
-</div>
-`;
-
-toastContainer.insertAdjacentHTML('beforeend', toastHtml);
-const toastElement = document.getElementById(toastId);
-const toast = new bootstrap.Toast(toastElement);
-toast.show();
-
-toastElement.addEventListener('hidden.bs.toast', () => {
-    toastElement.remove();
-});
-}
-
-if (currentUser) {
-rentButton.disabled = false;
-
-loginSection.innerHTML = `
-<div class="alert alert-success mb-3">
-<h5>Welcome, ${currentUser.name || currentUser.username}!</h5>
-<p class="mb-0">You are logged in and can rent cars.</p>
-</div>
-`;
-} else {
-rentButton.disabled = true;
-
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const confirmPasswordInput = document.getElementById('confirm-password');
-
-const formInputs = [emailInput, passwordInput, confirmPasswordInput];
-
-formInputs.forEach(input => {
-    if (input) {
-input.addEventListener('input', validateForm);
-}
-});
-
-const loginSignupContainer = document.createElement('div');
-loginSignupContainer.className = 'text-center mt-3';
-loginSignupContainer.innerHTML = `
-<button id="auth-btn" class="btn btn-primary">Login</button>
-`;
-
-loginSection.appendChild(loginSignupContainer);
-
-const authButton = document.getElementById('auth-btn');
-authButton.addEventListener('click', handleAuth);
-
-document.getElementById('show-register-link').addEventListener('click', function(event) {
-event.preventDefault();
-confirmPasswordContainer.style.display = 'block';
-registerLinkContainer.style.display = 'none';
-authButton.textContent = 'Register'; // Update button text
-});
-
-document.getElementById('show-login-link').addEventListener('click', function(event) {
-event.preventDefault();
-confirmPasswordContainer.style.display = 'none';
-registerLinkContainer.style.display = 'block';
-authButton.textContent = 'Login';
-});
-}
-
-function validateForm() {
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const confirmPasswordContainer = document.getElementById('confirm-password-container');
-const confirmPasswordInput = document.getElementById('confirm-password');
-
-if (!emailInput.value || !passwordInput.value) {
-return false;
-}
-
-if (confirmPasswordContainer.style.display !== 'none') {
-if (!confirmPasswordInput.value || confirmPasswordInput.value !== passwordInput.value) {
-return false;
-}
-}
-
-return true;
-}
-
-function handleAuth(e) {
-e.preventDefault();
-
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
-
-const isRegistering = confirmPasswordContainer.style.display !== 'none';
-
-if (isRegistering) {
-const confirmPassword = document.getElementById('confirm-password').value;
-
-if (!email || !password) {
-showToast('Please fill all required fields', 'danger');
-return;
-}
-
-if (password !== confirmPassword) {
-showToast('Passwords do not match', 'danger');
-return;
-}
-
-const username = email.split('@')[0];
-const name = username;
-const phone = '';
-
-const registerResult = usersClass.register(username, email, password, phone, name);
-
-if (registerResult.success) {
-showToast('Registration successful!', 'success');
-rentButton.disabled = false;
-
-loginSection.innerHTML = `
-<div class="alert alert-success mb-3">
-<h5>Welcome, ${registerResult.user.name || registerResult.user.username}!</h5>
-<p class="mb-0">You are logged in and can rent cars.</p>
-</div>
-`;
-} else {
-showToast(registerResult.message, 'danger');
-}
-} else {
-if (!email || !password) {
-showToast('Please enter both email and password', 'danger');
-return;
-}
-
-const loginResult = usersClass.login(email, password);
-
-if (loginResult.success) {
-showToast('Login successful!', 'success');
-rentButton.disabled = false;
-
-loginSection.innerHTML = `
-<div class="alert alert-success mb-3">
-<h5>Welcome, ${loginResult.user.name || loginResult.user.username}!</h5>
-<p class="mb-0">You are logged in and can rent cars.</p>
-</div>
-`;
-} else {
-showToast(loginResult.message, 'danger');
-}
-}
-}
-
+/* 
 rentButton.addEventListener('click', function() {
 const currentUser = usersClass.getCurrentUser();
 
@@ -340,13 +164,266 @@ showToast(`Booking successful! Total: $${totalAmount}`, 'success');
 
 } */
 
+
+
+function setupAuthorizationCheck() {
+    const rentButton = document.getElementById('rent-btn');
+    const loginSection = document.getElementById('login-signup');
+    
+    //user object
+    const currentUser = usersClass.getCurrentUser();
+    const confirmPasswordContainer = document.getElementById('confirm-password-container');
+    const registerLinkContainer = document.getElementById('register-link-container');
+    
+    console.log(currentUser);
+    
+    if(!currentUser){
+        handleLoggedOutUser(rentButton, loginSection, confirmPasswordContainer, registerLinkContainer);
+    }else{
+        handleLoggedInUser(rentButton, loginSection, currentUser);
+    }
+}
+
+function handleLoggedOutUser(rentButton, loginSection, confirmPasswordContainer, registerLinkContainer) {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    
+    const formInputs = [emailInput, passwordInput, confirmPasswordInput];
+    
+    // event listener to validate form and update button state
+    formInputs.forEach(input => {
+        if (input) {
+            input.addEventListener('input', () => {
+                // enable the button when form is valid
+                const isFormValid = validateForm();
+                rentButton.disabled = !isFormValid;
+            });
+        }
+    });
+    
+    // Set initial button state
+    const isFormValid = validateForm();
+    rentButton.disabled = !isFormValid;
+    
+    // rent button authorization
+    if (!rentButton.hasEventListener) {
+        rentButton.addEventListener('click', function() {
+            handleAuthOnRentClick(emailInput, passwordInput, confirmPasswordInput, confirmPasswordContainer, registerLinkContainer);
+        });
+        rentButton.hasEventListener = true; // prevent multiple event listeners
+    }
+}
+
+function handleLoggedInUser(rentButton, loginSection, currentUser) {
+    // Enable the rent button for logged-in users
+    rentButton.disabled = false;
+    
+    // remove inputs and show user info(can be removable)
+    // i just put it to be able to log out and try admin and wrong users
+    loginSection.innerHTML = `<div class="user-info p-3 border rounded mb-3">
+        <h5>Welcome, ${currentUser.name || currentUser.username}</h5>
+        <p class="mb-2">You are logged in as: ${currentUser.email}</p>
+        <button id="logout-btn" class="btn btn-outline-secondary btn-sm">Logout</button>
+    </div>`;
+    
+    console.log("Logged in user UI displayed:", loginSection.innerHTML);
+    
+    // logout button
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            const logoutResult = usersClass.logout();
+            if (logoutResult.success) {
+                showToast('Logged out successfully', 'success');
+                
+                // Reload after logging out
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            } else {
+                showToast('Logout failed: ' + logoutResult.message, 'danger');
+            }
+        });
+    }
+    
+    // If user is admin, redirect to admin page
+    if (currentUser.role === 'admin') {
+        showToast('Redirecting to admin dashboard...', 'info');
+        setTimeout(() => {
+            window.location.href = './admin/admin.html';
+        }, 1500);
+    }
+}
+
+function validateForm() {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordContainer = document.getElementById('confirm-password-container');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    
+    if (!emailInput.value || !passwordInput.value) {
+        return false;
+    }
+    
+    if (confirmPasswordContainer.style.display !== 'none' && (!confirmPasswordInput.value || confirmPasswordInput.value !== passwordInput.value)) {
+        return false;
+    }
+    
+    return true;
+}
+
+function handleAuthOnRentClick(emailInput, passwordInput, confirmPasswordInput, confirmPasswordContainer, registerLinkContainer) {
+    const isRegistering = confirmPasswordContainer.style.display !== 'none'; // Check if user is registering
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    
+    if (!email || !password) {
+        showToast('Please fill in all required fields', 'danger');
+        return;
+    }
+    
+    if (isRegistering) {
+        const confirmPassword = confirmPasswordInput.value;
+        if (!confirmPassword || confirmPassword !== password) {
+            showToast('Passwords do not match', 'danger');
+            return;
+        }
+        handleRegistration(email, password);
+    } else {
+        handleLogin(email, password);
+    }
+}
+
+function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toast-container');
+    const toastId = `toast-${Date.now()}`;
+    
+    const toastHtml = `
+        <div id="${toastId}" class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `;
+    
+    toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+    const toastElement = document.getElementById(toastId);
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+    
+    toastElement.addEventListener('hidden.bs.toast', () => {
+        toastElement.remove();
+    });
+}
+
+function handleRegistration(email, password) {
+    const username = email.split('@')[0];
+    const name = username;
+    const phone = '+123-456-78911';
+    
+    const registerResult = usersClass.register(username, email, password, phone, name);
+    console.log(registerResult);
+    
+    
+    if (registerResult.success) {
+        showToast('Registration successful!', 'success');
+        // Log the user in after successful registration
+        setTimeout(() => {
+            handleLogin(email, password);
+        }, 1000);
+    } else {
+        showToast(registerResult.message, 'danger');
+    }
+}
+
+function handleLogin(email, password) {
+    const loginResult = usersClass.login(email, password);
+    
+    if (loginResult.success) {
+        showToast('Login successful!', 'success');
+        // Reload the page to show the logged-in user interface
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+    } else {
+        showToast(loginResult.message, 'danger');
+    }
+}
+
+/*
+// Booking logic
+document.getElementById('rent-btn').addEventListener('click', function() {
+const currentUser = usersClass.getCurrentUser();
+
+if (!currentUser) {
+showToast('Please log in to rent a car', 'danger');
+return;
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const carId = urlParams.get('car_id');
+const car = carsClass.getCarById(carId);
+
+const selectedDates = getSelectedDatesFromCalendar();
+
+if (!selectedDates || selectedDates.length < 2) {
+showToast('Please select pickup and return dates', 'warning');
+return;
+}
+
+const [firstDate, lastDate] = selectedDates.sort((a, b) => new Date(a) - new Date(b));
+const totalAmount = calculateTotalAmount(firstDate, lastDate, car.pricePerDay);
+
+const booking = createBookingObject(carId, currentUser.id, firstDate, lastDate, totalAmount);
+
+saveBookingToLocalStorage(booking);
+showToast(`Booking successful! Total: $${totalAmount}`, 'success');
+});
+
+function getSelectedDatesFromCalendar() {
+const calendar = document.getElementById('calendar');
+return calendar?.context?.selectedDates || [];
+}
+
+function calculateTotalAmount(firstDate, lastDate, pricePerDay) {
+const diffTime = Math.abs(lastDate - firstDate);
+const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+return diffDays * pricePerDay;
+}
+
+function createBookingObject(carId, userId, pickupDate, returnDate, totalAmount) {
+return {
+carId,
+userId,
+pickupDate: pickupDate.toISOString().slice(0, 16),
+returnDate: returnDate.toISOString().slice(0, 16),
+totalDays: (returnDate - pickupDate) / (1000 * 60 * 60 * 24),
+totalAmount,
+status: "pending"
+};
+}
+
+function saveBookingToLocalStorage(booking) {
+const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+bookings.push(booking);
+localStorage.setItem('bookings', JSON.stringify(bookings));
+}*/
+
+
+
+
+
 // Initialize the page
 init();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Hover effect on range INPUTS (hour and minute) when RANGES are hovered 
     rangeHoverEffects();
-
+    
     // toggle between register and login forms and links
     toggleRegisterLogin();
 });
@@ -389,7 +466,7 @@ function toggleRegisterLogin(){
             e.preventDefault();
             toggleConfirmPassword(confirmPasswordContainer, registerLinkContainer, true);
         });
-    
+        
         // or "already have an account" is clicked
         showLoginLink.addEventListener('click', (e) => {
             e.preventDefault();

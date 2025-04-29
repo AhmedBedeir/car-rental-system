@@ -1,8 +1,10 @@
 import Cars from "./classes/Cars.js";
 import Users from "./classes/Users.js";
+import Booking from "./classes/booking.js";
 
 const carsClass = new Cars();
 const usersClass = new Users();
+const bookingClass = new Booking();
 
 const init = async () => {
     await carsClass.ready;
@@ -99,73 +101,6 @@ function carNotFoundRedirect(){
     }, 1000);
 }
 
-
-//TODO: Refactor this
-/* 
-rentButton.addEventListener('click', function() {
-const currentUser = usersClass.getCurrentUser();
-
-if (!currentUser) {
-showToast('Please log in to rent a car', 'danger');
-return;
-}
-
-const urlParams = new URLSearchParams(window.location.search);
-const carId = urlParams.get('car_id');
-const car = carsClass.getCarById(carId);
-
-if (!calendar || !calendar.context || !calendar.context.selectedDates) {
-showToast('Calendar not found or no dates selected', 'danger');
-return;
-}
-
-const selectedDates = calendar.context.selectedDates;
-
-if (selectedDates.length < 2) {
-showToast('Please select pickup and return dates', 'warning');
-return;
-}
-
-selectedDates.sort((a, b) => new Date(a) - new Date(b));
-const firstDate = new Date(selectedDates[0]);
-const lastDate = new Date(selectedDates[selectedDates.length - 1]);
-
-firstDate.setHours(10, 0, 0, 0);
-lastDate.setHours(10, 0, 0, 0);
-
-const pickupISOString = firstDate.toISOString().slice(0, 16);
-const returnISOString = lastDate.toISOString().slice(0, 16);
-
-const diffTime = Math.abs(lastDate - firstDate);
-const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-const totalAmount = diffDays * car.pricePerDay;
-
-// Create booking object
-const booking = {
-carId: carId,
-userId: currentUser.id,
-pickupDate: pickupISOString,
-returnDate: returnISOString,
-totalDays: diffDays,
-totalAmount: totalAmount,
-status: "pending"
-};
-console.log('Booking Object:', booking);
-
-const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-bookings.push(booking);
-localStorage.setItem('bookings', JSON.stringify(bookings));
-
-console.log('Stored Bookings in localStorage:', bookings);
-
-showToast(`Booking successful! Total: $${totalAmount}`, 'success');
-});
-
-
-} */
-
-
-
 function setupAuthorizationCheck() {
     const rentButton = document.getElementById('rent-btn');
     const loginSection = document.getElementById('login-signup');
@@ -246,6 +181,9 @@ function handleLoggedInUser(rentButton, loginSection, currentUser) {
             }
         });
     }
+    
+    // Initialize the booking system now that user is logged in
+    setupBookingSystem();
     
     // If user is admin, redirect to admin page
     if (currentUser.role === 'admin') {
@@ -354,68 +292,119 @@ function handleLogin(email, password) {
     }
 }
 
-/*
-// Booking logic
-document.getElementById('rent-btn').addEventListener('click', function() {
-const currentUser = usersClass.getCurrentUser();
-
-if (!currentUser) {
-showToast('Please log in to rent a car', 'danger');
-return;
+function setupBookingSystem() {
+    const rentButton = document.getElementById('rent-btn');
+    
+    // Remove previous existing event listeners to prevent duplicates
+    rentButton.removeEventListener('click', handleBooking);
+    
+    // Add the booking handler
+    rentButton.addEventListener('click', handleBooking);
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-const carId = urlParams.get('car_id');
-const car = carsClass.getCarById(carId);
-
-const selectedDates = getSelectedDatesFromCalendar();
-
-if (!selectedDates || selectedDates.length < 2) {
-showToast('Please select pickup and return dates', 'warning');
-return;
+function handleBooking() {
+    const currentUser = usersClass.getCurrentUser();
+    if (!currentUser) {
+        return showToast('Please log in to rent a car', 'danger');
+    }
+    
+    const car = getSelectedCar();
+    if (!car) {
+        return showToast('Car not found', 'danger');
+    }
+    
+    const [pickupDate, returnDate] = getSortedSelectedDates();
+    if (!pickupDate || !returnDate) {
+        return showToast('Please select pickup and return dates', 'warning');
+    }
+    
+    if (isSameDay(pickupDate, returnDate)) {
+        return showToast('Pickup and return dates cannot be the same day', 'warning');
+    }
+    
+    if (isDuplicateBooking(car.id, pickupDate, returnDate)) {
+        return showToast('You already have a booking for this car during these dates', 'warning');
+    }
+    
+    const totalAmount = calculateTotalAmount(pickupDate, returnDate, car.pricePerDay);
+    const booking = buildBooking(car.id, currentUser.id, pickupDate, returnDate, totalAmount);
+    
+    bookingClass.bookings.push(booking);
+    // Save to localStorage using the class method
+    bookingClass.saveToLocalStorage();
+    showToast(`Booking successful! Total: $${totalAmount}`, 'success');
 }
 
-const [firstDate, lastDate] = selectedDates.sort((a, b) => new Date(a) - new Date(b));
-const totalAmount = calculateTotalAmount(firstDate, lastDate, car.pricePerDay);
-
-const booking = createBookingObject(carId, currentUser.id, firstDate, lastDate, totalAmount);
-
-saveBookingToLocalStorage(booking);
-showToast(`Booking successful! Total: $${totalAmount}`, 'success');
-});
-
-function getSelectedDatesFromCalendar() {
-const calendar = document.getElementById('calendar');
-return calendar?.context?.selectedDates || [];
+// Check if two dates are the same day
+function isSameDay(date1, date2) {
+    return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
 }
 
-function calculateTotalAmount(firstDate, lastDate, pricePerDay) {
-const diffTime = Math.abs(lastDate - firstDate);
-const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-return diffDays * pricePerDay;
+// see if there is a previous booking for this car on these dates
+function isDuplicateBooking(carId, pickupDate, returnDate) {
+    const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+    const currentUser = usersClass.getCurrentUser();
+    
+    return bookings.some(booking => {
+        // Only check bookings for the current user and car
+        if (booking.carId !== carId || booking.userId !== currentUser.id) {
+            return false;
+        }
+        
+        const existingPickup = new Date(booking.pickupDate);
+        const existingReturn = new Date(booking.returnDate);
+        
+        // Check for date overlap
+        return (
+            // New booking starts during an existing booking
+            (pickupDate >= existingPickup && pickupDate <= existingReturn) ||
+            // New booking ends during an existing booking
+            (returnDate >= existingPickup && returnDate <= existingReturn) ||
+            // New booking encompasses an existing booking
+            (pickupDate <= existingPickup && returnDate >= existingReturn)
+        );
+    });
 }
 
-function createBookingObject(carId, userId, pickupDate, returnDate, totalAmount) {
-return {
-carId,
-userId,
-pickupDate: pickupDate.toISOString().slice(0, 16),
-returnDate: returnDate.toISOString().slice(0, 16),
-totalDays: (returnDate - pickupDate) / (1000 * 60 * 60 * 24),
-totalAmount,
-status: "pending"
-};
+function getSelectedCar() {
+    const carId = new URLSearchParams(window.location.search).get('car_id');
+    return carsClass.getCarById(carId);
 }
 
-function saveBookingToLocalStorage(booking) {
-const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
-bookings.push(booking);
-localStorage.setItem('bookings', JSON.stringify(bookings));
-}*/
+function getSortedSelectedDates() {
+    if (!calendar || !calendar.context || !calendar.context.selectedDates || calendar.context.selectedDates.length < 2) {
+        return [];
+    }
+    
+    // make Date objects and sort them
+    return calendar.context.selectedDates
+    .map(date => new Date(date))
+    .sort((a, b) => a - b);
+}
 
+function calculateTotalAmount(startDate, endDate, pricePerDay) {
+    const durationDays = getDateDifferenceInDays(startDate, endDate);
+    return durationDays * pricePerDay;
+}
 
+function getDateDifferenceInDays(start, end) {
+    const msPerDay = 1000 * 60 * 60 * 24;
+    return Math.ceil(Math.abs(end - start) / msPerDay);
+}
 
-
+function buildBooking(carId, userId, pickupDate, returnDate, totalAmount) {
+    return {
+        carId,
+        userId,
+        pickupDate: pickupDate.toISOString().slice(0, 16),
+        returnDate: returnDate.toISOString().slice(0, 16),
+        totalDays: getDateDifferenceInDays(pickupDate, returnDate),
+        totalAmount,
+        status: 'pending',
+    };
+}
 
 // Initialize the page
 init();

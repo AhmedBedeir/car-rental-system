@@ -17,7 +17,7 @@ class Cars {
   async loadInitialData() {
     try {
       if (!localStorage.getItem("cars")) {
-        const response = await fetch("../data/cars.json");
+        const response = await fetch("../../data/cars.json");
         const data = await response.json();
         this.cars = data;
         this.saveToLocalStorage();

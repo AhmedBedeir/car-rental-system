@@ -476,3 +476,8 @@ function toggleConfirmPassword(confirmPasswordContainer, registerLinkContainer, 
         registerLinkContainer.style.display = 'block';
     }
 }
+
+//TODO: handle booked cars by removing the calendar and the form and the button and displaying a yellow bootstrap alert that it's taken
+//TODO: handle renting right after registering/logging in
+//TODO: add car description right after the images
+//TODO:edit other images width&height(object fit:cover?)

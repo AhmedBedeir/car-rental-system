@@ -17,7 +17,7 @@ class Users {
     } else {
       // If not, fetch from JSON file and store in localStorage
       try {
-        const response = await fetch("../data/users.json");
+        const response = await fetch("../../data/users.json");
         if (!response.ok) {
           throw new Error("Failed to fetch users data");
         }

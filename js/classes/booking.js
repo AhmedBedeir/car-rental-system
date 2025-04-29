@@ -12,21 +12,22 @@ class Booking {
   }
   // load bookings
   async loadBookings() {
-    const booking = await fetch(`../data/bookings.json`);
-    const data = await booking.json();
-    this.bookings = data.bookings;
-
-    try {
-      if (!localStorage.getItem("bookings")) {
-        const booking = await fetch(`../data/bookings.json`);
-        const data = await booking.json();
+    const storedBookings = localStorage.getItem("bookings");
+    if (storedBookings) {
+      this.bookings = JSON.parse(storedBookings);
+    } else {
+      // If not, fetch from JSON file and store in localStorage
+      try {
+        const response = await fetch("../../data/bookings.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch bookings data");
+        }
+        const data = await response.json();
         this.bookings = data.bookings;
         this.saveToLocalStorage();
-      } else {
-        this.bookings = JSON.parse(localStorage.getItem("bookings"));
+      } catch (error) {
+        console.error("Error loading bookings data:", error);
       }
-    } catch (error) {
-      console.error("Error loading initial booking data:", error);
     }
   }
 

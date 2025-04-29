@@ -1,4 +1,4 @@
-import Booking from "./classes/booking.js";
+import Booking from "../classes/booking.js";
 
 const bookingList = new Booking();
 

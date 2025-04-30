@@ -50,4 +50,6 @@
   /* Sidebar Width */
   --sidebar-width: 250px;
   --sidebar-collapsed-width: 80px;
+  
+  --logo-width: 180px;
 }

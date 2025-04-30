@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dateMin: 'today',
         selectedTheme: 'light',
         selectionTimeMode: 12,
-        selectionDatesMode: 'multiple',
         selectionDatesMode: 'multiple-ranged',
         onClickDate(self) {
             console.log(self.context.selectedDates);

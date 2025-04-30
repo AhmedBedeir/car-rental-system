@@ -103,83 +103,92 @@ function carNotFoundRedirect(){
     }, 1000);
 }
 
-// Check if the car is available or currently booked
+// Updated checkCarAvailability()
 function checkCarAvailability() {
     const carId = new URLSearchParams(window.location.search).get('car_id');
     const car = carsClass.getCarById(carId);
     
-    // check if car available property is false
-    // (Car is unavailable in the car object)
-    if (car.hasOwnProperty('available') && car.available === false) {
+    // Show maintenance message if car is unavailable
+    if (car.available === false) {
         displayUnavailableMessage();
         hideBookingElements();
         return;
     }
-    
-    // If car is available, check if it's booked
-    // Get current date
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    // Get all bookings
+
+    // Check for active bookings
     const allBookings = bookingClass.getBookings();
+    const today = new Date();
     
-    // Find active booking for this car
+    // Find the first active booking for this car
     const activeBooking = allBookings.find(booking => {
-        if (booking.carId !== carId || booking.status === 'cancelled') {
+        if (!booking || booking.carId !== carId) return false;
+        try {
+            const returnDate = new Date(booking.returnDate);
+            return returnDate >= today;
+        } catch {
             return false;
         }
-        
-        const pickupDate = new Date(booking.pickupDate);
-        const returnDate = new Date(booking.returnDate);
-        
-        // Check if today is between pickup and return dates
-        return today >= pickupDate && today <= returnDate;
     });
-    
+
     if (activeBooking) {
-        // Car is booked
-        displayUnavailableMessage(activeBooking);
+        displayUnavailableMessage(activeBooking); // Pass the booking object
         hideBookingElements();
     }
 }
 
-// Display unavailable message with return date if available
 function displayUnavailableMessage(booking) {
-    // Create alert container
+    // Clear existing alerts first
+    const existingAlerts = document.querySelectorAll('.alert.alert-warning');
+    existingAlerts.forEach(alert => alert.remove());
+
     const alertContainer = document.createElement('div');
     alertContainer.className = 'alert alert-warning mt-3';
     alertContainer.role = 'alert';
+
+    let messageContent = '';
     
-    // Different message based on if we have booking info or not
     if (booking && booking.returnDate) {
-        const returnDate = new Date(booking.returnDate);
-        const formattedDate = returnDate.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
-        
-        alertContainer.innerHTML = `
-        <h4 class="alert-heading">Car Currently Unavailable</h4>
-        <p>We're sorry, but this car is currently booked and unavailable for rent.</p>
-        <hr>
-        <p class="mb-0">The car will be available after <strong>${formattedDate}</strong>.</p>
-    `;
+        try {
+            const returnDate = new Date(booking.returnDate);
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            };
+            
+            messageContent = `
+                <h4 class="alert-heading">Car Currently Booked</h4>
+                <p>This vehicle will be available after:</p>
+                <div class="fw-bold mb-2">
+                    ${returnDate.toLocaleDateString('en-US', options)}
+                </div>
+                <p>Please check back after this date to rent again.</p>
+            `;
+        } catch (error) {
+            console.error('Invalid return date format:', error);
+            messageContent = `
+                <h4 class="alert-heading">Vehicle Unavailable</h4>
+                <p>This car is currently booked by another user.</p>
+            `;
+        }
     } else {
-        // basic message when we don't have booking details(car is unavailable for other reasons)
-        alertContainer.innerHTML = `
-        <h4 class="alert-heading">Car Currently Unavailable</h4>
-        <p>We're sorry, but this car is currently unavailable for rent.</p>
-        <hr>
-        <p class="mb-0">Please check back later or browse our other available vehicles.</p>
-    `;
+        messageContent = `
+            <h4 class="alert-heading">Vehicle Unavailable</h4>
+            <p>This car is temporarily out of service for maintenance.</p>
+            <p class="mb-0">Please check back later or contact support.</p>
+        `;
     }
-    
-    // Insert alert before car equipment container
+
+    alertContainer.innerHTML = messageContent;
+
     const carEquipmentContainer = document.getElementById('car-equipment-container');
-    carEquipmentContainer.parentNode.insertBefore(alertContainer, carEquipmentContainer);
+    if (carEquipmentContainer) {
+        carEquipmentContainer.parentNode.insertBefore(alertContainer, carEquipmentContainer);
+    }
 }
 
 // Hide calendar and input fields and rent button when car is unavailable
@@ -218,6 +227,16 @@ function setupAuthorizationCheck() {
     }
 }
 
+function authClickHandler() {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+    const confirmPasswordContainer = document.getElementById('confirm-password-container');
+    const registerLinkContainer = document.getElementById('register-link-container');
+
+    handleAuthOnRentClick(emailInput, passwordInput, confirmPasswordInput, confirmPasswordContainer, registerLinkContainer);
+}
+
 function handleLoggedOutUser(rentButton, loginSection, confirmPasswordContainer, registerLinkContainer) {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -240,13 +259,20 @@ function handleLoggedOutUser(rentButton, loginSection, confirmPasswordContainer,
     const isFormValid = validateForm();
     rentButton.disabled = !isFormValid;
     
-    // rent button authorization
     if (!rentButton.hasEventListener) {
-        rentButton.addEventListener('click', function() {
-            handleAuthOnRentClick(emailInput, passwordInput, confirmPasswordInput, confirmPasswordContainer, registerLinkContainer);
-        });
-        rentButton.hasEventListener = true; // prevent multiple event listeners
+        rentButton.addEventListener('click', authClickHandler);
+        rentButton.hasEventListener = true;
     }
+}
+
+function setupBookingSystem() {
+    const rentButton = document.getElementById('rent-btn');
+    
+    // Remove previous existing event listeners to prevent duplicates
+    rentButton.removeEventListener('click', handleBooking);
+    
+    // Add the booking handler
+    rentButton.addEventListener('click', handleBooking);
 }
 
 function handleLoggedInUser(rentButton, loginSection, currentUser) {
@@ -319,6 +345,13 @@ function handleAuthOnRentClick(emailInput, passwordInput, confirmPasswordInput, 
         showToast('Please fill in all required fields', 'danger');
         return;
     }
+
+    if (!document.querySelector('.rent-after-login')) {
+        const flag = document.createElement('div');
+        flag.className = 'rent-after-login';
+        flag.style.display = 'none';
+        document.body.appendChild(flag);
+    }
     
     if (isRegistering) {
         const confirmPassword = confirmPasswordInput.value;
@@ -369,37 +402,46 @@ function handleRegistration(email, password) {
     if (registerResult.success) {
         showToast('Registration successful!', 'success');
         // Log the user in after successful registration
-        setTimeout(() => {
-            handleLogin(email, password);
-        }, 1000);
+        handleLogin(email, password, true);
     } else {
         showToast(registerResult.message, 'danger');
     }
 }
 
-function handleLogin(email, password) {
+function handleLogin(email, password, fromRegistration = false) {
     const loginResult = usersClass.login(email, password);
     
     if (loginResult.success) {
-        showToast('Login successful!', 'success');
-        // Reload the page to show the logged-in user interface
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
+        if (!fromRegistration) {
+            showToast('Login successful!', 'success');
+        }
+
+        //update UI
+        const rentButton = document.getElementById("rent-btn");
+        const loginSection = document.getElementById("login-signup");
+        const currentUser  = usersClass.getCurrentUser();
+
+        rentButton.removeEventListener('click', authClickHandler);
+        handleLoggedInUser(rentButton, loginSection, currentUser);
+
+        const shouldRent = document.querySelector(".rent-after-login");
+        if (fromRegistration || shouldRent) {
+            if (shouldRent) {
+                shouldRent.remove();
+            }
+
+            // Wait for UI updates before renting
+            setTimeout(() => {
+                handleBooking(); // directly call the booking
+            }, 500);
+        }
+        console.log("Booking triggered after login:", new Date());
     } else {
         showToast(loginResult.message, 'danger');
     }
 }
 
-function setupBookingSystem() {
-    const rentButton = document.getElementById('rent-btn');
-    
-    // Remove previous existing event listeners to prevent duplicates
-    rentButton.removeEventListener('click', handleBooking);
-    
-    // Add the booking handler
-    rentButton.addEventListener('click', handleBooking);
-}
+
 
 function handleBooking() {
     const currentUser = usersClass.getCurrentUser();
@@ -413,6 +455,8 @@ function handleBooking() {
     }
     
     const [pickupDate, returnDate] = getSortedSelectedDates();
+    console.log('Pickup Date:', pickupDate);
+    console.log('Return Date:', returnDate);
     if (!pickupDate || !returnDate) {
         return showToast('Please select pickup and return dates', 'warning');
     }
@@ -426,11 +470,14 @@ function handleBooking() {
     }
     
     const totalAmount = calculateTotalAmount(pickupDate, returnDate, car.pricePerDay);
+    console.log('Total Amount:', totalAmount);
     const booking = buildBooking(car.id, currentUser.id, pickupDate, returnDate, totalAmount);
+    console.log('Booking Object:', booking);
     
     bookingClass.bookings.push(booking);
-    // Save to localStorage using the class method
     bookingClass.saveToLocalStorage();
+    // check after booking
+    checkCarAvailability();
     showToast(`Booking successful! Total: $${totalAmount}`, 'success');
 }
 
@@ -447,7 +494,6 @@ function isDuplicateBooking(carId, pickupDate, returnDate) {
     const currentUser = usersClass.getCurrentUser();
     
     return bookings.some(booking => {
-        // Only check bookings for the current user and car
         if (booking.carId !== carId || booking.userId !== currentUser.id) {
             return false;
         }
@@ -477,11 +523,49 @@ function getSortedSelectedDates() {
         return [];
     }
     
-    // make Date objects and sort them
-    return calendar.context.selectedDates
-    .map(date => new Date(date))
-    .sort((a, b) => a - b);
+    const dates = calendar.context.selectedDates.map(dateStr => {
+        const [year, month, day] = dateStr.split('-');
+        const dateObj = new Date(year, month - 1, day);
+        
+        if (isNaN(dateObj.getTime())) {
+            console.log('Invalid date:', dateStr);
+            return null;
+        }
+        
+        const selectedTime = calendar.context.selectedTime;
+        console.log('Selected Time (Raw):', selectedTime);
+        
+        // Parse 12-hour time (e.g., "04:00 PM") into 24-hour format
+        if (typeof selectedTime === 'string') {
+            const [time, period] = selectedTime.split(' ');
+            let [hours, minutes] = time.split(':').map(Number);
+            
+            if (period === 'PM' && hours !== 12) {
+                hours += 12; // Convert PM to 24-hour (except 12 PM)
+            } else if (period === 'AM' && hours === 12) {
+                hours = 0; // 12 AM becomes 00:00
+            }
+            
+            dateObj.setHours(hours, minutes, 0, 0);
+        }
+        // If selectedTime is an object (e.g., { hours: 16, minutes: 0 })
+        else if (selectedTime && selectedTime.hours !== undefined && selectedTime.minutes !== undefined) {
+            dateObj.setHours(selectedTime.hours, selectedTime.minutes, 0, 0);
+        }
+        // Default to 00:00 if time selection gives error for any reason
+        else {
+            dateObj.setHours(0, 0, 0, 0);
+        }
+        
+        console.log('Updated Date Object (local):', dateObj.toString());
+        console.log('Updated Date Object (ISO):', dateObj.toISOString());
+        
+        return dateObj;
+    }).filter(date => date !== null);
+    
+    return dates.sort((a, b) => a - b);
 }
+
 
 function calculateTotalAmount(startDate, endDate, pricePerDay) {
     const durationDays = getDateDifferenceInDays(startDate, endDate);
@@ -497,13 +581,14 @@ function buildBooking(carId, userId, pickupDate, returnDate, totalAmount) {
     return {
         carId,
         userId,
-        pickupDate: pickupDate.toISOString().slice(0, 16),
-        returnDate: returnDate.toISOString().slice(0, 16),
+        pickupDate: pickupDate.toString(),
+        returnDate: returnDate.toString(),
         totalDays: getDateDifferenceInDays(pickupDate, returnDate),
         totalAmount,
         status: 'pending',
     };
 }
+
 
 // Initialize the page
 init();
@@ -576,6 +661,5 @@ function toggleConfirmPassword(confirmPasswordContainer, registerLinkContainer, 
     }
 }
 
-//TODO: handle renting right after registering/logging in
 //TODO: add car description right after the images
 //TODO:edit other images width&height(object fit:cover?)

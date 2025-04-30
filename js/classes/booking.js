@@ -18,7 +18,7 @@ class Booking {
     } else {
       // If not, fetch from JSON file and store in localStorage
       try {
-        const response = await fetch("../../data/bookings.json");
+        const response = await fetch("../data/bookings.json");
         if (!response.ok) {
           throw new Error("Failed to fetch bookings data");
         }

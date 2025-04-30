@@ -13,6 +13,11 @@ class Cars {
     localStorage.setItem("cars", JSON.stringify(this.cars));
   }
 
+  deleteCar(id) {
+    this.cars = this.cars.filter((car) => car.id !== id);
+    this.saveToLocalStorage();
+  }
+
   // handle initial data loading
   async loadInitialData() {
     try {

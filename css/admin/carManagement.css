@@ -1,4 +1,4 @@
-.booking-table-container {
+.cars-table-container {
   background-color: var(--surface-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
@@ -6,43 +6,46 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.booking-table {
+.cars-table {
   width: 100%;
 }
 
-.booking-table thead {
+.cars-table thead {
   background-color: var(--main-color-hover);
   color: var(--light-text-color);
   position: sticky;
   top: 0;
 }
 
-.booking-table th {
+.cars-table th {
   padding: var(--spacing-md);
   font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }
 
-.booking-table td {
+.cars-table td {
   padding: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
-.booking-table .user-info,
-.booking-table .car-info {
+.cars-table .user-info,
+.cars-table .car-info {
   display: flex;
   flex-direction: column;
   min-width: 120px;
 }
 
-.booking-table .user-info .name,
-.booking-table .car-info .model {
+.cars-table .bold {
   font-weight: var(--font-weight-bold);
 }
 
-.booking-table .user-info .username,
-.booking-table .car-info .details {
+.cars-table .bigger {
+  font-size: larger;
+}
+
+.cars-table .user-info .username,
+.cars-table .car-info .details {
   color: var(--secondary-text-color);
   font-size: var(--font-size-sm);
 }
@@ -75,19 +78,19 @@ option {
   background-color: #f44336;
 }
 
-.booking-table tbody tr:hover {
+.cars-table tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
 @media (max-width: 768px) {
-  .booking-table-container {
+  .cars-table-container {
     border-radius: 0;
     margin: 0;
     max-width: 100%;
   }
 
-  .booking-table th,
-  .booking-table td {
+  .cars-table th,
+  .cars-table td {
     padding: var(--spacing-sm);
   }
 }

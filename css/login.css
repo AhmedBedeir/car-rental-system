@@ -1,10 +1,6 @@
 body {
   background-color: var(--background-color);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: var(--spacing-md);
 }
 
 .container {
@@ -16,7 +12,7 @@ body {
   box-shadow: var(--box-shadow-lg);
   overflow: hidden;
   padding: 0;
-  margin: 0 auto;
+  margin: 50px auto;
   transition: all var(--transition);
 }
 

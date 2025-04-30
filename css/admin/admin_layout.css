@@ -8,7 +8,7 @@ main {
 .sidebar {
   min-width: var(--sidebar-width);
   max-width: var(--sidebar-width);
-  background: #213448;
+  background: var(--main-color-hover);
   transition: all var(--transition);
   z-index: 999;
   height: 100vh;
@@ -175,7 +175,7 @@ main {
 
 #dashboard-content nav {
   border-bottom: 1px solid var(--border-color);
-  background: #213448;
+  background: var(--main-color-hover);
   height: 70px;
   color: var(--light-text-color);
 }

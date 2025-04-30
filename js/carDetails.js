@@ -9,7 +9,9 @@ const bookingClass = new Booking();
 const init = async () => {
     await carsClass.ready;
     await usersClass.ready;
+    await bookingClass.ready;
     extractDisplayDetails();
+    checkCarAvailability(); // Add availability check before auth setup
     setupAuthorizationCheck();
 };
 
@@ -99,6 +101,103 @@ function carNotFoundRedirect(){
             window.location.href = "../index.html";
         }
     }, 1000);
+}
+
+// Check if the car is available or currently booked
+function checkCarAvailability() {
+    const carId = new URLSearchParams(window.location.search).get('car_id');
+    const car = carsClass.getCarById(carId);
+    
+    // check if car available property is false
+    // (Car is unavailable in the car object)
+    if (car.hasOwnProperty('available') && car.available === false) {
+        displayUnavailableMessage();
+        hideBookingElements();
+        return;
+    }
+    
+    // If car is available, check if it's booked
+    // Get current date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Get all bookings
+    const allBookings = bookingClass.getBookings();
+    
+    // Find active booking for this car
+    const activeBooking = allBookings.find(booking => {
+        if (booking.carId !== carId || booking.status === 'cancelled') {
+            return false;
+        }
+        
+        const pickupDate = new Date(booking.pickupDate);
+        const returnDate = new Date(booking.returnDate);
+        
+        // Check if today is between pickup and return dates
+        return today >= pickupDate && today <= returnDate;
+    });
+    
+    if (activeBooking) {
+        // Car is booked
+        displayUnavailableMessage(activeBooking);
+        hideBookingElements();
+    }
+}
+
+// Display unavailable message with return date if available
+function displayUnavailableMessage(booking) {
+    // Create alert container
+    const alertContainer = document.createElement('div');
+    alertContainer.className = 'alert alert-warning mt-3';
+    alertContainer.role = 'alert';
+    
+    // Different message based on if we have booking info or not
+    if (booking && booking.returnDate) {
+        const returnDate = new Date(booking.returnDate);
+        const formattedDate = returnDate.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+        
+        alertContainer.innerHTML = `
+        <h4 class="alert-heading">Car Currently Unavailable</h4>
+        <p>We're sorry, but this car is currently booked and unavailable for rent.</p>
+        <hr>
+        <p class="mb-0">The car will be available after <strong>${formattedDate}</strong>.</p>
+    `;
+    } else {
+        // basic message when we don't have booking details(car is unavailable for other reasons)
+        alertContainer.innerHTML = `
+        <h4 class="alert-heading">Car Currently Unavailable</h4>
+        <p>We're sorry, but this car is currently unavailable for rent.</p>
+        <hr>
+        <p class="mb-0">Please check back later or browse our other available vehicles.</p>
+    `;
+    }
+    
+    // Insert alert before car equipment container
+    const carEquipmentContainer = document.getElementById('car-equipment-container');
+    carEquipmentContainer.parentNode.insertBefore(alertContainer, carEquipmentContainer);
+}
+
+// Hide calendar and input fields and rent button when car is unavailable
+function hideBookingElements() {
+    const calendarElement = document.getElementById('calendar');
+    if (calendarElement) {
+        calendarElement.style.display = 'none';
+    }
+    
+    const loginSignup = document.getElementById('login-signup');
+    if (loginSignup) {
+        loginSignup.style.display = 'none';
+    }
+    
+    const rentBtn = document.getElementById('rent-btn');
+    if (rentBtn) {
+        rentBtn.style.display = 'none';
+    }
 }
 
 function setupAuthorizationCheck() {
@@ -477,7 +576,6 @@ function toggleConfirmPassword(confirmPasswordContainer, registerLinkContainer, 
     }
 }
 
-//TODO: handle booked cars by removing the calendar and the form and the button and displaying a yellow bootstrap alert that it's taken
 //TODO: handle renting right after registering/logging in
 //TODO: add car description right after the images
 //TODO:edit other images width&height(object fit:cover?)

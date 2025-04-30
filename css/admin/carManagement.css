@@ -28,6 +28,9 @@
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
 }
+.cars-table td {
+  list-style: none;
+}
 
 .cars-table .user-info,
 .cars-table .car-info {

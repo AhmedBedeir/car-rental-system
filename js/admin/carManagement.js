@@ -7,6 +7,7 @@ const carsTableBody = document.getElementById("cars-data");
 
 showCars(cars);
 
+//Show Cars In Table
 function showCars(cars) {
   carsTableBody.innerHTML = "";
 
@@ -30,22 +31,39 @@ function showCars(cars) {
          ${listFeatures(car.features)}</td>
         <td>
         <div>
-        <button class="update-btn btn btn-warning"><i class="bi bi-pencil-square"></i></button>
-        <button class="delete-btn btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+        <button class="update-btn btn btn-warning" ${
+          car.available ? "" : "disabled"
+        }>
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button class="delete-btn btn btn-danger" ${
+          car.available ? "" : "disabled"
+        }>
+          <i class="bi bi-trash-fill"></i>
+        </button>
+
         </div>
         </td>`;
     carsTableBody.appendChild(row);
 
     //Update Button
     const updateBtn = row.querySelector(".update-btn");
-    //Delete Button
+
+    //Delete Button Functionality
     const deleteBtn = row.querySelector(".delete-btn");
-    deleteBtn.addEventListener("click", () =>
-      reRenderAfterAction(carsClass.deleteCar(car.id))
-    );
+    deleteBtn.addEventListener("click", async () => {
+      //Show Confirm
+      const confirmed = confirm(
+        `Are you sure you want to delete ${car.brand} ${car.model}?`
+      );
+      if (confirmed) {
+        await reRenderAfterAction(carsClass.deleteCar(car.id));
+      }
+    });
   });
 }
 
+//Rerender Cars After Action
 async function reRenderAfterAction(actionFunction) {
   await actionFunction;
   const updatedCars = carsClass.getAllCars();

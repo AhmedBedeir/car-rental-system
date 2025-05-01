@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //extarct car details from url
     function extractDisplayDetails() {
-        const carId = new URLSearchParams(window.location.search).get('car_id');
-        const car = carsClass.getCarById(carId);
+        const car = getSelectedCar();
         
         if (car) {
             updateNamePrice(car);
@@ -73,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             featureColumnsContainer.appendChild(column);
         }
     }
-
+    
     function updateDescription(car) {
         document.getElementById("car-description").innerHTML = car.description;
     }
@@ -104,9 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //disable calendar and inputs when car is unavailble for any reason
     function checkCarAvailability() {
-        const carId = new URLSearchParams(window.location.search).get('car_id');
-        const car = carsClass.getCarById(carId);
-        
+        const car = getSelectedCar();
+        const carId = car.id;
+
         if (car.available === false) {
             displayUnavailableMessage();
             hideBookingElements();
@@ -148,12 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const returnDate = new Date(booking.returnDate);
                 const options = {
-                    weekday: 'long',
                     year: 'numeric',
-                    month: 'long',
+                    month: 'numeric',
                     day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: undefined,
                     hour12: true
                 };
                 
@@ -430,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const car = getSelectedCar();
         if (!car) {
-            return showToast('Car not found', 'danger');
+            carNotFoundRedirect();
         }
         
         const [pickupDate, returnDate] = getSortedSelectedDates();
@@ -447,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const totalAmount = calculateTotalAmount(pickupDate, returnDate, car.pricePerDay);
-        const booking = buildBooking(car.id, currentUser.id, pickupDate, returnDate, totalAmount);
+        const booking = buildBooking(car.id, currentUser.id, pickupDate, returnDate, car.pricePerDay);
         
         bookingClass.bookings.push(booking);
         bookingClass.saveToLocalStorage();
@@ -521,11 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 dateObj.setHours(hours, minutes, 0, 0);
             }
-            // If selectedTime is an object ({ hours: 16, minutes: 0 })
-            else if (selectedTime && selectedTime.hours !== undefined && selectedTime.minutes !== undefined) {
-                dateObj.setHours(selectedTime.hours, selectedTime.minutes, 0, 0);
-            }
-            // Default to 00:00 if time selection gives error for any reason
+            //if for any reason time is not returned
+            // Default to 00:00
             else {
                 dateObj.setHours(0, 0, 0, 0);
             }
@@ -536,26 +532,35 @@ document.addEventListener('DOMContentLoaded', () => {
         return dates.sort((a, b) => a - b);
     }
     
-    //total price
+    //total price & days
     function calculateTotalAmount(startDate, endDate, pricePerDay) {
-        const durationDays = getDateDifferenceInDays(startDate, endDate);
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const durationDays = Math.ceil((endDate - startDate) / msPerDay);
         return durationDays * pricePerDay;
     }
     
-    //total days
-    function getDateDifferenceInDays(start, end) {
-        const msPerDay = 1000 * 60 * 60 * 24;
-        return Math.ceil(Math.abs(end - start) / msPerDay);
-    }
-    
     //make booking object
-    function buildBooking(carId, userId, pickupDate, returnDate, totalAmount) {
+    function buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
+        const options = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: undefined,
+            hour12: true
+        };
+        
+        const totalAmount = calculateTotalAmount(pickupDate, returnDate, pricePerDay);
+        const msPerDay = 1000 * 60 * 60 * 24;
+        const totalDays = Math.ceil((returnDate - pickupDate) / msPerDay);
+        
         return {
             carId,
             userId,
-            pickupDate: pickupDate.toString(),
-            returnDate: returnDate.toString(),
-            totalDays: getDateDifferenceInDays(pickupDate, returnDate),
+            pickupDate: pickupDate.toLocaleString('en-US', options),
+            returnDate: returnDate.toLocaleString('en-US', options),
+            totalDays,
             totalAmount,
             status: 'pending',
         };

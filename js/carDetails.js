@@ -120,7 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!booking || booking.carId !== carId) return false;
             try {
                 const returnDate = new Date(booking.returnDate);
-                return returnDate >= today;
+                const isFutureBooking = returnDate >= today;
+                return isFutureBooking && booking.status === "confirmed"; // Only block confirmed bookings
             } catch {
                 return false;
             }

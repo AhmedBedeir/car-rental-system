@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function updateNamePrice(car){
-        document.getElementById("car-name").textContent = `${car.brand} ${car.model}`;
-        document.getElementById("price").textContent = `$${car.pricePerDay}/day`;
+        document.title = `${car.brand} ${car.model}`;
+        document.getElementById("car-name").innerHTML = `${car.brand} ${car.model}`;
+        document.getElementById("price").innerHTML = `$${car.pricePerDay}/day`;
     }
     
     function updateImgs(car){
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateDescription(car) {
-        document.getElementById("car-description").textContent = car.description;
+        document.getElementById("car-description").innerHTML = car.description;
     }
     
     //goign to url directly

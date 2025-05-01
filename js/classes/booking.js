@@ -33,13 +33,26 @@ class Booking {
 
   getBookings() {
     this.bookings.forEach((booking) => {
-      //user
+      // User
       const users = new Users();
       const user = users.getUserById(String(booking.userId));
       booking.user = user;
+
       // Car
       const cars = new Cars();
       const car = cars.getCarById(String(booking.carId));
+
+      // Check if return date is in the past
+      const returnDate = new Date(booking.returnDate);
+      const now = new Date();
+
+      if (returnDate < now) {
+        car.available = true;
+        booking.status = "completed";
+      } else {
+        car.available = false;
+      }
+
       booking.car = car;
     });
 

@@ -20,7 +20,10 @@ const getBookings = async () => {
     console.log(bookings);
 
     if (bookings.length === 0) {
+      document.querySelector("#booking").classList.add("d-none");
+      document.querySelector(".booking-empty-state").classList.remove("d-none");
       console.log("No bookings found");
+
       return;
     }
 

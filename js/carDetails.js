@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkCarAvailability() {
         const car = getSelectedCar();
         const carId = car.id;
-
+        
         if (car.available === false) {
             displayUnavailableMessage();
             hideBookingElements();
@@ -267,15 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     //user is authorized
     function handleLoggedInUser(rentButton, loginSection, currentUser) {
-        rentButton.disabled = false;
-        
-        // remove inputs and show user info(can be removable)
-        // i just put it to be able to log out and try admin and wrong users
-        loginSection.innerHTML = `<div class="user-info p-3 border rounded mb-3">
-        <h5>Welcome, ${currentUser.name || currentUser.username}</h5>
-        <p class="mb-2">You are logged in as: ${currentUser.email}</p>
-        <button id="logout-btn" class="btn btn-outline-secondary btn-sm">Logout</button>
-    </div>`;
+        // Hide the login/signup form section but keep the rent booking 
+        // functionality in case they didnt rent when signingup/logging in
+    loginSection.style.display = 'none';
         
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) {
@@ -293,13 +287,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         
-        setupBookingSystem();
-        
-        if (currentUser.role === 'admin') {
-            showToast('Redirecting to admin dashboard...', 'info');
-            setTimeout(() => {
-                window.location.href = './admin/admin.html';
-            }, 1500);
+        // Don't enable the rent button for admin users
+        if (currentUser.role !== 'admin') {
+            rentButton.disabled = false;
+            setupBookingSystem();
+        } else {
+            // Hide booking elements for admin users
+            hideBookingElements();
+            
+            const adminAlert = document.createElement('div');
+            adminAlert.className = 'alert alert-info alert-dismissible fade show me-5';
+            adminAlert.role = 'alert';
+            adminAlert.innerHTML = `
+                <strong>Admin account detected!</strong> You can access the 
+                <a href="./admin/admin.html" class="alert-link">Admin Dashboard</a> to manage the system.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            
+            // Insert the alert after the login section
+            loginSection.parentNode.insertBefore(adminAlert, loginSection.nextSibling);
         }
     }
     

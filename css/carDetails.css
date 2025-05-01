@@ -1,17 +1,3 @@
-header{
-    width: 100%;
-}
-.navbar{
-    width: 100%;
-    background-color: var(--surface-color) !important;
-    padding: 0;
-    flex-wrap: wrap;
-}
-
-.navbar-brand, .nav-link{
-    vertical-align: middle !important;
-}
-
 #car-details{
     background-color: var(--surface-color);
     min-height: 100vh;

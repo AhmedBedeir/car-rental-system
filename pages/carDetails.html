@@ -9,55 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/styles/index.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/index.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="../css/footer.css" />
     <link rel="stylesheet" type="text/css" href="../css/carDetails.css">
 </head>
 <body>
-    <!--temporary header-->
-    <header>
-        <nav class="navbar navbar-expand-md bg-body-tertiary">
-            <div class="container-fluid">
-                <!-- Left: Logo -->
-                <a class="navbar-brand" href="#">Logo</a>
-                
-                <!-- Mobile Toggler -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- Center: Navigation Links -->
-            <!--mobile-->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Vehicles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Details</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                </ul>
-                <div class="d-md-none d-flex align-items-center justify-content-center gap-2 mt-3">
-                    <i class="bi bi-telephone-fill"></i>
-                    <div class="d-flex flex-column justify-content-center">
-                        <p class="mb-0 small">Need Help?</p>
-                        <p class="mb-0 small">+966 247-1680</p>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="d-none d-md-flex align-items-center gap-2 ms-auto">
-                <i class="bi bi-telephone-fill"></i>
-                <div class="d-flex flex-column justify-content-center">
-                    <p class="mb-0 small">Need Help?</p>
-                    <p class="mb-0 small">+966 247-1680</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<main>
+    <main>
     <section id="car-details" class="d-flex flex-column flex-md-row p-3">
         <article id="left" class="w-100 w-md-50 d-flex flex-column gap-3">
             <h1 id="car-name"></h1>
@@ -114,10 +71,10 @@
             </div>
             
             <!--Rent button-->
-            <button id="rent-btn" class="mb-5 w-50 w-md-100">Rent Car</button>
+            <button id="rent-btn" class="w-50 w-md-100">Rent Car</button>
             
             <!--car equipment container-->
-            <div id="car-equipment-container" class="container">
+            <div id="car-equipment-container" class="container my-3">
                 <h2>Car Equipment</h2>
                 <!--features-->
                 <div id="feature-columns" class="row"></div>
@@ -127,8 +84,10 @@
         </aside>
     </section>
 </main>
-
+<footer class="footer-container"></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="module" src="../js/navbar.js"></script>
+<script src="../js/footer.js"></script>
 <script src="../js/calendarInit.js"></script>
 <script src="../js/CarDetails.js" type="module"></script>
 </body>

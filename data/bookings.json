@@ -4,8 +4,8 @@
       "booking_id": 1,
       "carId": 6,
       "userId": 1,
-      "pickupDate": "4/25/2025, 4:00 PM",
-      "returnDate": "4/28/2025, 4:00 PM",
+      "pickupDate": "5/1/2025, 4:00 PM",
+      "returnDate": "5/4/2025, 4:00 PM",
       "numberOfDays": 3,
       "total": 255,
       "status": "pending"

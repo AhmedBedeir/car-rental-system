@@ -18,7 +18,7 @@
       "returnDate": "4/29/2025, 4:00 PM",
       "numberOfDays": 3,
       "total": 300,
-      "status": "confirmed"
+      "status": "completed"
     },
     {
       "booking_id": 3,
@@ -28,7 +28,7 @@
       "returnDate": "4/30/2025, 4:00 PM",
       "numberOfDays": 3,
       "total": 300,
-      "status": "pending"
+      "status": "completed"
     },
     {
       "booking_id": 4,
@@ -38,7 +38,7 @@
       "returnDate": "4/28/2025, 4:00 PM",
       "numberOfDays": 3,
       "total": 255,
-      "status": "confirmed"
+      "status": "completed"
     }
   ]
 }

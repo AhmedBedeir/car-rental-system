@@ -100,45 +100,93 @@ class Booking {
     }
   }
 
-//make a booking object
-buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
-  const options = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true
-  };
-  
-  const msPerDay = 1000 * 60 * 60 * 24;
-  const numberOfDays = Math.ceil((returnDate - pickupDate) / msPerDay);
-  const total = numberOfDays * pricePerDay;
-  
-  let lastBookingId = 0;
-  if (this.bookings.length > 0) {
-    const bookingIds = this.bookings.map(booking => {
-        if (booking.booking_id) {
-            return booking.booking_id;
-        } else {
-            return 0;
-        }
-    });
+  //make a booking object
+  buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
 
-    lastBookingId = Math.max(...bookingIds);
-}
-  
-  return {
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const numberOfDays = Math.ceil((returnDate - pickupDate) / msPerDay);
+    const total = numberOfDays * pricePerDay;
+
+    let lastBookingId = 0;
+    if (this.bookings.length > 0) {
+      const bookingIds = this.bookings.map((booking) => {
+        if (booking.booking_id) {
+          return booking.booking_id;
+        } else {
+          return 0;
+        }
+      });
+
+      lastBookingId = Math.max(...bookingIds);
+    }
+
+    return {
       booking_id: lastBookingId + 1,
       carId,
       userId,
-      pickupDate: pickupDate.toLocaleString('en-US', options),
-      returnDate: returnDate.toLocaleString('en-US', options),
+      pickupDate: pickupDate.toLocaleString("en-US", options),
+      returnDate: returnDate.toLocaleString("en-US", options),
       numberOfDays,
       total,
-      status: 'pending'
-  };
-}
+      status: "pending",
+    };
+  }
+
+  // overview bookings analysis
+  overViewNumbers() {
+    const totalBookings = this.bookings.length;
+    const completedBookings = this.bookings.filter(
+      (booking) => booking.status === "completed"
+    ).length;
+    const pendingBookings = this.bookings.filter(
+      (booking) => booking.status === "pending"
+    ).length;
+    const activeBookings = this.bookings.filter(
+      (booking) =>
+        booking.status === "confirmed" || booking.status === "pending"
+    ).length;
+    const endingBookings = this.bookings.filter((booking) => {
+      const returnDate = new Date(booking.returnDate);
+      const now = new Date();
+      return returnDate < now;
+    }).length;
+    const completedBookingsPercentage = Math.round(
+      (completedBookings / totalBookings) * 100
+    );
+
+    return {
+      totalBookings,
+      activeBookings,
+      completedBookings,
+      pendingBookings,
+      endingBookings,
+      completedBookingsPercentage,
+    };
+  }
+
+  overViewAnalysis() {
+    const statusCounts = {
+      pending: 0,
+      confirmed: 0,
+      completed: 0,
+      cancelled: 0,
+    };
+
+    this.bookings.forEach((booking) => {
+      const status = booking.status || "pending";
+      statusCounts[status] = (statusCounts[status] || 0) + 1;
+    });
+
+    return statusCounts;
+  }
 }
 
 export default Booking;

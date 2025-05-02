@@ -56,3 +56,19 @@ export function showCards(cars, carsContainer, carDetailsPath) {
     carsContainer.appendChild(col);
   });
 }
+
+export function overviewCard({ icon, title, value, small }) {
+  const card = `
+  <div class="col-md-6 col-lg-3">
+    <div class="item p-3">
+      <div class="icon d-flex justify-content-center align-items-center">               
+        ${icon}
+      </div>
+      <p class="title">${title}</p>
+      <h2>${value}</h2>
+      <p class="small mt-1">${small}</p>
+    </div>
+  </div>
+  `;
+  return card;
+}

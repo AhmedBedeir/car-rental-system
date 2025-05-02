@@ -110,7 +110,7 @@ class Users {
   }
 
   getUserById(id) {
-    return this.users.find((user) => user.id === id);
+    return this.users.find((user) => user.id == id);
   }
   getUserByEmail(email) {
     return this.users.find((user) => user.email === email);

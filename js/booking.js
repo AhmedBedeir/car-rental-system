@@ -10,6 +10,7 @@ const getBookingDetails = async () => {
   const dataUser = new Users();
   const userId = dataUser.currentUser;
   await data.ready;
+  console.log(data.getBookingDetails(userId));
   return data.getBookingDetails(userId);
 };
 

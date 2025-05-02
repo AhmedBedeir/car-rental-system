@@ -59,28 +59,40 @@ class Booking {
     return this.bookings;
   }
 
-  getBookingDetails(userId) {
+  getBookingDetails(user) {
+    console.log(this.bookings);
     try {
       const userBookings = this.bookings.filter(
-        (booking) => booking.userId == userId
+        (booking) => booking.userId == user?.id
       );
 
       if (!userBookings) {
         return null;
       }
 
-      const users = new Users();
-      const cars = new Cars();
-
-      userBookings.forEach((booking) => {
-        //user
+      this.bookings.forEach((booking) => {
+        // User
+        const users = new Users();
         const user = users.getUserById(String(booking.userId));
         booking.user = user;
+
         // Car
+        const cars = new Cars();
         const car = cars.getCarById(String(booking.carId));
+
+        // Check if return date is in the past
+        const returnDate = new Date(booking.returnDate);
+        const now = new Date();
+
+        if (returnDate < now) {
+          car.available = true;
+          booking.status = "completed";
+        } else {
+          car.available = false;
+        }
+
         booking.car = car;
       });
-
       return userBookings;
     } catch (error) {
       console.error("Error fetching booking details:", error);

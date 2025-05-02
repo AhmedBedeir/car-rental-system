@@ -140,10 +140,10 @@ export function handleBooking() {
     }
     
     const totalAmount = calculateTotalAmount(pickupDate, returnDate, car.pricePerDay);
-    const booking = buildBooking(car.id, currentUser.id, pickupDate, returnDate, car.pricePerDay);
+    const booking = window.bookingClass.buildBooking(car.id, currentUser.id, pickupDate, returnDate, car.pricePerDay);
     
-    window.bookingClass.bookings.push(booking);
-    window.bookingClass.saveToLocalStorage();
+    bookingClass.bookings.push(booking);
+    bookingClass.saveToLocalStorage();
     checkCarAvailability();
     showToast(`Booking successful! Total: $${totalAmount}`, 'success');
 }
@@ -233,44 +233,4 @@ export function calculateTotalAmount(startDate, endDate, pricePerDay) {
     const msPerDay = 1000 * 60 * 60 * 24;
     const durationDays = Math.ceil((endDate - startDate) / msPerDay);
     return durationDays * pricePerDay;
-}
-
-//make a booking object
-export function buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
-    const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-    };
-    
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const numberOfDays = Math.ceil((returnDate - pickupDate) / msPerDay);
-    const total = numberOfDays * pricePerDay;
-    
-    const bookings = bookingClass.getBookings();
-    let lastBookingId = 0;
-    if (bookings.length > 0) {
-        const bookingIds = bookings.map(booking => {
-            if (booking.booking_id) {
-                return booking.booking_id;
-            } else {
-                return 0;
-            }
-        });
-        lastBookingId = Math.max(...bookingIds);
-    }
-    
-    return {
-        booking_id: lastBookingId + 1,
-        carId,
-        userId,
-        pickupDate: pickupDate.toLocaleString('en-US', options),
-        returnDate: returnDate.toLocaleString('en-US', options),
-        numberOfDays,
-        total,
-        status: 'pending'
-    };
 }

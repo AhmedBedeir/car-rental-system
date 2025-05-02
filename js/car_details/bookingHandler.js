@@ -140,10 +140,10 @@ export function handleBooking() {
     }
     
     const totalAmount = calculateTotalAmount(pickupDate, returnDate, car.pricePerDay);
-    const booking = buildBooking(car.id, currentUser.id, pickupDate, returnDate, car.pricePerDay);
+    const booking = window.bookingClass.buildBooking(car.id, currentUser.id, pickupDate, returnDate, car.pricePerDay);
     
-    window.bookingClass.bookings.push(booking);
-    window.bookingClass.saveToLocalStorage();
+    bookingClass.bookings.push(booking);
+    bookingClass.saveToLocalStorage();
     checkCarAvailability();
     showToast(`Booking successful! Total: $${totalAmount}`, 'success');
 }
@@ -233,31 +233,4 @@ export function calculateTotalAmount(startDate, endDate, pricePerDay) {
     const msPerDay = 1000 * 60 * 60 * 24;
     const durationDays = Math.ceil((endDate - startDate) / msPerDay);
     return durationDays * pricePerDay;
-}
-
-//make a booking object
-export function buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
-    const options = {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        second: undefined,
-        hour12: true
-    };
-    
-    const totalAmount = calculateTotalAmount(pickupDate, returnDate, pricePerDay);
-    const msPerDay = 1000 * 60 * 60 * 24;
-    const totalDays = Math.ceil((returnDate - pickupDate) / msPerDay);
-    
-    return {
-        carId,
-        userId,
-        pickupDate: pickupDate.toLocaleString('en-US', options),
-        returnDate: returnDate.toLocaleString('en-US', options),
-        totalDays,
-        totalAmount,
-        status: 'pending',
-    };
 }

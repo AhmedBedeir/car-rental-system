@@ -243,21 +243,34 @@ export function buildBooking(carId, userId, pickupDate, returnDate, pricePerDay)
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        second: undefined,
         hour12: true
     };
     
-    const totalAmount = calculateTotalAmount(pickupDate, returnDate, pricePerDay);
     const msPerDay = 1000 * 60 * 60 * 24;
-    const totalDays = Math.ceil((returnDate - pickupDate) / msPerDay);
+    const numberOfDays = Math.ceil((returnDate - pickupDate) / msPerDay);
+    const total = numberOfDays * pricePerDay;
+    
+    const bookings = bookingClass.getBookings();
+    let lastBookingId = 0;
+    if (bookings.length > 0) {
+        const bookingIds = bookings.map(booking => {
+            if (booking.booking_id) {
+                return booking.booking_id;
+            } else {
+                return 0;
+            }
+        });
+        lastBookingId = Math.max(...bookingIds);
+    }
     
     return {
+        booking_id: lastBookingId + 1,
         carId,
         userId,
         pickupDate: pickupDate.toLocaleString('en-US', options),
         returnDate: returnDate.toLocaleString('en-US', options),
-        totalDays,
-        totalAmount,
-        status: 'pending',
+        numberOfDays,
+        total,
+        status: 'pending'
     };
 }

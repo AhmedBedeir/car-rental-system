@@ -19,6 +19,7 @@ const overViewAnalysis = booking.overViewAnalysis();
 const cardsContainer = document.getElementById("cards-container");
 const carBrandsChart = document.getElementById("brandsChart");
 const carModelsChart = document.getElementById("modelsChart");
+const bookingStatusesChart = document.getElementById("bookingChart");
 
 const overViewCardsData = [
   {
@@ -116,4 +117,34 @@ new Chart(carModelsChart, {
 });
 
 // SR First Chart
-
+new Chart(bookingStatusesChart, {
+  type: "bar",
+  data: {
+    labels: Object.keys(overViewAnalysis),
+    datasets: [
+      {
+        label: "Number of Bookings",
+        data: Object.values(overViewAnalysis),
+        backgroundColor: backgroundColors,
+        hoverOffset: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      title: {
+        display: true,
+        text: "Booking Statuses",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+});

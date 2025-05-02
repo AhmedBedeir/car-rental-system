@@ -1,0 +1,12 @@
+.charts-container {
+  padding: var(--spacing-md);
+}
+.chart {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-md) 0;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}

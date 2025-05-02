@@ -2,6 +2,10 @@ body {
   background-color: var(--background-color);
 }
 
+#cars-section {
+  min-height: 100vh;
+}
+
 .btn-primary {
   background-color: var(--main-color);
   border-color: var(--main-color);

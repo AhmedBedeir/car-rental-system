@@ -57,10 +57,17 @@ const bookingRow = (booking) => {
 const statusDropdown = (booking) => {
   let optionsContainer = "";
 
+  const now = new Date();
+  const returnDate = booking.returnDate ? new Date(booking.returnDate) : null;
+
   for (const option of status_options) {
+    const shouldDisableCompleted =
+      option.value === "completed" && (!returnDate || returnDate > now);
+
     optionsContainer += `
       <option value="${option.value}" 
-              ${booking.status === option.value ? "selected" : ""}>
+              ${booking.status === option.value ? "selected" : ""}
+              ${shouldDisableCompleted ? "disabled" : ""}>
         ${option.label}
       </option>
     `;
@@ -68,7 +75,7 @@ const statusDropdown = (booking) => {
 
   return `
     <select class="status-select ${booking.status}" 
-                data-booking-id="${booking.booking_id}"
+            data-booking-id="${booking.booking_id}"
             onchange="updateStatus(${booking.booking_id}, this.value)">
       ${optionsContainer}
     </select>
@@ -106,13 +113,14 @@ const updateStatus = (bookingId, newStatus) => {
     return false;
   }
 
-  // if (newStatus === "cancelled") {
-  //   booking.car.available = true;
-  //   booking.pickupDate = null;
-  //   booking.returnDate = null;
-  // } else if (newStatus === "completed") {
-  //   booking.car.available = true;
-  // }
+  const now = new Date();
+  const returnDate = booking.returnDate ? new Date(booking.returnDate) : null;
+
+  if (newStatus === "completed" && (!returnDate || returnDate > now)) {
+    alert("Cannot complete the booking before the return date.");
+    return false;
+  }
+
   if (newStatus === "cancelled") {
     booking.car.available = true;
     booking.pickupDate = null;
@@ -120,7 +128,8 @@ const updateStatus = (bookingId, newStatus) => {
   } else if (
     newStatus === "completed" ||
     booking.pickupDate === null ||
-    booking.returnDate === null
+    booking.returnDate === null ||
+    returnDate < now
   ) {
     booking.car.available = true;
   }
@@ -142,7 +151,6 @@ const updateStatus = (bookingId, newStatus) => {
     selectElement.className = `status-select ${newStatus}`;
     selectElement.value = newStatus;
   }
-  console.log(selectElement);
 
   return true;
 };

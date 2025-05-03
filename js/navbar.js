@@ -8,6 +8,8 @@ function logout() {
   window.location.href = "../index.html";
 }
 
+// const navContainer = document.querySelector(".nav-container");
+
 const authButtons = `
 <a href="../pages/login.html" class="btn btn-outline-custom"><i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Login</a>
 <a href="../pages/login.html" class="btn btn-custom"><i class="fa-solid fa-user-plus me-2"></i>Sign Up</a>
@@ -20,6 +22,7 @@ const adminDashboardButton = `
 <a href="../pages/admin/admin.html" class="btn btn-outline-custom"><i class="fa-solid fa-user-tie me-2"></i>Admin Dashboard</a>`;
 
 const navbar = `
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 px-3 nav-container">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <div style="width: var(--logo-width);">
@@ -70,12 +73,10 @@ const navbar = `
           </div>
         </div>
       </div>
-    
+    </nav>
 `;
 document.addEventListener("DOMContentLoaded", () => {
-  const navContainer = document.querySelector(".nav-container");
-  navContainer.innerHTML = navbar;
-  // document.body.insertAdjacentHTML("afterbegin", navbar);
+  document.body.insertAdjacentHTML("afterbegin", navbar);
   const logoutButton = document.getElementById("logout");
   if (logoutButton) {
     logoutButton.addEventListener("click", (e) => {

@@ -26,25 +26,43 @@
     <link rel="stylesheet" href="./css/footer.css" />
     <link rel="stylesheet" href="./css/home.css" />
 
-    <title>Car Rental System</title>
+    <title>Prime Ride</title>
   </head>
   <body class="">
     <div class="nav-container"></div>
     <main class="home-page">
-      <!-- hero section  -->
-      <section id="hero-section">
-        <div class="hero-container">
-          <div class="hero-overlay"></div>
-          <div class="container">
+      <!-- Hero Section -->
+      <section class="hero-section overflow-hidden">
+        <div class="hero-overlay" id="heroBackground">
+          <div class="slider-controls">
+            <button class="slider-arrow prev-arrow" id="prevSlide">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-arrow next-arrow" id="nextSlide">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="slider-dots" id="sliderDots">
+              <!-- Dots will be added here by JavaScript -->
+            </div>
+          </div>
 
-            <div class="hero-content">
-              <h1 class="hero-title">Experience the road like never before</h1>
-              <p class="hero-description">
-                Unlock extraordinary journeys with our curated collection of
-                luxury vehicles. From sleek sedans to powerful SUVs, experience
-                unmatched comfort, style, and performance on every road.
-              </p>
-              <button class="hero-btn">Explore Collection</button>
+          <div class="container-xxl" id="heroContent">
+            <div class="row align-items-center">
+              <div class="col-lg-7">
+                <span class="hero-tag">PREMIUM CAR RENTALS</span>
+                <h1 class="hero-title">
+                  Your Ride, Your Way – with Speed Rent
+                </h1>
+                <p class="hero-text">
+                  Speed Rent delivers a seamless car rental experience with a
+                  wide selection of vehicles to match your lifestyle. Whether
+                  it’s for business, travel, or everyday use – choose comfort,
+                  speed, and reliability.
+                </p>
+                <a href="#contact" class="btn btn-primary btn-lg">
+                  Reserve Your Car Now
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -128,10 +146,10 @@
         <div class="container-xxl">
           <div class="row align-items-center">
             <!-- Image Column -->
-            <div class="col-lg-7">
+            <div class="col-lg-6 feature-image">
               <div class="feature-img-container">
                 <img
-                  src="assets/g-8.webp"
+                  src="assets/about_us/be_feature.png"
                   alt="Luxury Mercedes vehicle"
                   class="feature-img"
                 />
@@ -140,9 +158,11 @@
             </div>
 
             <!-- Content Column -->
-            <div class="col-lg-5">
+            <div class="col-lg-6">
               <div class="features-content">
-                <h2 class="section-heading">Why Choose <span>CARENT</span></h2>
+                <h2 class="section-heading">
+                  Why Choose <span>Speed Rent</span>
+                </h2>
                 <p class="section-subtitle">
                   Experience premium car rental like never before
                 </p>
@@ -259,7 +279,7 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
-
+    <script type="module" src="./js/slider.js"></script>
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/home.js"></script>
   </body>

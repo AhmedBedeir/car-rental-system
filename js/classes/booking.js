@@ -47,7 +47,10 @@ class Booking {
       const returnDate = new Date(booking.returnDate);
       const now = new Date();
 
-      if (returnDate < now) {
+      if (
+        (returnDate < now && booking.status === "confirmed") ||
+        (returnDate < now && booking.status === "pending")
+      ) {
         car.available = true;
         booking.status = "completed";
       } else if (booking.status === "cancelled") {
@@ -55,7 +58,7 @@ class Booking {
       } else {
         car.available = false;
       }
-
+      cars.saveToLocalStorage();
       booking.car = car;
     });
 
@@ -87,7 +90,7 @@ class Booking {
         const returnDate = new Date(booking.returnDate);
         const now = new Date();
 
-        if (returnDate < now) {
+        if (returnDate < now && booking.status !== "cancelled") {
           car.available = true;
           booking.status = "completed";
         } else {
@@ -143,7 +146,6 @@ class Booking {
     };
   }
 
-
   // overview bookings analysis
   overViewNumbers() {
     const totalBookings = this.bookings.length;
@@ -191,7 +193,6 @@ class Booking {
 
     return statusCounts;
   }
-
 }
 
 export default Booking;

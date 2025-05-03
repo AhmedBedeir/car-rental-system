@@ -1,184 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../css/admin/admin_layout.css" />
+    <link rel="stylesheet" href="../../css/admin/carManagement.css" />
+    <link rel="stylesheet" href="../../css/index.css" />
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser || currentUser?.role === "customer") {
+        window.location.href = "../../index.html";
+      }
+    </script>
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>Admin | Cars Management</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../../css/admin/admin_layout.css" />
-  <link rel="stylesheet" href="../../css/admin/carManagement.css" />
-  <link rel="stylesheet" href="../../css/index.css" />
-  <script>
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (!currentUser || currentUser?.role === "customer") {
-      window.location.href = "../../index.html";
-    }
-  </script>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <title>Admin | Cars Management</title>
-</head>
-
-<body>
-  <main>
-    <!-- Sidebar -->
-    <aside id="sidebar" class="sidebar">
-      <!-- sidebar header -->
-      <div class="sidebar-header">
-        <h3>Car Rental</h3>
-      </div>
-
-      <!-- sidebar profile -->
-      <div class="sidebar-profile">
-        <div class="profile-img">
-          <img src="../../assets/adminphoto.png" alt="Profile Image" />
+  <body>
+    <main>
+      <!-- Sidebar -->
+      <aside id="sidebar" class="sidebar">
+        <!-- sidebar header -->
+        <div class="sidebar-header">
+          <h3>Speed Rent</h3>
         </div>
-        <div class="profile-info">
-          <h5>Abdelrhman</h5>
-          <p>Administrator</p>
-        </div>
-      </div>
 
-      <!-- links -->
-      <ul class="list-unstyled components">
-        <li>
-          <a href="./admin.html" class="dashboard">
-            <i class="fas fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="active">
-          <a href="./cars_management.html" class="dashboard">
-            <i class="fas fa-car"></i>
-            <span>Management Cars </span>
-          </a>
-        </li>
-
-        <li>
-          <a href="management_booking.html">
-            <i class="fas fa-calendar-check"></i>
-            <span>Manage Booking</span>
-          </a>
-        </li>
-      </ul>
-
-      <!-- sidebar footer  -->
-      <div class="sidebar-footer">
-        <a href="#" class="btn btn-logout">
-          <i class="fas fa-right-from-bracket"></i>
-          <span>Logout</span>
-        </a>
-      </div>
-    </aside>
-
-    <!-- Dashboard Content -->
-    <div id="dashboard-content" class="overflow-hidden">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <h2 class="h6">Dashboard</h2>
-
-          <!-- Actions Container -->
-          <div class="d-flex justify-content-between align-items-center">
-            <!-- Icon Toggle Sidebar -->
-            <button class="nav-item d-flex align-items-center border-0 bg-transparent">
-              <i id="sidebarCollapse" class="fa fa-list fs-4 me-3 text-light"></i>
-            </button>
-
-            <!-- Navbar Icons -->
-            <div class="profile-img">
-              <img src="../../assets/adminphoto.png" alt="Profile Image" />
-            </div>
+        <!-- sidebar profile -->
+        <div class="sidebar-profile">
+          <div class="profile-img">
+            <img src="../../assets/adminphoto.png" alt="Profile Image" />
+          </div>
+          <div class="profile-info">
+            <h5>Abdelrhman</h5>
+            <p>Administrator</p>
           </div>
         </div>
-      </nav>
 
-      <div class="dashboard-content-area">
-        <h1>Cars Management Table</h1>
-        <!-- Table  -->
-        <div class="cars-table-container">
-          <table class="cars-table">
-            <thead>
-              <tr>
-                <th>Car ID</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Type</th>
-                <th>Price/Day</th>
-                <th>Availability</th>
-                <th>Features</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="cars-data"></tbody>
-          </table>
-          <button id="add-car-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            style="margin: 10px;">
-            Add Car
-          </button>
+        <!-- links -->
+        <ul class="list-unstyled components">
+          <li>
+            <a href="./admin.html" class="dashboard">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="./cars_management.html" class="dashboard">
+              <i class="fas fa-car"></i>
+              <span>Management Cars </span>
+            </a>
+          </li>
+
+          <li>
+            <a href="management_booking.html">
+              <i class="fas fa-calendar-check"></i>
+              <span>Manage Booking</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- sidebar footer  -->
+        <div class="sidebar-footer">
+          <a href="#" class="btn btn-logout">
+            <i class="fas fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Dashboard Content -->
+      <div id="dashboard-content" class="overflow-hidden">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <h2 class="h6">Dashboard</h2>
+
+            <!-- Actions Container -->
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Icon Toggle Sidebar -->
+              <button
+                class="nav-item d-flex align-items-center border-0 bg-transparent"
+              >
+                <i
+                  id="sidebarCollapse"
+                  class="fa fa-list fs-4 me-3 text-light"
+                ></i>
+              </button>
+              <!-- Dark mode toggle button -->
+              <button id="dark-mode-toggle" class="btn p-2 border-0">
+                <i class="fas fa-moon fs-4 dark-icon text-secondary"></i>
+                <i class="fas fa-sun fs-4 text-warning light-icon d-none"></i>
+              </button>
+              <!-- Navbar Icons -->
+              <div class="profile-img">
+                <img src="../../assets/adminphoto.png" alt="Profile Image" />
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="dashboard-content-area">
+          <!-- Table  -->
+          <div class="cars-table-container">
+            <table class="cars-table">
+              <thead>
+                <tr>
+                  <th>Car ID</th>
+                  <th>Brand</th>
+                  <th>Model</th>
+                  <th>Type</th>
+                  <th>Price/Day</th>
+                  <th>Availability</th>
+                  <th>Features</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="cars-data"></tbody>
+            </table>
+            <button
+              id="add-car-btn"
+              class="btn btn-warning"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              style="margin: 10px"
+            >
+              Add Car
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--Modal Update Car-->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Car</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="update-form">
+              <input type="hidden" id="car-id" />
+              <div class="mb-3">
+                <label for="brand" class="form label">Brand</label>
+                <select id="brand" class="form-select bg-white text-dark">
+                  <option value="">Select Brand</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="model" class="form-label">Model</label>
+                <select id="model" class="form-select bg-white text-dark">
+                  <option value="">Select Model</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="model" class="form-label">Type</label>
+                <select id="type" class="form-select bg-white text-dark">
+                  <option value="">Select Type</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="model" class="form-label">Price/Day</label>
+                <input type="text" class="form-control" id="pricePerDay" />
+              </div>
+              <div class="mb-3">
+                <label for="model" class="form-label">Features</label>
+                <input type="text" class="form-control" id="features" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              form="update-form"
+              class="btn btn-success"
+              id="saveChangesBtn"
+            >
+              Save
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </main>
 
-
-
-
-  <!--Modal Update Car-->
-  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Car</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="update-form">
-            <input type="hidden" id="car-id" />
-            <div class="mb-3">
-              <label for="brand" class="form label">Brand</label>
-              <select id="brand" class="form-select  bg-white text-dark">
-                <option value="">Select Brand</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="model" class="form-label">Model</label>
-              <select id="model" class="form-select  bg-white text-dark">
-                <option value="">Select Model</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="model" class="form-label">Type</label>
-              <select id="type" class="form-select  bg-white text-dark">
-                <option value="">Select Type</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="model" class="form-label">Price/Day</label>
-              <input type="text" class="form-control" id="pricePerDay" />
-            </div>
-            <div class="mb-3">
-              <label for="model" class="form-label">Features</label>
-              <input type="text" class="form-control" id="features" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" form="update-form" class="btn btn-success" id="saveChangesBtn">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-    crossorigin="anonymous"></script>
-  <script type="module" src="../../js/admin/sidebar.js"></script>
-  <script type="module" src="../../js/admin/carManagement.js"></script>
-  <script type="module" src="../../js/index.js"></script>
-</body>
-
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="../../js/admin/sidebar.js"></script>
+    <script type="module" src="../../js/admin/carManagement.js"></script>
+    <script type="module" src="../../js/index.js"></script>
+  </body>
 </html>

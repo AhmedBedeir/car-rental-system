@@ -1,10 +1,25 @@
 .contact-main .hero-section {
   position: relative;
-  height: 300px;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-xl);
   overflow: hidden;
+}
+
+.contact-main .hero-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
 }
 
 .contact-main .hero-image {
@@ -39,9 +54,11 @@
   opacity: 0.8;
   color: var(--secondary-color);
 }
+
 .contact-main .hero-content li:last-child {
   color: var(--secondary-color);
 }
+
 .contact-main .hero-content a {
   color: var(--light-text-color);
   text-decoration: none;
@@ -53,24 +70,11 @@
   text-decoration: underline;
 }
 
-.contact-main .hero-section::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  z-index: 1;
-}
-
-.map-container {
-  border-radius: var(--border-radius);
-  overflow: hidden;
+.contact-main p {
+  color: var(--secondary-text-color);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  opacity: 0.9;
 }
 
 .accordion-button:not(.collapsed) {
@@ -83,13 +87,60 @@
   border-color: var(--main-color);
 }
 
-.card {
+.accordion-item {
+  background-color: var(--surface-color);
+}
+
+.accordion-item button {
+  color: var(--main-color);
+  background-color: var(--surface-color);
+}
+
+.accordion-item ul,
+.accordion-body {
+  color: var(--secondary-text-color) !important;
+}
+
+/* === Contact Card === */
+.contact-main .card {
   border-radius: var(--border-radius-lg) !important;
+  background-color: var(--surface-color);
   transition: var(--transition);
 }
 
-.card:hover {
+.contact-main .card:hover {
   box-shadow: var(--box-shadow-lg) !important;
+}
+
+.contact-main .card label {
+  color: var(--secondary-text-color);
+  padding-left: 10px;
+}
+
+.contact-main .card input,
+.contact-main .card textarea {
+  background-color: var(--background-color) !important;
+  padding: 12px;
+  border: transparent;
+}
+
+.contact-main .card input::placeholder,
+.contact-main .card textarea::placeholder {
+  color: var(--secondary-text-color);
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  border-radius: var(--border-radius-lg);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: var(--border-radius-lg);
 }
 
 .btn-primary:hover {
@@ -98,6 +149,11 @@
 }
 
 @media (max-width: 768px) {
+  .contact-main {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
   .contact-main .hero-section {
     height: 250px;
   }
@@ -108,13 +164,5 @@
 
   .contact-main .about-image {
     margin-bottom: var(--spacing-lg);
-  }
-  .contact-main {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-  }
-
-  .map-container {
-    height: 300px;
   }
 }

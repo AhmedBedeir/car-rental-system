@@ -17,7 +17,7 @@
   font-weight: var(--font-weight-normal);
   margin: 0 var(--spacing-sm);
   transition: all var(--transition);
-  font-size: var(--font-size-lg);
+  font-size: 18px;
 }
 .nav-link.active {
   color: var(--main-color) !important;

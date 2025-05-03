@@ -11,7 +11,7 @@
 }
 
 .cars-table thead {
-  background-color: var(--main-color-hover);
+  background-color: var(--background-color);
   color: var(--light-text-color);
   position: sticky;
   top: 0;
@@ -21,12 +21,14 @@
   padding: var(--spacing-md);
   font-weight: var(--font-weight-bold);
   white-space: nowrap;
+  color: var(--primary-text-color);
 }
 
 .cars-table td {
   padding: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
+  color: var(--primary-text-color);
 }
 .cars-table td {
   list-style: none;
@@ -53,22 +55,6 @@
   font-size: var(--font-size-sm);
 }
 
-select {
-  border: none;
-  border-radius: 6px;
-  background: #213448;
-  padding: 10px;
-  transition: 0.4s;
-  outline: none;
-  color: #fff;
-  font-weight: bold;
-}
-
-option {
-  transition: 0.4s;
-  background-color: #213448;
-}
-
 .status-select.pending {
   background-color: #ffa500;
 }
@@ -85,12 +71,44 @@ option {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
+.modal-content {
+  background-color: var(--surface-color) !important;
+  color: var(--primary-text-color);
+}
+.modal-content h1 {
+  color: var(--primary-text-color);
+}
+.modal-content label {
+  color: var(--primary-text-color);
+}
+
+.modal-content input,
+.modal-content select {
+  border: none;
+  border-radius: 6px;
+  background: #213448;
+  padding: 10px;
+  transition: 0.4s;
+  outline: none;
+  color: var(--primary-text-color) !important;
+  font-weight: bold;
+  background-color: var(--background-color) !important;
+}
+
+.modal-content input::placeholder,
+.modal-content select::placeholder {
+  color: var(--primary-text-color) !important;
+}
 
 /* Fix for dropdowns inside modals showing black */
 .modal select.form-select option {
-  background-color: white !important;
+  background-color: var(--background-color) !important;
+  color: var(--primary-text-color);
 }
-
+select:focus {
+  background-color: var(--background-color) !important;
+  color: var(--primary-text-color) !important;
+}
 
 @media (max-width: 768px) {
   .cars-table-container {

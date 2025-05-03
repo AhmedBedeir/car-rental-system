@@ -8,7 +8,7 @@ main {
 .sidebar {
   min-width: var(--sidebar-width);
   max-width: var(--sidebar-width);
-  background: var(--main-color-hover);
+  background: var(--background-color);
   transition: all var(--transition);
   z-index: 999;
   height: 100vh;
@@ -64,7 +64,7 @@ main {
   padding: var(--spacing-sm) var(--spacing-md);
   display: flex;
   align-items: center;
-  color: var(--light-text-color);
+  color: var(--primary-text-color);
   text-decoration: none;
   transition: all var(--transition);
   border-radius: var(--border-radius);
@@ -74,7 +74,7 @@ main {
 .sidebar ul li a:hover,
 .sidebar ul li.active > a {
   background: var(--secondary-color-hover);
-  color: var(--light-text-color);
+  color: var(--main-color);
   transform: translateX(2px);
 }
 
@@ -100,6 +100,9 @@ main {
   justify-content: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+.sidebar-header h3 {
+  color: var(--main-color);
+}
 
 /* Sidebar Profile */
 .sidebar-profile {
@@ -108,6 +111,10 @@ main {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.sidebar-profile p,
+.sidebar-profile h5 {
+  color: var(--primary-text-color);
+}
 .sidebar-profile .profile-img {
   width: 100px;
   height: 100px;
@@ -175,13 +182,20 @@ main {
 
 #dashboard-content nav {
   border-bottom: 1px solid var(--border-color);
-  background: var(--main-color-hover);
+  background: var(--background-color);
   height: 70px;
   color: var(--light-text-color);
+}
+#dashboard-content nav h2 {
+  color: var(--secondary-text-color);
 }
 
 #dashboard-content nav button i {
   color: var(--main-color);
+}
+
+#sidebarCollapse {
+  color: var(--main-color) !important;
 }
 
 #dashboard-content nav img {
@@ -245,6 +259,10 @@ main {
   font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
   margin: 0;
+}
+
+.dashboard-content-area .cards .item p {
+  color: var(--secondary-text-color);
 }
 
 /* Responsive  */

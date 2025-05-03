@@ -77,25 +77,21 @@ body {
 }
 
 .dark-mode {
-  /* Primary & Secondary Colors */
   --main-color: var(--dark-main-color);
   --main-color-hover: var(--dark-main-color-hover);
   --secondary-color: var(--dark-secondary-color);
   --secondary-color-hover: var(--dark-secondary-color-hover);
 
-  /* Background & Surfaces */
   --background-color: var(--dark-background-color);
   --surface-color: var(--dark-surface-color);
   --border-color: var(--dark-border-color);
 
-  /* Text Colors */
   --primary-text-color: var(--dark-primary-text-color);
   --secondary-text-color: var(--dark-secondary-text-color);
   --link-color: var(--dark-link-color);
   --link-hover-color: var(--dark-link-hover-color);
   --light-text-color: var(--dark-light-text-color);
 
-  /* Shadows */
   --box-shadow: var(--dark-box-shadow);
   --box-shadow-lg: var(--dark-box-shadow-lg);
 }

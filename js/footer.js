@@ -6,7 +6,7 @@ const footer = `
       <!-- Logo Section -->
       <div class="col-md-3 d-flex align-items-center">
         <div class="footer-brand">
-          <img src="../assets/logo.svg" alt="Car Rental Logo" style="width: var(--logo-width);background-color:#fff;padding:5px;border-radius:var(--border-radius);" />
+          <img src="../assets/LogoPurple.svg" alt="Car Rental Logo" style="width: var(--logo-width);;padding:5px;border-radius:var(--border-radius);" />
         </div>
       </div>
 

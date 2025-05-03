@@ -45,7 +45,7 @@ body {
 }
 
 .switch-btn.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
@@ -120,6 +120,9 @@ input:focus {
   display: block;
 }
 
+input {
+  color: var(--secondary-text-color);
+}
 .image-container {
   flex: 1;
   background: linear-gradient(135deg, var(--main-color), #7b5cf0);
@@ -202,14 +205,14 @@ input:focus {
 
 @media (max-width: 768px) {
   .container {
-      flex-direction: column;
+    flex-direction: column;
   }
-  
+
   .image-container {
-      display: none;
+    display: none;
   }
-  
+
   .form-container {
-      padding: var(--spacing-lg);
+    padding: var(--spacing-lg);
   }
 }

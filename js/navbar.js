@@ -31,11 +31,11 @@ const links = [
 const currentPath = window.location.pathname;
 
 const navbar = `
-    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary px-3">
+    <nav class="navbar  fixed-top navbar-expand-lg bg-body-tertiary px-3">
   <div class="container-xxl">
     <a class="navbar-brand" href="/">
       <div style="width: var(--logo-width); background-color: var(--surface-color); padding: 5px; border-radius: var(--border-radius);">
-        <img class="img-fluid" src="../assets/logo.svg" />
+        <img class="img-fluid" src="../assets/LogoPurple.svg" />
       </div>
     </a>
     
@@ -94,10 +94,8 @@ export const initNav = () => {
     if (navContainer) {
       navContainer.innerHTML = navbar;
 
-      // implementDarkMode();
-
       const logoutBtn = document.getElementById("logout");
-    
+
       if (logoutBtn) {
         logoutBtn.addEventListener("click", (e) => {
           e.preventDefault();
@@ -106,29 +104,12 @@ export const initNav = () => {
           }
         });
       }
+      implementDarkMode();
     }
   });
 };
 
 const implementDarkMode = () => {
-  const darkModeToggle = document.getElementById("dark-mode-toggle");
-
-  const savedMode = localStorage.getItem("darkMode");
-
-  if (savedMode === "dark") {
-    enableDarkMode();
-  }
-
-  darkModeToggle.addEventListener("click", toggleDarkMode);
-  if (darkModeToggle) {
-  }
-
-  const toggleDarkMode = () => {
-    document.body.classList.contains("dark-mode")
-      ? disableDarkMode()
-      : enableDarkMode();
-  };
-
   const enableDarkMode = () => {
     document.body.classList.add("dark-mode");
     localStorage.setItem("darkMode", "dark");
@@ -142,4 +123,22 @@ const implementDarkMode = () => {
     document.querySelector(".dark-icon").classList.remove("d-none");
     document.querySelector(".light-icon").classList.add("d-none");
   };
+
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+  const savedMode = localStorage.getItem("darkMode");
+
+  if (savedMode === "dark") {
+    enableDarkMode();
+  }
+
+  const toggleDarkMode = () => {
+    document.body.classList.contains("dark-mode")
+      ? disableDarkMode()
+      : enableDarkMode();
+  };
+
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", toggleDarkMode);
+  }
 };

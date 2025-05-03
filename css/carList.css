@@ -4,7 +4,7 @@
 
 .car-list-page .hero-section {
   position: relative;
-  height: 300px;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-xl);
@@ -47,7 +47,7 @@
   color: var(--secondary-color);
 }
 .car-list-page .hero-content a {
-  color: var(--light-text-color);
+  color: var(--secondary-text-color);
   text-decoration: none;
   transition: var(--transition);
 }
@@ -73,6 +73,14 @@
 }
 
 /* Car List Section */
+
+#car-filters {
+  background-color: var(--surface-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--box-shadow);
+}
 .car-list-page .btn-primary {
   background-color: var(--main-color);
   border-color: var(--main-color);
@@ -95,23 +103,36 @@
 
 .car-list-page .form-select,
 .car-list-page .form-control {
-  background-color: #fff;
+  background-color: var(--background-color);
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-text-color);
   color: var(--primary-text-color);
 }
+#search-section {
+  background-color: var(--surface-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
 
+::placeholder {
+  color: var(--secondary-text-color) !important;
+}
+
+.car-list-page input {
+  padding: 10px;
+}
 /* When focused (clicked), they highlight with main color */
 .car-list-page .form-select:focus,
 .car-list-page .form-control:focus {
   border-color: var(--main-color);
-  box-shadow: 0 0 0 0.25rem rgba(89, 55, 224, 0.25);
+  box-shadow: var(--box-shadow);
 }
 
 /* /////////////////////////////////////////////// */
 
 #car-cards-container .car-card {
-  background-color: #fff;
+  background-color: var(--surface-color);
   border-radius: var(--border-radius, 10px);
   box-shadow: var(--box-shadow, 0 0 10px rgba(0, 0, 0, 0.1));
   overflow: hidden;
@@ -159,10 +180,14 @@
   flex-direction: column;
   flex-grow: 1;
 }
+#car-cards-container .car-card-body p {
+  color: var(--secondary-text-color);
+}
 
 #car-cards-container .car-card-title {
   font-weight: 700;
   font-size: 1.25rem;
+  color: var(--primary-text-color);
 }
 
 #car-cards-container .car-card-price {

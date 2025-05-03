@@ -4,7 +4,7 @@
 
 .car-details-page .hero-section {
   position: relative;
-  height: 300px;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-xl);
@@ -47,7 +47,7 @@
   color: var(--secondary-color);
 }
 .car-details-page .hero-content a {
-  color: var(--light-text-color);
+  color: var(--secondary-text-color);
   text-decoration: none;
   transition: var(--transition);
 }
@@ -96,6 +96,7 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: var(--primary-text-color);
 }
 
 .car-price {
@@ -151,7 +152,7 @@
 .car-description {
   font-size: var(--font-size-lg);
   line-height: 1.6;
-  color: var(--primary-text-color);
+  color: var(--secondary-text-color);
 }
 
 /* Booking Section */
@@ -164,12 +165,33 @@
 }
 
 .booking-calendar {
-  background: white;
+  background: var(--surface-color);
   border-radius: var(--border-radius-lg);
   padding: 1rem;
   box-shadow: var(--box-shadow);
 }
 
+[data-vc-theme="light"] .vc-date__btn {
+  background-color: var(--surface-color);
+  color: var(--secondary-text-color);
+}
+[data-vc-theme="light"].vc {
+  background-color: var(--surface-color) !important;
+}
+
+[data-vc-theme="light"] .vc-time__range input {
+  background-color: var(--surface-color);
+  color: var(--secondary-text-color);
+}
+[data-vc-theme="light"] .vc-time__hour input,
+[data-vc-theme="light"] .vc-time__minute input {
+  background-color: var(--surface-color);
+  color: var(--secondary-text-color);
+}
+/* [data-vc-date-btn] {
+  background-color: var(--surface-colo) !important;
+  color: var(--secondary-text-color) !important;
+} */
 .calendar-wrapper {
   width: 100%;
 }
@@ -182,10 +204,17 @@
 
 /* Auth Form */
 .auth-form-container {
-  background: white;
+  background: var(--surface-color);
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   box-shadow: var(--box-shadow);
+}
+.auth-form-container input {
+  background-color: var(--surface-color);
+  color: var(--secondary-text-color);
+}
+.auth-form-container input::placeholder {
+  color: var(--secondary-text-color);
 }
 
 .auth-form {
@@ -254,12 +283,19 @@
 
 /* Car Features */
 .car-features {
-  background: white;
+  background: var(--surface-color);
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   box-shadow: var(--box-shadow);
 }
 
+.car-features .car-equips p {
+  color: var(--secondary-text-color);
+}
+
+.car-features .car-equips i {
+  color: var(--main-color);
+}
 .features-title {
   font-size: 1.5rem;
   color: var(--primary-text-color);
@@ -269,7 +305,6 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 

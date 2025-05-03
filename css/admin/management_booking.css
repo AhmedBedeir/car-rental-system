@@ -8,10 +8,11 @@
 
 .booking-table {
   width: 100%;
+  box-shadow: var(--box-shadow);
 }
 
 .booking-table thead {
-  background-color: var(--main-color-hover);
+  background-color: var(--background-color);
   color: var(--light-text-color);
   position: sticky;
   top: 0;
@@ -21,12 +22,14 @@
   padding: var(--spacing-md);
   font-weight: var(--font-weight-bold);
   white-space: nowrap;
+  color: var(--primary-text-color);
 }
 
 .booking-table td {
   padding: var(--spacing-md);
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
+  color: var(--primary-text-color);
 }
 
 .booking-table .user-info,

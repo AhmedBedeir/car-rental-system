@@ -4,6 +4,7 @@
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
   box-shadow: var(--box-shadow);
+  background-color: var(--surface-color);
 }
 
 #booking .heading h1 {
@@ -160,6 +161,8 @@
   text-transform: uppercase;
   cursor: pointer;
   border: none;
+  background-color: var(--surface-color);
+  color: var(--primary-text-color);
 }
 
 #booking .btns button:first-of-type,
@@ -179,6 +182,12 @@
 }
 .confirmed {
   background-color: #67ae6e;
+}
+.completed {
+  background-color: #f0ad4e;
+}
+.cancelled {
+  background-color: #d9534f;
 }
 
 /* Responsive */

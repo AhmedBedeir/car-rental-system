@@ -87,9 +87,21 @@ class Booking {
         const returnDate = new Date(booking.returnDate);
         const now = new Date();
 
-        if (returnDate < now) {
+        // if (returnDate < now) {
+        //   car.available = true;
+        //   booking.status = "completed";
+        // } else {
+        //   car.available = false;
+        // }
+        if (
+          (returnDate < now && booking.status !== "cancelled") ||
+          booking.returnDate !== null ||
+          booking.pickupDate !== null
+        ) {
           car.available = true;
           booking.status = "completed";
+        } else if (booking.status === "cancelled") {
+          car.available = true;
         } else {
           car.available = false;
         }
@@ -143,7 +155,6 @@ class Booking {
     };
   }
 
-
   // overview bookings analysis
   overViewNumbers() {
     const totalBookings = this.bookings.length;
@@ -191,7 +202,6 @@ class Booking {
 
     return statusCounts;
   }
-
 }
 
 export default Booking;

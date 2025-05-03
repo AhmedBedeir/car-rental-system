@@ -1,5 +1,6 @@
 import Cars from "./classes/Cars.js";
 import Users from "./classes/Users.js";
+import { implementDarkMode } from "./dark-mode.js";
 import { initFooter } from "./footer.js";
 import { initNav } from "./navbar.js";
 
@@ -14,3 +15,4 @@ await users.ready;
 initNav();
 
 initFooter();
+implementDarkMode();

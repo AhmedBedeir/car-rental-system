@@ -99,27 +99,34 @@ const displayBookings = () => {
 */
 const updateStatus = (bookingId, newStatus) => {
   console.log(bookingList);
-  // 1. Find the booking
   const booking = bookingList.bookings.find((b) => b.booking_id === bookingId);
 
   if (!booking) {
     console.error(`Booking with ID ${bookingId} not found`);
-    return false; // Return false to indicate failure
+    return false;
   }
 
-  // 2. Update car availability if cancelling or completing
+  // if (newStatus === "cancelled") {
+  //   booking.car.available = true;
+  //   booking.pickupDate = null;
+  //   booking.returnDate = null;
+  // } else if (newStatus === "completed") {
+  //   booking.car.available = true;
+  // }
   if (newStatus === "cancelled") {
     booking.car.available = true;
     booking.pickupDate = null;
     booking.returnDate = null;
-  } else if (newStatus === "completed") {
+  } else if (
+    newStatus === "completed" ||
+    booking.pickupDate === null ||
+    booking.returnDate === null
+  ) {
     booking.car.available = true;
   }
 
-  // 3. Update booking status
   booking.status = newStatus;
 
-  // 4. Save to localStorage
   try {
     localStorage.setItem("bookings", JSON.stringify(bookingList.bookings));
   } catch (error) {
@@ -127,7 +134,6 @@ const updateStatus = (bookingId, newStatus) => {
     return false;
   }
 
-  // 5. Update UI if select element exists
   const selectElement = document.querySelector(
     `select[data-booking-id="${bookingId}"]`
   );
@@ -136,9 +142,9 @@ const updateStatus = (bookingId, newStatus) => {
     selectElement.className = `status-select ${newStatus}`;
     selectElement.value = newStatus;
   }
+  console.log(selectElement);
 
-  console.log(`Successfully updated booking ${bookingId} to ${newStatus}`);
-  return true; // Return true to indicate success
+  return true;
 };
 
 window.updateStatus = updateStatus;

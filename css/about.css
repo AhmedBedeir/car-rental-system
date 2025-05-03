@@ -1,6 +1,6 @@
 .about-page .hero-section {
   position: relative;
-  height: 300px;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-xl);
@@ -43,7 +43,7 @@
   color: var(--secondary-color);
 }
 .about-page .hero-content a {
-  color: var(--light-text-color);
+  color: var(--secondary-text-color);
   text-decoration: none;
   transition: var(--transition);
 }

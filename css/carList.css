@@ -1,33 +1,100 @@
-body {
-  background-color: var(--background-color);
-}
-
-#cars-section {
+.car-list-page {
   min-height: 100vh;
 }
 
-.btn-primary {
+.car-list-page .hero-section {
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  overflow: hidden;
+}
+
+.car-list-page .hero-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.car-list-page .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.car-list-page .hero-content ul {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.car-list-page .hero-content li {
+  color: var(--light-text-color);
+  font-size: var(--font-size-md);
+}
+
+.car-list-page .hero-content li:not(:last-child) {
+  opacity: 0.8;
+  color: var(--secondary-color);
+}
+.car-list-page .hero-content li:last-child {
+  color: var(--secondary-color);
+}
+.car-list-page .hero-content a {
+  color: var(--light-text-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.car-list-page .hero-content a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.car-list-page .hero-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+/* Car List Section */
+.car-list-page .btn-primary {
   background-color: var(--main-color);
   border-color: var(--main-color);
   color: #fff;
 }
 
-.btn-secondary {
+.car-list-page .btn-secondary {
   background-color: var(--secondary-text-color);
   border-color: var(--border-color);
   color: #fff;
 }
 
-.btn-primary:hover {
+.car-list-page .btn-primary:hover {
   background-color: var(--main-color-hover);
 }
 
-.form-label {
+.car-list-page .form-label {
   color: var(--primary-text-color);
 }
 
-.form-select,
-.form-control {
+.car-list-page .form-select,
+.car-list-page .form-control {
   background-color: #fff;
   border-radius: var(--border-radius);
   border: 1px solid var(--secondary-text-color);
@@ -35,15 +102,15 @@ body {
 }
 
 /* When focused (clicked), they highlight with main color */
-.form-select:focus,
-.form-control:focus {
+.car-list-page .form-select:focus,
+.car-list-page .form-control:focus {
   border-color: var(--main-color);
-  box-shadow: 0 0 0 0.25rem rgba(89, 55, 224, 0.25); /* optional: can create a new variable for this if you want */
+  box-shadow: 0 0 0 0.25rem rgba(89, 55, 224, 0.25);
 }
 
 /* /////////////////////////////////////////////// */
 
-.car-card {
+#car-cards-container .car-card {
   background-color: #fff;
   border-radius: var(--border-radius, 10px);
   box-shadow: var(--box-shadow, 0 0 10px rgba(0, 0, 0, 0.1));
@@ -55,18 +122,18 @@ body {
   position: relative;
 }
 
-.car-card:hover {
+#car-cards-container .car-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.car-card img {
+#car-cards-container .car-card img {
   width: 100%;
   height: 150px;
   object-fit: cover;
 }
 
-.car-card #available {
+#car-cards-container .car-card #available {
   color: white;
   background-color: var(--secondary-color);
   border-radius: var(--border-radius);
@@ -76,7 +143,7 @@ body {
   top: 5px;
 }
 
-.car-card #booked {
+#car-cards-container .car-card #booked {
   color: white;
   background-color: rgb(201, 59, 59);
   border-radius: var(--border-radius);
@@ -86,24 +153,24 @@ body {
   top: 5px;
 }
 
-.car-card-body {
+#car-cards-container .car-card-body {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.car-card-title {
+#car-cards-container .car-card-title {
   font-weight: 700;
   font-size: 1.25rem;
 }
 
-.car-card-price {
+#car-cards-container .car-card-price {
   color: var(--main-color, #5937e0);
   font-weight: 600;
 }
 
-.car-card-features {
+#car-cards-container .car-card-features {
   font-size: 0.9rem;
   color: #8d8d8d;
   display: flex;
@@ -112,7 +179,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.car-card-btn {
+#car-cards-container .car-card-btn {
   background-color: var(--main-color, #5937e0);
   color: #fff;
   text-align: center;
@@ -123,11 +190,11 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.car-card-btn:hover {
+#car-cards-container .car-card-btn:hover {
   background-color: #452cc4;
 }
 
-div > .bi-check-circle {
+#car-cards-container div > .bi-check-circle {
   color: var(--secondary-color);
 }
 

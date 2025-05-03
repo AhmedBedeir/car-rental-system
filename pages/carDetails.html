@@ -20,6 +20,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link
+
       href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/styles/index.css"
       rel="stylesheet"
     />
@@ -33,100 +34,138 @@
     <link rel="stylesheet" type="text/css" href="../css/carDetails.css" />
   </head>
   <body>
-    <!-- <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 px-3 nav-container"></nav> -->
-    <main>
-      <section id="car-details" class="d-flex flex-column flex-md-row p-3">
-        <article id="left" class="w-100 w-md-50 d-flex flex-column gap-3">
-          <h1 id="car-name"></h1>
-          <h2 id="price"></h2>
+    <div class="nav-container"></div>
 
-          <!--main image-->
-          <img id="main-car-img" src="" alt="" />
-
-          <!--other images-->
-          <div id="other-images-container"></div>
-
-          <p id="car-description" class="mt-2"></p>
-        </article>
-
-        <aside
-          id="right"
-          class="w-100 w-md-50 d-flex flex-column align-items-center align-items-md-start gap-3"
-        >
-          <div id="calendar-container" class="d-flex justify-content-center">
-            <div id="calendar"></div>
-          </div>
-
-          <div id="login-signup">
-            <div class="inputs my-3 w-100 w-md-50">
-              <label for="email" class="form-label">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="Enter Your Email"
-              />
-            </div>
-
-            <!-- Password Field -->
-            <div class="inputs my-3 w-100 w-md-50">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                id="password"
-                class="form-control"
-                placeholder="Enter Password"
-              />
-            </div>
-
-            <!-- "Don't Have an Account?" Link -->
-            <div class="w-100 w-md-50 mb-3" id="register-link-container">
-              <small>
-                <a href="#" id="show-register-link">Don't have an account?</a>
-              </small>
-            </div>
-
-            <!-- Confirm Password Field + "Already have an account?" Link -->
-            <div
-              class="inputs my-3 w-100 w-md-50"
-              id="confirm-password-container"
-              style="display: none"
-            >
-              <label for="confirm-password" class="form-label"
-                >Confirm Password</label
-              >
-              <input
-                type="password"
-                id="confirm-password"
-                class="form-control"
-                placeholder="Confirm Password"
-              />
-
-              <!-- Place "Already have an account?" inside the same container -->
-              <div class="mt-1">
-                <small>
-                  <a href="#" id="show-login-link">Already have an account?</a>
-                </small>
+    <main id="car-details" class="car-details-page">
+      <section class="hero-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-7">
+              <div class="hero-content">
+                <ul>
+                  <li><a href="../index.html">Home</a></li>
+                  <li>/</li>
+                  <li>Booking</li>
+                </ul>
               </div>
             </div>
           </div>
-
-          <!--Rent button-->
-          <button id="rent-btn" class="w-50 w-md-100 mt-3">Rent Car</button>
-
-          <!--car equipment container-->
-          <div id="car-equipment-container" class="container my-3">
-            <h2>Car Equipment</h2>
-            <!--features-->
-            <div id="feature-columns" class="row"></div>
-          </div>
-          <div
-            id="toast-container"
-            class="toast-container position-fixed bottom-0 end-0 p-3"
-            style="z-index: 9999"
-          ></div>
-        </aside>
+        </div>
+        <img
+          src="../assets/about_image.avif"
+          alt="Luxury car fleet"
+          class="hero-image"
+        />
       </section>
+      <div class="car-details-container">
+        <!-- Left Column - Car Images and Description -->
+        <article class="car-images-section">
+          <div class="car-header">
+            <h1 id="car-name" class="car-title"></h1>
+            <h2 id="price" class="car-price"></h2>
+          </div>
+
+          <div class="car-image-gallery">
+            <!-- Main Image -->
+            <div class="main-image-container">
+              <img
+                id="main-car-img"
+                class="main-car-image"
+                src=""
+                alt="Main car image"
+              />
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            <div id="other-images-container" class="thumbnail-gallery">
+              <!-- Thumbnails will be inserted here -->
+            </div>
+          </div>
+
+          <div class="car-description-container">
+            <p id="car-description" class="car-description"></p>
+          </div>
+        </article>
+
+        <!-- Right Column - Booking Form -->
+        <aside class="booking-section">
+          <!-- Calendar -->
+          <div class="booking-calendar">
+            <div id="calendar-container" class="calendar-wrapper">
+              <div id="calendar" class="calendar"></div>
+            </div>
+          </div>
+
+          <!-- Login/Signup Form -->
+          <div class="auth-form-container">
+            <div id="login-signup" class="auth-form">
+              <div class="form-group">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter Your Email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Enter Password"
+                />
+              </div>
+
+              <div class="auth-links">
+                <small>
+                  <a href="#" id="show-register-link" class="auth-link"
+                    >Don't have an account?</a
+                  >
+                </small>
+              </div>
+
+              <div
+                id="confirm-password-container"
+                class="form-group confirm-password"
+                style="display: none"
+              >
+                <label for="confirm-password" class="form-label"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  id="confirm-password"
+                  class="form-control"
+                  placeholder="Confirm Password"
+                />
+
+                <div class="auth-links">
+                  <small>
+                    <a href="#" id="show-login-link" class="auth-link"
+                      >Already have an account?</a
+                    >
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <button id="rent-btn" class="rent-button">Rent Car</button>
+          </div>
+
+          <!-- Car Features -->
+          <div id="car-equipment-container" class="car-features">
+            <h2 class="features-title">Car Equipment</h2>
+            <div id="feature-columns" class="features-grid"></div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Toast Notifications -->
+      <div id="toast-container" class="toast-notifications"></div>
+
     </main>
     <footer class="footer-container"></footer>
     <script
@@ -135,9 +174,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script type="module" src="../js/navbar.js"></script>
-    <script src="../js/footer.js"></script>
     <script src="../js/calendarInit.js"></script>
     <script src="../js/carDetails.js" type="module"></script>
+    <script src="../js/index.js" type="module"></script>
   </body>
 </html>

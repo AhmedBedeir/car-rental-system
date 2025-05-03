@@ -35,7 +35,8 @@ class Booking {
     this.bookings.forEach((booking) => {
       // User
       const users = new Users();
-      const user = users.getUserById(String(booking.userId));
+      const user = users.getUserById(booking.userId);
+      console.log(user);
       booking.user = user;
 
       // Car
@@ -49,6 +50,8 @@ class Booking {
       if (returnDate < now) {
         car.available = true;
         booking.status = "completed";
+      } else if (booking.status === "cancelled") {
+        car.available = true;
       } else {
         car.available = false;
       }
@@ -140,6 +143,7 @@ class Booking {
     };
   }
 
+
   // overview bookings analysis
   overViewNumbers() {
     const totalBookings = this.bookings.length;
@@ -187,6 +191,7 @@ class Booking {
 
     return statusCounts;
   }
+
 }
 
 export default Booking;

@@ -58,7 +58,7 @@ class Booking {
       } else {
         car.available = false;
       }
-
+      cars.saveToLocalStorage();
       booking.car = car;
     });
 

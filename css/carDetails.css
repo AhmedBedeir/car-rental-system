@@ -188,10 +188,7 @@
   background-color: var(--surface-color);
   color: var(--secondary-text-color);
 }
-/* [data-vc-date-btn] {
-  background-color: var(--surface-colo) !important;
-  color: var(--secondary-text-color) !important;
-} */
+
 .calendar-wrapper {
   width: 100%;
 }

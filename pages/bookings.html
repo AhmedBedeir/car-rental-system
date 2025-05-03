@@ -22,7 +22,7 @@
     <title>Booking Confirmation</title>
     <script>
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (!currentUser) {
+      if (!currentUser || currentUser?.role === "admin") {
         window.location.href = "../index.html";
       }
     </script>
@@ -180,9 +180,9 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
-    <script type="module" src="./../js/navbar.js"></script>
-    <script src="./../js/footer.js"></script>
-    <script src="../js/booking.js" type="module"></script>
+    <!-- <script type="module" src="./../js/navbar.js"></script>
+    <script src="./../js/footer.js"></script> -->
     <script type="module" src="../js/index.js"></script>
+    <script src="../js/booking.js" type="module"></script>
   </body>
 </html>

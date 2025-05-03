@@ -51,6 +51,8 @@ const displayBooking = (index) => {
     statusElement.classList.add("pending");
   } else if (booking.status === "confirmed") {
     statusElement.classList.add("confirmed");
+  } else if (booking.status === "cancelled") {
+    statusElement.classList.add("cancelled");
   }
 
   // Display car image

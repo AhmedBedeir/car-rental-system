@@ -47,7 +47,10 @@ class Booking {
       const returnDate = new Date(booking.returnDate);
       const now = new Date();
 
-      if (returnDate < now) {
+      if (
+        (returnDate < now && booking.status === "confirmed") ||
+        (returnDate < now && booking.status === "pending")
+      ) {
         car.available = true;
         booking.status = "completed";
       } else if (booking.status === "cancelled") {
@@ -87,21 +90,9 @@ class Booking {
         const returnDate = new Date(booking.returnDate);
         const now = new Date();
 
-        // if (returnDate < now) {
-        //   car.available = true;
-        //   booking.status = "completed";
-        // } else {
-        //   car.available = false;
-        // }
-        if (
-          (returnDate < now && booking.status !== "cancelled") ||
-          booking.returnDate !== null ||
-          booking.pickupDate !== null
-        ) {
+        if (returnDate < now && booking.status !== "cancelled") {
           car.available = true;
           booking.status = "completed";
-        } else if (booking.status === "cancelled") {
-          car.available = true;
         } else {
           car.available = false;
         }

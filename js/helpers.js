@@ -144,6 +144,17 @@ export function showCards(cars, carsContainer, carDetailsPath) {
   });
 }
 
+//function to get the data for the select 
+export function populateSelectOptions(selectId, optionsArray) {
+
+  const select = document.getElementById(selectId);
+  optionsArray.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    select.appendChild(option);
+  });
+}
 export function overviewCard({ icon, title, value, small }) {
   const card = `
   <div class="col-md-6 col-lg-3">

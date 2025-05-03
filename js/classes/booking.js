@@ -142,6 +142,56 @@ class Booking {
       status: "pending",
     };
   }
+
+
+  // overview bookings analysis
+  overViewNumbers() {
+    const totalBookings = this.bookings.length;
+    const completedBookings = this.bookings.filter(
+      (booking) => booking.status === "completed"
+    ).length;
+    const pendingBookings = this.bookings.filter(
+      (booking) => booking.status === "pending"
+    ).length;
+    const activeBookings = this.bookings.filter(
+      (booking) =>
+        booking.status === "confirmed" || booking.status === "pending"
+    ).length;
+    const endingBookings = this.bookings.filter((booking) => {
+      const returnDate = new Date(booking.returnDate);
+      const now = new Date();
+      return returnDate < now;
+    }).length;
+    const completedBookingsPercentage = Math.round(
+      (completedBookings / totalBookings) * 100
+    );
+
+    return {
+      totalBookings,
+      activeBookings,
+      completedBookings,
+      pendingBookings,
+      endingBookings,
+      completedBookingsPercentage,
+    };
+  }
+
+  overViewAnalysis() {
+    const statusCounts = {
+      pending: 0,
+      confirmed: 0,
+      completed: 0,
+      cancelled: 0,
+    };
+
+    this.bookings.forEach((booking) => {
+      const status = booking.status || "pending";
+      statusCounts[status] = (statusCounts[status] || 0) + 1;
+    });
+
+    return statusCounts;
+  }
+
 }
 
 export default Booking;

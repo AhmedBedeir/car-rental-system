@@ -94,9 +94,10 @@ export const initNav = () => {
     if (navContainer) {
       navContainer.innerHTML = navbar;
 
-      implementDarkMode();
+      // implementDarkMode();
 
       const logoutBtn = document.getElementById("logout");
+    
       if (logoutBtn) {
         logoutBtn.addEventListener("click", (e) => {
           e.preventDefault();

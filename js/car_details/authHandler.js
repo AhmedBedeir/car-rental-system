@@ -179,6 +179,8 @@ export function handleLogin(email, password, fromRegistration = false) {
         rentButton.removeEventListener('click', authClickHandler);
         handleAuthorizedUser(rentButton, loginSection, currentUser);
         
+       // Only proceed with booking if this is not an admin user
+       if (currentUser.role !== 'admin') {
         const shouldRent = document.querySelector(".rent-after-login");
         if (fromRegistration || shouldRent) {
             if (shouldRent) {
@@ -189,6 +191,22 @@ export function handleLogin(email, password, fromRegistration = false) {
                 handleBooking();
             }, 500);
         }
+    } else {
+        // If admin user, clean up the rent flag
+        const shouldRent = document.querySelector(".rent-after-login");
+        if (shouldRent) {
+            shouldRent.remove();
+        }
+        
+        showToast('Admin users cannot make bookings', 'warning');
+        
+        // Ensure admin users can't book by disabling the rent button
+        rentButton.disabled = true;
+        
+        // Remove any existing event listeners to prevent booking
+        const newRentButton = rentButton.cloneNode(true);
+        rentButton.parentNode.replaceChild(newRentButton, rentButton);
+    }
     } else {
         showToast(loginResult.message, 'danger');
     }

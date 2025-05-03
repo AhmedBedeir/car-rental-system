@@ -85,6 +85,13 @@ option {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
+
+/* Fix for dropdowns inside modals showing black */
+.modal select.form-select option {
+  background-color: white !important;
+}
+
+
 @media (max-width: 768px) {
   .cars-table-container {
     border-radius: 0;

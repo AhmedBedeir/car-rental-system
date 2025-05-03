@@ -56,3 +56,16 @@ export function showCards(cars, carsContainer, carDetailsPath) {
     carsContainer.appendChild(col);
   });
 }
+
+
+//function to get the data for the select 
+export function populateSelectOptions(selectId, optionsArray) {
+
+  const select = document.getElementById(selectId);
+  optionsArray.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    select.appendChild(option);
+  });
+}

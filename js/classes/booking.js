@@ -35,7 +35,8 @@ class Booking {
     this.bookings.forEach((booking) => {
       // User
       const users = new Users();
-      const user = users.getUserById(String(booking.userId));
+      const user = users.getUserById(booking.userId);
+      console.log(user);
       booking.user = user;
 
       // Car
@@ -49,6 +50,8 @@ class Booking {
       if (returnDate < now) {
         car.available = true;
         booking.status = "completed";
+      } else if (booking.status === "cancelled") {
+        car.available = true;
       } else {
         car.available = false;
       }
@@ -100,45 +103,45 @@ class Booking {
     }
   }
 
-//make a booking object
-buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
-  const options = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true
-  };
-  
-  const msPerDay = 1000 * 60 * 60 * 24;
-  const numberOfDays = Math.ceil((returnDate - pickupDate) / msPerDay);
-  const total = numberOfDays * pricePerDay;
-  
-  let lastBookingId = 0;
-  if (this.bookings.length > 0) {
-    const bookingIds = this.bookings.map(booking => {
-        if (booking.booking_id) {
-            return booking.booking_id;
-        } else {
-            return 0;
-        }
-    });
+  //make a booking object
+  buildBooking(carId, userId, pickupDate, returnDate, pricePerDay) {
+    const options = {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
 
-    lastBookingId = Math.max(...bookingIds);
-}
-  
-  return {
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const numberOfDays = Math.ceil((returnDate - pickupDate) / msPerDay);
+    const total = numberOfDays * pricePerDay;
+
+    let lastBookingId = 0;
+    if (this.bookings.length > 0) {
+      const bookingIds = this.bookings.map((booking) => {
+        if (booking.booking_id) {
+          return booking.booking_id;
+        } else {
+          return 0;
+        }
+      });
+
+      lastBookingId = Math.max(...bookingIds);
+    }
+
+    return {
       booking_id: lastBookingId + 1,
       carId,
       userId,
-      pickupDate: pickupDate.toLocaleString('en-US', options),
-      returnDate: returnDate.toLocaleString('en-US', options),
+      pickupDate: pickupDate.toLocaleString("en-US", options),
+      returnDate: returnDate.toLocaleString("en-US", options),
       numberOfDays,
       total,
-      status: 'pending'
-  };
-}
+      status: "pending",
+    };
+  }
 }
 
 export default Booking;

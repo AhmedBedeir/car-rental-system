@@ -28,217 +28,227 @@
 
     <title>Car Rental System</title>
   </head>
-  <body>
-    <!-- Navbar -->
-
-    <!-- hero section  -->
-
-    <section class="container-fluid my-5 px-5">
-      <div
-        class="container-fluid d-flex justify-content-center align-items-center p-3 p-lg-5"
-        id="hero-section"
-      >
-        <div class="row min-vh-75">
-          <!-- Text Section -->
-
-          <div class="col-lg-4 d-flex align-items-lg-start align-items-center">
+  <body class="">
+    <div class="nav-container"></div>
+    <main class="home-page">
+      <!-- hero section  -->
+      <section id="hero-section">
+        <div class="hero-container">
+          <div class="hero-overlay"></div>
+          <div class="container">
             <div class="hero-content">
-              <h1 class="fw-bold">Experience the road like never before</h1>
-              <p class="mt-3 mb-4">
+              <h1 class="hero-title">Experience the road like never before</h1>
+              <p class="hero-description">
                 Unlock extraordinary journeys with our curated collection of
                 luxury vehicles. From sleek sedans to powerful SUVs, experience
                 unmatched comfort, style, and performance on every road.
               </p>
-            </div>
-          </div>
-
-          <!-- Image Section -->
-          <div class="col-lg-8 d-flex align-items-center">
-            <div class="hero-image">
-              <img class="img-fluid" src="assets/car.png" />
+              <button class="hero-btn">Explore Collection</button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- icons section -->
-    <!-- Benefits Section -->
-    <section id="icons-section" class="container-fluid my-5 p-5">
-      <div class="row justify-content-center">
-        <div class="iconDiv col-md-4">
-          <i class="fa-solid fa-map-location-dot"></i>
-          <h2>Nationwide Coverage</h2>
-          <p>
-            Pick up and drop off at any of our 50+ locations across the country
-            with our flexible rental network.
-          </p>
-        </div>
-
-        <div class="iconDiv col-md-4">
-          <i class="fa-solid fa-medal"></i>
-          <h2>Premium Quality</h2>
-          <p>
-            Our fleet undergoes rigorous 150-point inspections to ensure safety
-            and performance standards.
-          </p>
-        </div>
-
-        <div class="iconDiv col-md-4">
-          <i class="fa-solid fa-headset"></i>
-          <h2>24/7 Support</h2>
-          <p>
-            Round-the-clock assistance from our customer care team for any
-            questions or roadside emergencies.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Cars Showcase Section -->
-    <section id="cars-section" class="py-lg-6 my-5">
-      <div class="container-fluid px-5">
-        <!-- Section Header -->
-        <div class="text-center mb-5 mb-lg-6">
-          <h2 class="fw-bold">Our Premium Fleet</h2>
-          <p class="mx-auto" style="max-width: 600px">
-            Explore our collection of meticulously maintained luxury vehicles
-            for your next journey
-          </p>
-        </div>
-
-        <div id="car-cards-container" class="row gy-4"></div>
-
-        <!-- View More Button -->
-        <div class="text-center mt-5">
-          <a href="./pages/carListings.html" class="btn btn-custom">
-            View All Vehicles
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features-section" class="container-fluid p-5 my-4">
-      <div class="row align-items-center">
-        <!-- Image Column -->
-        <div class="col-lg-7 mb-5 mb-lg-0">
-          <img src="assets/mercedes.png" alt="Mercedes-Benz features" />
-        </div>
-
-        <!-- Features List Column -->
-        <div class="col-lg-5">
-          <div class="feature-list">
-            <h2 class="mb-4">Why Choose CARANT</h2>
-
-            <div class="feature-item d-flex mb-4">
-              <div class="feature-icon me-4">
-                <i class="bi bi-shield-check"></i>
-              </div>
-              <div class="feature-content">
-                <h3>Comprehensive Insurance</h3>
-                <p>
-                  All rentals include premium insurance coverage with multiple
-                  protection options.
-                </p>
-              </div>
-            </div>
-
-            <div class="feature-item d-flex mb-4">
-              <div class="feature-icon me-4">
-                <i class="bi bi-arrow-repeat"></i>
-              </div>
-              <div class="feature-content">
-                <h3>Flexible Rental Periods</h3>
-                <p>
-                  Rent by the hour, day, week, or month with our adaptable
-                  rental plans.
-                </p>
-              </div>
-            </div>
-
-            <div class="feature-item d-flex mb-4">
-              <div class="feature-icon me-4">
-                <i class="bi bi-stars"></i>
-              </div>
-              <div class="feature-content">
-                <h3>Loyalty Rewards</h3>
-                <p>
-                  Earn points with every rental that can be redeemed for
-                  upgrades and discounts.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- facts-container -->
-    <!-- Updated Facts Section with Bootstrap classes -->
-    <section id="facts-container" class="py-5 my-5 bg-white rounded-3">
-      <div class="container text-center">
-        <h2 class="mb-3">Our Track Record</h2>
-        <p class="mb-5 mx-auto" style="max-width: 600px">
-          Trusted by thousands of satisfied customers for their transportation
-          needs
-        </p>
-
+      <!-- Benefits Section -->
+      <section id="benefits" class="container-xxl py-5">
         <div class="row g-4 justify-content-center">
-          <!-- Fact Card 1 -->
-          <div class="col-12 col-sm-6 col-lg-3 d-flex">
-            <div
-              class="factCard p-4 w-100 d-flex flex-column align-items-center shadow-sm rounded-3 h-100"
-            >
-              <div class="p-3 mb-3">
-                <i class="fa-solid fa-users fs-1"></i>
+          <!-- Benefit 1 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="benefit-card p-4 h-100 text-center">
+              <div class="benefit-icon mb-4">
+                <i class="fa-solid fa-map-location-dot"></i>
               </div>
-              <h4 class="mb-2">15,000+</h4>
-              <p class="mb-0">Satisfied Customers</p>
+              <h3 class="benefit-title mb-3">Nationwide Coverage</h3>
+              <p class="benefit-text">
+                Pick up and drop off at any of our 50+ locations across the
+                country with our flexible rental network.
+              </p>
             </div>
           </div>
 
-          <!-- Fact Card 2 -->
-          <div class="col-12 col-sm-6 col-lg-3 d-flex">
-            <div
-              class="factCard p-4 w-100 d-flex flex-column align-items-center shadow-sm rounded-3 h-100"
-            >
-              <div class="p-3 mb-3">
-                <i class="fa-solid fa-car fs-1"></i>
+          <!-- Benefit 2 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="benefit-card p-4 h-100 text-center">
+              <div class="benefit-icon mb-4">
+                <i class="fa-solid fa-medal"></i>
               </div>
-              <h4 class="mb-2">200+</h4>
-              <p class="mb-0">Vehicle Fleet</p>
+              <h3 class="benefit-title mb-3">Premium Quality</h3>
+              <p class="benefit-text">
+                Our fleet undergoes rigorous 150-point inspections to ensure
+                safety and performance standards.
+              </p>
             </div>
           </div>
 
-          <!-- Fact Card 3 -->
-          <div class="col-12 col-sm-6 col-lg-3 d-flex">
-            <div
-              class="factCard p-4 w-100 d-flex flex-column align-items-center shadow-sm rounded-3 h-100"
-            >
-              <div class="p-3 mb-3">
-                <i class="fa-solid fa-map-marked-alt fs-1"></i>
+          <!-- Benefit 3 -->
+          <div class="col-lg-4 col-md-6">
+            <div class="benefit-card p-4 h-100 text-center">
+              <div class="benefit-icon mb-4">
+                <i class="fa-solid fa-headset"></i>
               </div>
-              <h4 class="mb-2">50+</h4>
-              <p class="mb-0">Locations Nationwide</p>
-            </div>
-          </div>
-
-          <!-- Fact Card 4 -->
-          <div class="col-12 col-sm-6 col-lg-3 d-flex">
-            <div
-              class="factCard p-4 w-100 d-flex flex-column align-items-center shadow-sm rounded-3 h-100"
-            >
-              <div class="p-3 mb-3">
-                <i class="fa-solid fa-smile fs-1"></i>
-              </div>
-              <h4 class="mb-2">98%</h4>
-              <p class="mb-0">Customer Satisfaction</p>
+              <h3 class="benefit-title mb-3">24/7 Support</h3>
+              <p class="benefit-text">
+                Round-the-clock assistance from our customer care team for any
+                questions or roadside emergencies.
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- Cars Showcase Section -->
+      <section id="cars-section" class="py-5">
+        <div class="container-xxl px-4 px-lg-5">
+          <!-- Section Header -->
+          <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3">Our Premium Fleet</h2>
+            <p class="lead mx-auto" style="max-width: 600px">
+              Explore our collection of meticulously maintained luxury vehicles
+              for your next journey
+            </p>
+          </div>
+
+          <!-- Cars Grid -->
+          <div id="car-cards-container" class="row g-4"></div>
+
+          <!-- View More Button -->
+          <div class="text-center mt-5">
+            <a
+              href="./pages/carListings.html"
+              class="btn btn-primary btn-lg px-4 py-2"
+            >
+              View All Vehicles
+            </a>
+          </div>
+        </div>
+      </section>
+      <!--  Features Section -->
+      <section id="features-section">
+        <div class="container-xxl">
+          <div class="row align-items-center">
+            <!-- Image Column -->
+            <div class="col-lg-7">
+              <div class="feature-img-container">
+                <img
+                  src="assets/g-8.webp"
+                  alt="Luxury Mercedes vehicle"
+                  class="feature-img"
+                />
+                <div class="img-overlay"></div>
+              </div>
+            </div>
+
+            <!-- Content Column -->
+            <div class="col-lg-5">
+              <div class="features-content">
+                <h2 class="section-heading">Why Choose <span>CARENT</span></h2>
+                <p class="section-subtitle">
+                  Experience premium car rental like never before
+                </p>
+
+                <div class="features-grid">
+                  <!-- Feature 1 -->
+                  <div class="feature-card">
+                    <div class="feature-icon">
+                      <i class="bi bi-shield-check"></i>
+                    </div>
+                    <div class="feature-text">
+                      <h3>Premium Insurance</h3>
+                      <p>
+                        Comprehensive coverage with multiple protection options
+                        for complete peace of mind
+                      </p>
+                    </div>
+                    <div class="feature-badge">01</div>
+                  </div>
+
+                  <!-- Feature 2 -->
+                  <div class="feature-card">
+                    <div class="feature-icon">
+                      <i class="bi bi-arrow-repeat"></i>
+                    </div>
+                    <div class="feature-text">
+                      <h3>Flexible Rentals</h3>
+                      <p>
+                        Choose from hourly, daily, weekly or monthly rental
+                        plans to suit your needs
+                      </p>
+                    </div>
+                    <div class="feature-badge">02</div>
+                  </div>
+
+                  <!-- Feature 3 -->
+                  <div class="feature-card">
+                    <div class="feature-icon">
+                      <i class="bi bi-stars"></i>
+                    </div>
+                    <div class="feature-text">
+                      <h3>Loyalty Rewards</h3>
+                      <p>
+                        Earn points with every rental redeemable for upgrades
+                        and exclusive offers
+                      </p>
+                    </div>
+                    <div class="feature-badge">03</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section id="stats-section">
+        <div class="container-xxl">
+          <div class="section-header text-center">
+            <h2 class="section-title">Our Track Record</h2>
+            <p class="section-subtitle">
+              Trusted by thousands of satisfied customers for their
+              transportation needs
+            </p>
+          </div>
+
+          <div class="stats-grid">
+            <!-- Stat 1 -->
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <h3 class="stat-number">15,000+</h3>
+              <p class="stat-label">Satisfied Customers</p>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fa-solid fa-car"></i>
+              </div>
+              <h3 class="stat-number">200+</h3>
+              <p class="stat-label">Vehicle Fleet</p>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fa-solid fa-map-marked-alt"></i>
+              </div>
+              <h3 class="stat-number">50+</h3>
+              <p class="stat-label">Locations Nationwide</p>
+            </div>
+
+            <!-- Stat 4 -->
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fa-solid fa-smile"></i>
+              </div>
+              <h3 class="stat-number">98%</h3>
+              <p class="stat-label">Customer Satisfaction</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <!-- footer section  -->
     <footer class="footer-container"></footer>
@@ -248,9 +258,8 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
-    <script type="module" src="./js/navbar.js"></script>
-    <script src="./js/footer.js"></script>
-    <script type="module" src="./js/index.js"></script>
+
     <script type="module" src="./js/home.js"></script>
+    <script type="module" src="./js/index.js"></script>
   </body>
 </html>

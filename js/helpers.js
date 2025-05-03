@@ -1,3 +1,90 @@
+// export function showCards(cars, carsContainer, carDetailsPath) {
+//   carsContainer.innerHTML = "";
+
+//   if (cars.length === 0) {
+//     carsContainer.innerHTML = `
+//       <div class="col-12 text-center py-5">
+//         <div class="no-cars-found p-4">
+//           <img src="../assets/noCar.svg" alt="No cars found" class="mb-4" width="150" height="150">
+//           <h3 class="mb-3">No cars matched your search.</h3>
+//           <p class="text-muted mb-0">Try adjusting your search/filter for better results!</p>
+//         </div>
+//       </div>
+//     `;
+//     return;
+//   }
+
+//   cars.forEach((car) => {
+//     const col = document.createElement("div");
+//     col.className = "col-12 col-md-6 col-lg-4 mb-4";
+
+//     const availabilityClass = car.available ? "bg-success" : "bg-danger";
+//     const availabilityIcon = car.available ? "bi-check-circle" : "bi-x-circle";
+//     const availabilityText = car.available ? "Available" : "Booked";
+
+//     col.innerHTML = `
+//       <div class="card h-100 shadow-sm border-0 overflow-hidden">
+//         <div class="position-relative">
+//           <img src="${car.images[0]}" class="card-img-top" alt="${car.brand} ${
+//       car.model
+//     }" style="height: 200px; object-fit: cover;">
+//           <span class="position-absolute top-0 end-0 m-2 badge ${availabilityClass}">
+//             <i class="bi ${availabilityIcon} me-1"></i> ${availabilityText}
+//           </span>
+//         </div>
+
+//         <div class="card-body">
+//           <div class="d-flex justify-content-between align-items-center mb-2">
+//             <h5 class="card-title mb-0 fw-bold">${car.brand} ${car.model}</h5>
+//             <span class="text-primary fw-bold">$${
+//               car.pricePerDay
+//             } <small class="text-muted">/day</small></span>
+//           </div>
+
+//           <p class="text-muted mb-3">${car.type}
+
+//           <div class="car-features mb-3">
+//             ${car.features
+//               .slice(0, 3)
+//               .map(
+//                 (f) => `
+//               <div class="d-flex align-items-center mb-2">
+//                 <i class="bi bi-check-circle text-success me-2"></i>
+//                 <small>${f}</small>
+//               </div>
+//             `
+//               )
+//               .join("")}
+//           </div>
+
+//           <a href="${carDetailsPath}?car_id=${
+//       car.id
+//     }" class="btn btn-outline-primary w-100 mt-auto">
+//             View Details <i class="bi bi-arrow-right ms-2"></i>
+//           </a>
+//         </div>
+//       </div>
+//     `;
+
+//     carsContainer.appendChild(col);
+//   });
+// }
+
+// export function overviewCard({ icon, title, value, small }) {
+//   return `
+//     <div class="col-12 col-md-6 col-lg-3 mb-4">
+//       <div class="card h-100 border-0 shadow-sm text-center p-4">
+//         <div class="icon-wrapper bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+//           ${icon}
+//         </div>
+//         <p class="text-muted mb-1">${title}</p>
+//         <h3 class="fw-bold mb-2">${value}</h3>
+//         <small class="text-muted d-block">${small}</small>
+//       </div>
+//     </div>
+//   `;
+// }
+
 export function showCards(cars, carsContainer, carDetailsPath) {
   carsContainer.innerHTML = "";
   if (cars.length === 0) {
@@ -33,9 +120,9 @@ export function showCards(cars, carsContainer, carDetailsPath) {
                 <h5 class="car-card-title mb-0">${car.brand}</h5>
                 <span class="car-card-price">$${
                   car.pricePerDay
-                } <small class="text-muted">/ day</small></span>
+                } <small class="">/ day</small></span>
               </div>
-              <p class="text-muted mb-3">${car.type}</p>
+              <p class="mb-3">${car.type}</p>
       
               <div class="car-card-features">
                 ${car.features

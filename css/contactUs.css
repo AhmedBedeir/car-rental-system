@@ -1,64 +1,120 @@
+.contact-main .hero-section {
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  overflow: hidden;
+}
 
+.contact-main .hero-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
 
-/* map and form section */  
+.contact-main .hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
 
+.contact-main .hero-content ul {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
+.contact-main .hero-content li {
+  color: var(--light-text-color);
+  font-size: var(--font-size-md);
+}
+
+.contact-main .hero-content li:not(:last-child) {
+  opacity: 0.8;
+  color: var(--secondary-color);
+}
+.contact-main .hero-content li:last-child {
+  color: var(--secondary-color);
+}
+.contact-main .hero-content a {
+  color: var(--light-text-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.contact-main .hero-content a:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+.contact-main .hero-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+}
 
 .map-container {
-    height: 100%;
-    min-height: 400px;
-    box-shadow: var(--box-shadow-lg);
-    padding: 0;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
-.map-container iframe{
-    width: 100%;
-    height: 100%;
-    border: 0;
-    border-radius: var(--border-radius);
-}
-#contactForm {
-    background-color: var(--background-color);
-    padding: var(--spacing-lg);
-    border-radius:var(--border-radius);
-    box-shadow: var(--box-shadow);
-    font-size:var(--font-size-lg) ;
-}
-
-
-.btn-custom {
-    background-color: var(--main-color);
-    color:var(--background-color);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: var(--spacing-sm) var(--spacing-md);
-    transition: var(--transition);
-}
-
-.btn-custom:hover {
-    color:var(--background-color);
-    background-color: var(--main-color-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--box-shadow-lg);
-}
-
-
-#FAQ{
-    background-color: var(--background-color);
-    box-shadow: var(--box-shadow-lg);
-    border-radius: var(--border-radius);
-}
-
-.accordion-button {
-    font-size:var(--font-size-lg);
-    padding: var(--spacing-lg);
-}
-
-.accordion-button:hover,
 .accordion-button:not(.collapsed) {
-    color: var(--main-color);
+  background-color: rgba(89, 55, 224, 0.1);
+  color: var(--main-color);
 }
 
-#contact-head p{
-    color:var(--secondary-text-color);
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(89, 55, 224, 0.25);
+  border-color: var(--main-color);
+}
+
+.card {
+  border-radius: var(--border-radius-lg) !important;
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--box-shadow-lg) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--main-color-hover) !important;
+  border-color: var(--main-color-hover) !important;
+}
+
+@media (max-width: 768px) {
+  .contact-main .hero-section {
+    height: 250px;
+  }
+
+  .contact-main .hero-content li {
+    font-size: var(--font-size-sm);
+  }
+
+  .contact-main .about-image {
+    margin-bottom: var(--spacing-lg);
+  }
+  .contact-main {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .map-container {
+    height: 300px;
+  }
 }

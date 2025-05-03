@@ -25,73 +25,124 @@ const bookingsButton = `
 const adminDashboardButton = `
 <a href="../pages/admin/admin.html" class="btn btn-outline-custom"><i class="fa-solid fa-user-tie me-2"></i>Admin Dashboard</a>`;
 
-const navbar = `
-<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 px-3">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <div style="width: var(--logo-width);">
-            <img class="img-fluid" src="../assets/logo.svg" />
-          </div>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="../index.html" >Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../pages/carListings.html">Cars</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
-            </li>
+const links = [
+  { name: "Home", href: "../index.html" },
+  { name: "Cars", href: "../pages/carListings.html" },
+  { name: "About Us", href: "../pages/about.html" },
+  { name: "Contact Us", href: "../pages/contactUs.html" },
+];
 
-            <li class="nav-item">
-              <a class="nav-link" href="../pages/contactUs.html">Contact Us</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <div class="d-flex flex-column flex-lg-row gap-lg-3 gap-2 justify-content-center justify-content-lg-end mt-3 mt-lg-0 w-100">
-              ${
-                currentUser && currentUser.role === "customer"
-                  ? bookingsButton
-                  : ""
-              }
-              ${
-                currentUser && currentUser.role === "admin"
-                  ? adminDashboardButton
-                  : ""
-              }
-              ${currentUser ? logoutButton : authButtons}
-            </div>
-          </div>
+const currentPath = window.location.pathname;
+
+const navbar = `
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary px-3">
+  <div class="container-xxl">
+    <a class="navbar-brand" href="/">
+      <div style="width: var(--logo-width); background-color: var(--surface-color); padding: 5px; border-radius: var(--border-radius);">
+        <img class="img-fluid" src="../assets/logo.svg" />
+      </div>
+    </a>
+    
+    <span class="navbar-toggler-icon navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"></span>
+      
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        ${links
+          .map(
+            (link) => `
+          <li class="nav-item">
+            <a class="nav-link ${
+              currentPath.endsWith(link.href.replace("../", "/"))
+                ? "active"
+                : ""
+            }" 
+               href="${link.href}">${link.name}</a>
+          </li>
+        `
+          )
+          .join("")}
+      </ul>
+      
+      <div class="d-flex align-items-center gap-3">
+        <!-- Dark mode toggle button -->
+        <button id="dark-mode-toggle" class="btn p-2 border-0" >
+          <i class="fas fa-moon fs-4 dark-icon text-secondary "></i>
+          <i class="fas fa-sun fs-4 text-warning light-icon d-none"></i>
+        </button>
+        
+        <div class="d-flex flex-column flex-lg-row gap-lg-3 gap-2">
+          ${
+            currentUser && currentUser.role === "customer" ? bookingsButton : ""
+          }
+          ${
+            currentUser && currentUser.role === "admin"
+              ? adminDashboardButton
+              : ""
+          }
+          ${currentUser ? logoutButton : authButtons}
         </div>
       </div>
-    </nav>
+    </div>
+  </div>
+</nav>
 `;
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.insertAdjacentHTML("afterbegin", navbar);
-  const logoutButton = document.getElementById("logout");
-  if (logoutButton) {
-    logoutButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      const confirmLogout = confirm(
-        "Are you sure you want to log out? You will be redirected to the home page."
-      );
-      if (confirmLogout) {
-        logout();
-      }
-    });
-  }
-});
 
+export const initNav = () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const navContainer = document.querySelector(".nav-container");
+    if (navContainer) {
+      navContainer.innerHTML = navbar;
+
+      implementDarkMode();
+
+      const logoutBtn = document.getElementById("logout");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (confirm("Are you sure you want to log out?")) {
+            logout();
+          }
+        });
+      }
+    }
+  });
+};
+
+const implementDarkMode = () => {
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+
+  const savedMode = localStorage.getItem("darkMode");
+
+  if (savedMode === "dark") {
+    enableDarkMode();
+  }
+
+  darkModeToggle.addEventListener("click", toggleDarkMode);
+  if (darkModeToggle) {
+  }
+
+  const toggleDarkMode = () => {
+    document.body.classList.contains("dark-mode")
+      ? disableDarkMode()
+      : enableDarkMode();
+  };
+
+  const enableDarkMode = () => {
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("darkMode", "dark");
+    document.querySelector(".dark-icon").classList.add("d-none");
+    document.querySelector(".light-icon").classList.remove("d-none");
+  };
+
+  const disableDarkMode = () => {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("darkMode", "light");
+    document.querySelector(".dark-icon").classList.remove("d-none");
+    document.querySelector(".light-icon").classList.add("d-none");
+  };
+};

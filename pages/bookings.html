@@ -16,6 +16,9 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+
     <title>Booking Confirmation</title>
     <script>
       const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -25,6 +28,8 @@
     </script>
   </head>
   <body>
+    <div class="nav-container"></div>
+
     <div class="my-5">
       <div class="booking-empty-state d-none">
         <div class="empty-animation">
@@ -167,6 +172,7 @@
       </section>
       <div class="btns"></div>
     </main>
+    <footer class="footer-container"></footer>
 
     <!-- Bootstrap -->
     <script
@@ -174,6 +180,8 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="./../js/navbar.js"></script>
+    <script src="./../js/footer.js"></script>
     <script src="../js/booking.js" type="module"></script>
     <script type="module" src="../js/index.js"></script>
   </body>

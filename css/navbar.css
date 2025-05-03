@@ -9,13 +9,20 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-lg);
 }
-.nav-item{
+.nav-item {
   transition: all var(--transition);
 }
 .nav-link {
   color: var(--primary-text-color) !important;
   font-weight: var(--font-weight-normal);
   margin: 0 var(--spacing-sm);
+  transition: all var(--transition);
+  font-size: var(--font-size-lg);
+}
+.nav-link.active {
+  color: var(--main-color) !important;
+  font-weight: var(--font-weight-bold);
+  transition: all var(--transition);
 }
 
 .nav-link:hover {

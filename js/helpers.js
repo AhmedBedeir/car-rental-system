@@ -57,7 +57,6 @@ export function showCards(cars, carsContainer, carDetailsPath) {
   });
 }
 
-
 //function to get the data for the select 
 export function populateSelectOptions(selectId, optionsArray) {
 
@@ -68,4 +67,19 @@ export function populateSelectOptions(selectId, optionsArray) {
     option.textContent = item;
     select.appendChild(option);
   });
+}
+export function overviewCard({ icon, title, value, small }) {
+  const card = `
+  <div class="col-md-6 col-lg-3">
+    <div class="item p-3">
+      <div class="icon d-flex justify-content-center align-items-center">               
+        ${icon}
+      </div>
+      <p class="title">${title}</p>
+      <h2>${value}</h2>
+      <p class="small mt-1">${small}</p>
+    </div>
+  </div>
+  `;
+  return card;
 }

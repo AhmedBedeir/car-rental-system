@@ -1,138 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Car Details</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/styles/index.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/index.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
-    <link rel="stylesheet" type="text/css" href="../css/carDetails.css">
-</head>
-<body>
-    <!--temporary header-->
-    <header>
-        <nav class="navbar navbar-expand-md bg-body-tertiary">
-            <div class="container-fluid">
-                <!-- Left: Logo -->
-                <a class="navbar-brand" href="#">Logo</a>
-                
-                <!-- Mobile Toggler -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- Center: Navigation Links -->
-            <!--mobile-->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Vehicles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Details</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
-                </ul>
-                <div class="d-md-none d-flex align-items-center justify-content-center gap-2 mt-3">
-                    <i class="bi bi-telephone-fill"></i>
-                    <div class="d-flex flex-column justify-content-center">
-                        <p class="mb-0 small">Need Help?</p>
-                        <p class="mb-0 small">+966 247-1680</p>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="d-none d-md-flex align-items-center gap-2 ms-auto">
-                <i class="bi bi-telephone-fill"></i>
-                <div class="d-flex flex-column justify-content-center">
-                    <p class="mb-0 small">Need Help?</p>
-                    <p class="mb-0 small">+966 247-1680</p>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<!--manage car main image height so it stays teh same for all cars-->
-<main>
-    <section id="car-details" class="d-flex flex-column flex-md-row p-3">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/styles/index.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/index.js"
+      defer
+    ></script>
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="../css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="../css/carDetails.css" />
+  </head>
+  <body>
+    <!-- <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 px-3 nav-container"></nav> -->
+    <main>
+      <section id="car-details" class="d-flex flex-column flex-md-row p-3">
         <article id="left" class="w-100 w-md-50 d-flex flex-column gap-3">
-            <h1 id="car-name">Car name</h1>
-            <h2 id="price">$price/day</h2>
-            
-            <!--main image-->
-            <img id="main-car-img" src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb">
-            
-            <!--other images-->
-            <div id="other-images-container">
-                <img class="other-imgs" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d">
-                <img class="other-imgs" src="https://images.unsplash.com/photo-1550355291-bbee04a92027">
-            </div>
+          <h1 id="car-name"></h1>
+          <h2 id="price"></h2>
 
-            <p id="car-description"></p>
+          <!--main image-->
+          <img id="main-car-img" src="" alt="" />
+
+          <!--other images-->
+          <div id="other-images-container"></div>
+
+          <p id="car-description" class="mt-2"></p>
         </article>
-        
-        
-        <aside id="right" class="w-100 w-md-50 d-flex flex-column align-items-center align-items-md-start gap-3">
-            <div id="calendar-container" class="d-flex justify-content-center">
-                <div id="calendar"></div>
-            </div>
-            
-            <div id="login-signup">
-                <div class="inputs my-3 w-100 w-md-50">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter Your Email">
-                </div>
-                
-                <!-- Password Field -->
-                <div class="inputs my-3 w-100 w-md-50">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control" placeholder="Enter Password">
-                </div>
-                
-                <!-- "Don't Have an Account?" Link -->
-                <div class="w-100 w-md-50 mb-3" id="register-link-container">
-                    <small>
-                        <a href="#" id="show-register-link">Don't have an account?</a>
-                    </small>
-                </div>
-                
-                <!-- Confirm Password Field + "Already have an account?" Link -->
-                <div class="inputs my-3 w-100 w-md-50" id="confirm-password-container" style="display: none;">
-                    <label for="confirm-password" class="form-label">Confirm Password</label>
-                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirm Password">
-                    
-                    <!-- Place "Already have an account?" inside the same container -->
-                    <div class="mt-1">
-                        <small>
-                            <a href="#" id="show-login-link">Already have an account?</a>
-                        </small>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <!--Rent button-->
-            <button id="rent-btn" class="mb-5 w-50 w-md-100">Rent Car</button>
-            
-            <!--car equipment container-->
-            <div id="car-equipment-container" class="container">
-                <h2>Car Equipment</h2>
-                <!--features-->
-                <div id="feature-columns" class="row"></div>
-            </div>
-            <div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999;"></div>
 
+        <aside
+          id="right"
+          class="w-100 w-md-50 d-flex flex-column align-items-center align-items-md-start gap-3"
+        >
+          <div id="calendar-container" class="d-flex justify-content-center">
+            <div id="calendar"></div>
+          </div>
+
+          <div id="login-signup">
+            <div class="inputs my-3 w-100 w-md-50">
+              <label for="email" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter Your Email"
+              />
+            </div>
+
+            <!-- Password Field -->
+            <div class="inputs my-3 w-100 w-md-50">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder="Enter Password"
+              />
+            </div>
+
+            <!-- "Don't Have an Account?" Link -->
+            <div class="w-100 w-md-50 mb-3" id="register-link-container">
+              <small>
+                <a href="#" id="show-register-link">Don't have an account?</a>
+              </small>
+            </div>
+
+            <!-- Confirm Password Field + "Already have an account?" Link -->
+            <div
+              class="inputs my-3 w-100 w-md-50"
+              id="confirm-password-container"
+              style="display: none"
+            >
+              <label for="confirm-password" class="form-label"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                id="confirm-password"
+                class="form-control"
+                placeholder="Confirm Password"
+              />
+
+              <!-- Place "Already have an account?" inside the same container -->
+              <div class="mt-1">
+                <small>
+                  <a href="#" id="show-login-link">Already have an account?</a>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!--Rent button-->
+          <button id="rent-btn" class="w-50 w-md-100 mt-3">Rent Car</button>
+
+          <!--car equipment container-->
+          <div id="car-equipment-container" class="container my-3">
+            <h2>Car Equipment</h2>
+            <!--features-->
+            <div id="feature-columns" class="row"></div>
+          </div>
+          <div
+            id="toast-container"
+            class="toast-container position-fixed bottom-0 end-0 p-3"
+            style="z-index: 9999"
+          ></div>
         </aside>
-    </section>
-</main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../js/calendarInit.js"></script>
-<script src="../js/CarDetails.js" type="module"></script>
-</body>
+      </section>
+    </main>
+    <footer class="footer-container"></footer>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+      integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="module" src="../js/navbar.js"></script>
+    <script src="../js/footer.js"></script>
+    <script src="../js/calendarInit.js"></script>
+    <script src="../js/carDetails.js" type="module"></script>
+  </body>
 </html>

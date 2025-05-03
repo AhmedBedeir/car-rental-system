@@ -108,6 +108,51 @@ class Cars {
       );
     });
   }
+
+  overviewCarsNumbers() {
+    const totalCars = this.cars.length;
+    if (totalCars === 0) {
+      return {
+        totalCars: 0,
+        availableCars: 0,
+        bookedCars: 0,
+        availableCarsPercentage: 0,
+      };
+    }
+    const availableCars = this.cars.filter((car) => car.available).length;
+    const bookedCars = totalCars - availableCars;
+    const availableCarsPercentage = Math.round(
+      (availableCars / totalCars) * 100
+    );
+    return {
+      totalCars,
+      availableCars,
+      bookedCars,
+      availableCarsPercentage,
+    };
+  }
+
+  getOverview(dataArray, key) {
+    const items = dataArray.map((value) => {
+      const count = this.cars.filter((car) => car[key] === value).length;
+      return { [key]: value, count };
+    });
+    const labels = items.map((item) => item[key]);
+    const data = items.map((item) => item.count);
+    return { items, labels, data };
+  }
+
+  overViewCarsModels() {
+    return this.getOverview(this.carsModels, "model");
+  }
+
+  overViewCarsBrands() {
+    return this.getOverview(this.carsBrands, "brand");
+  }
+
+  overViewCarsTypes() {
+    return this.getOverview(this.carsTypes, "type");
+  }
 }
 
 export default Cars;

@@ -17,8 +17,50 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <title>Booking Confirmation</title>
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser) {
+        window.location.href = "../index.html";
+      }
+    </script>
   </head>
   <body>
+    <div class="my-5">
+      <div class="booking-empty-state d-none">
+        <div class="empty-animation">
+          <div class="calendar-icon">
+            <div class="calendar-header"></div>
+            <div class="calendar-body">
+              <span class="month">JUN</span>
+              <span class="day">15</span>
+            </div>
+          </div>
+          <div class="search-icon">
+            <div class="search-glass"></div>
+            <div class="search-handle"></div>
+          </div>
+        </div>
+
+        <h3 class="empty-title">No Bookings Found</h3>
+        <p class="empty-subtitle">
+          Start your journey by making your first booking and explore our
+          premium services
+        </p>
+
+        <button class="explore-btn">
+          <span>Explore Services</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12H19M19 12L12 5M19 12L12 19"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
     <main class="container-xxl" id="booking">
       <!-- Heading -->
       <section class="heading">

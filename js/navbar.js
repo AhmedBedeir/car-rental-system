@@ -9,11 +9,7 @@ function logout() {
 }
 
 // const navContainer = document.querySelector(".nav-container");
-const archiveButtons = `
-<div class="d-flex flex-column flex-lg-row gap-2 justify-content-center justify-content-lg-end mt-3 mt-lg-0 w-100">
-  <button class="btn btn-custom">Log In</button>
-  <button class="btn btn-custom">Sign Up</button>
-</div>`;
+
 const authButtons = `
 <a href="../pages/login.html" class="btn btn-outline-custom"><i class="fa-solid fa-arrow-right-to-bracket me-2"></i>Login</a>
 <a href="../pages/login.html" class="btn btn-custom"><i class="fa-solid fa-user-plus me-2"></i>Sign Up</a>
@@ -26,7 +22,7 @@ const adminDashboardButton = `
 <a href="../pages/admin/admin.html" class="btn btn-outline-custom"><i class="fa-solid fa-user-tie me-2"></i>Admin Dashboard</a>`;
 
 const navbar = `
-<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 px-3">
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary mb-3 px-3 nav-container">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <div style="width: var(--logo-width);">

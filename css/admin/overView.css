@@ -1,0 +1,25 @@
+.charts-container {
+  padding: var(--spacing-md);
+}
+.chart {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-md) 0;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+@media screen and (max-width: 960px) {
+  .chart {
+    height: 100%;
+  }
+  .chart-container {
+    margin-bottom: var(--spacing-md);
+  }
+  .charts-container {
+    padding: var(--spacing-sm);
+  }
+
+}

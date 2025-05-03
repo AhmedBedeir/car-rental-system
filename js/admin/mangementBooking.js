@@ -4,6 +4,7 @@ const bookingList = new Booking();
 
 await bookingList.ready;
 
+console.log(bookingList);
 const bookings = bookingList.getBookings();
 
 const bookingTableBody = document.getElementById("booking-data");
@@ -14,10 +15,10 @@ const status_options = [
   { value: "pending", label: "Pending" },
   { value: "confirmed", label: "Confirmed" },
   { value: "cancelled", label: "Cancelled" },
+  { value: "completed", label: "Completed" },
 ];
 
 // Single booking
-
 const bookingRow = (booking) => {
   return `
     <tr>
@@ -32,12 +33,18 @@ const bookingRow = (booking) => {
         <div class="car-info">
           <span class="model">${booking.car.brand} ${booking.car.model}</span>
           <span class="details">${booking.car.year} • ${booking.car.type}</span>
+                    <span class="model">${
+                      booking.car.available
+                        ? "Available"
+                        : "Booked or Unavailable"
+                    } </span>
+
         </div>
       </td>
       <td>${booking.pickupDate}</td>
       <td>${booking.returnDate}</td>
       <td>${booking.numberOfDays}</td>
-      <td>$${booking.total}</td>
+      <td>$${booking.car.pricePerDay * booking.numberOfDays}</td>
       <td>
         ${statusDropdown(booking)}
       </td>
@@ -106,6 +113,9 @@ const updateStatus = (bookingId, newStatus) => {
     return;
   }
 
+  if (newStatus === "cancelled" || newStatus === "completed") {
+    booking.car.available = true;
+  }
   booking.status = newStatus;
 
   localStorage.setItem("bookings", JSON.stringify(bookings));

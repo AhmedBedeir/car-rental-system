@@ -10,6 +10,7 @@ const getBookingDetails = async () => {
   const dataUser = new Users();
   const userId = dataUser.currentUser;
   await data.ready;
+  console.log(data.getBookingDetails(userId));
   return data.getBookingDetails(userId);
 };
 
@@ -20,7 +21,10 @@ const getBookings = async () => {
     console.log(bookings);
 
     if (bookings.length === 0) {
+      document.querySelector("#booking").classList.add("d-none");
+      document.querySelector(".booking-empty-state").classList.remove("d-none");
       console.log("No bookings found");
+
       return;
     }
 

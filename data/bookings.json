@@ -1,5 +1,64 @@
 {
   "bookings": [
-    
+    {
+      "booking_id": 2,
+      "carId": 2,
+      "userId": 2,
+      "pickupDate": "4/26/2025, 4:00 PM",
+      "returnDate": "4/29/2025, 4:00 PM",
+      "numberOfDays": 3,
+      "total": 285,
+      "status": "completed"
+    },
+    {
+      "booking_id": 3,
+      "carId": 4,
+      "userId": 3,
+      "pickupDate": "5/10/2025, 9:00 AM",
+      "returnDate": "5/15/2025, 9:00 AM",
+      "numberOfDays": 5,
+      "total": 750,
+      "status": "confirmed"
+    },
+    {
+      "booking_id": 5,
+      "carId": 7,
+      "userId": 5,
+      "pickupDate": "5/20/2025, 11:00 AM",
+      "returnDate": "5/22/2025, 11:00 AM",
+      "numberOfDays": 2,
+      "total": 250,
+      "status": "pending"
+    },
+    {
+      "booking_id": 6,
+      "carId": 1,
+      "userId": 6,
+      "pickupDate": "5/7/2025, 3:00 PM",
+      "returnDate": "5/8/2025, 3:00 PM",
+      "numberOfDays": 1,
+      "total": 85,
+      "status": "confirmed"
+    },
+    {
+      "booking_id": 7,
+      "carId": 5,
+      "userId": 7,
+      "pickupDate": "5/12/2025, 10:00 AM",
+      "returnDate": "5/19/2025, 10:00 AM",
+      "numberOfDays": 7,
+      "total": 770,
+      "status": "pending"
+    },
+    {
+      "booking_id": 8,
+      "carId": 9,
+      "userId": 8,
+      "pickupDate": "5/15/2025, 9:00 AM",
+      "returnDate": "5/17/2025, 9:00 AM",
+      "numberOfDays": 2,
+      "total": 180,
+      "status": "confirmed"
+    }
   ]
 }

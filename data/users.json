@@ -3,7 +3,7 @@
       "id": "1",
       "role": "admin",
       "username": "admin",
-      "password": "hashed_password_here",
+      "password": "12345678",
       "name": "Admin User",
       "phone": "+1-555-123-4567",
       "email": "admin@example.com"
@@ -11,11 +11,11 @@
     {
       "id": "2",
       "role": "customer",
-      "username": "john_doe",
-      "password": "hashed_password_1",
+      "username": "ahmed",
+      "password": "ahmed1234",
       "name": "John Doe",
       "phone": "+1-555-234-5678",
-      "email": "john.doe@example.com"
+      "email": "ahmed@example.com"
     },
     {
       "id": "3",

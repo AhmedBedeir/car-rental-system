@@ -1,9 +1,18 @@
+import Users from "../classes/Users.js";
+const users = new Users();
+await users.ready;
 document.addEventListener("DOMContentLoaded", function () {
   // Sidebar toggle functionality
   const sidebar = document.getElementById("sidebar");
   const content = document.getElementById("dashboard-content");
   const sidebarCollapse = document.getElementById("sidebarCollapse");
-
+  const logoutButton = document.querySelector(".btn-logout");
+  logoutButton.addEventListener("click", function () {
+    if (confirm("Are you sure you want to log out?")) {
+      users.logout();
+      window.location.href = "../../index.html";
+    }
+  });
   // Toggle sidebar on button click
   sidebarCollapse.addEventListener("click", function () {
     sidebar.classList.toggle("active");

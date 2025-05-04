@@ -3,9 +3,13 @@ import Cars from "../classes/Cars.js";
 const carsClass = new Cars();
 await carsClass.ready;
 
-//function to show the data for the select 
-function populateSelectOptions(selectId, optionsArray) {
+const cars = carsClass.getAllCars();
+const carsTableBody = document.getElementById("cars-data");
 
+showCars(cars);
+
+//function to show the data for the select
+function populateSelectOptions(selectId, optionsArray) {
   const select = document.getElementById(selectId);
   optionsArray.forEach((item) => {
     const option = document.createElement("option");
@@ -18,13 +22,6 @@ function populateSelectOptions(selectId, optionsArray) {
 populateSelectOptions("brand", carsClass.carsBrands);
 populateSelectOptions("model", carsClass.carsModels);
 populateSelectOptions("type", carsClass.carsTypes);
-
-
-
-const cars = carsClass.getAllCars();
-const carsTableBody = document.getElementById("cars-data");
-
-showCars(cars);
 
 //Show Cars In Table
 function showCars(cars) {
@@ -41,20 +38,23 @@ function showCars(cars) {
         <td class="bold">${car.model}</td>
         <td class="bold">${car.type}</td>
         <td><span class="bold">${car.pricePerDay}</span> / Day</td>
-        <td>${car.available
-        ? `<span class="bg-success text-white px-3 py-1 rounded">Available</span>`
-        : `<span class="bg-danger text-white px-3 py-1 rounded">Booked</span>`
-      }</td>
+        <td>${
+          car.available
+            ? `<span class="bg-success text-white px-3 py-1 rounded">Available</span>`
+            : `<span class="bg-danger text-white px-3 py-1 rounded">Booked</span>`
+        }</td>
         <td>
          ${listFeatures(car.features)}</td>
         <td>
         <div>
-        <button class="update-btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" ${car.available ? "" : "disabled"
-      }>
+        <button class="update-btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" ${
+          car.available ? "" : "disabled"
+        }>
           <i class="bi bi-pencil-square"></i>
         </button>
-        <button class="delete-btn btn btn-danger" ${car.available ? "" : "disabled"
-      }>
+        <button class="delete-btn btn btn-danger" ${
+          car.available ? "" : "disabled"
+        }>
           <i class="bi bi-trash-fill"></i>
         </button>
 
@@ -65,13 +65,13 @@ function showCars(cars) {
     //update button
     const updateBtn = row.querySelector(".update-btn");
     updateBtn.addEventListener("click", () => {
-
       document.getElementById("car-id").value = car.id;
       document.getElementById("brand").value = car.brand;
       document.getElementById("model").value = car.model;
       document.getElementById("type").value = car.type;
       document.getElementById("pricePerDay").value = car.pricePerDay;
       document.getElementById("features").value = car.features;
+      document.getElementById("images").value = car.images;
 
       document.querySelector(".modal-title").textContent = "Update Car";
     });
@@ -100,17 +100,41 @@ modalForm.addEventListener("submit", async (e) => {
   const model = document.getElementById("model").value.trim();
   const type = document.getElementById("type").value.trim();
   const pricePerDay = parseFloat(document.getElementById("pricePerDay").value);
-  const features = document.getElementById("features").value
-    .split(",")
-    .map(f => f.trim())
+  const features = document
+    .getElementById("features")
+    .value.split(",")
+    .map((f) => f.trim())
     .filter(Boolean);
+  const images = () => {
+    let imagesArr = [];
+    const imgUrls = document
+      .getElementById("images")
+      .value.split(",")
+      .map((f) => f.trim())
+      .filter(Boolean);
+
+    if (imgUrls.length === 1) {
+      imagesArr = [imgUrls[0], imgUrls[0], imgUrls[0]];
+    } else if (imgUrls.length === 2) {
+      imagesArr = [imgUrls[0], imgUrls[1], imgUrls[1]];
+    } else {
+      imagesArr = [...imgUrls];
+    }
+    return imagesArr;
+  };
 
   // Updated Validation
-  if (!brand || brand === "Select Brand" ||
-    !model || model === "Select Model" ||
-    !type || type === "Select Type" ||
+  if (
+    !brand ||
+    brand === "Select Brand" ||
+    !model ||
+    model === "Select Model" ||
+    !type ||
+    type === "Select Type" ||
     isNaN(pricePerDay) ||
-    features.length === 0) {
+    features.length === 0 ||
+    !images
+  ) {
     alert("All fields must be filled out correctly.");
     return;
   }
@@ -123,18 +147,19 @@ modalForm.addEventListener("submit", async (e) => {
   } else {
     // Add new car
 
-    // create new id 
-    const lastCarId=parseInt(cars[cars.length-1].id);
-    console.log(typeof(lastCarId))
+    // create new id
+    const lastCarId = parseInt(cars[cars.length - 1].id);
+    console.log(typeof lastCarId);
     // Set new ID as max + 1
     const newCar = {
-      id: (lastCarId+1).toString(),
+      id: (lastCarId + 1).toString(),
       brand,
       model,
       type,
       pricePerDay,
       features,
       available: true,
+      images: images(),
     };
 
     await reRenderAfterAction(carsClass.addCar(newCar));
@@ -145,7 +170,6 @@ modalForm.addEventListener("submit", async (e) => {
   const modalInstance = bootstrap.Modal.getInstance(modalEl);
   modalInstance.hide();
 });
-
 
 const addCarBtn = document.getElementById("add-car-btn");
 addCarBtn.addEventListener("click", () => {
@@ -159,7 +183,6 @@ addCarBtn.addEventListener("click", () => {
   // Change modal title
   document.querySelector(".modal-title").textContent = "Add Car";
 });
-
 
 //Rerender Cars After Action
 async function reRenderAfterAction(actionFunction) {

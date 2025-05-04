@@ -11,36 +11,6 @@
       "status": "completed"
     },
     {
-      "booking_id": 3,
-      "carId": 4,
-      "userId": 3,
-      "pickupDate": "5/10/2025, 9:00 AM",
-      "returnDate": "5/15/2025, 9:00 AM",
-      "numberOfDays": 5,
-      "total": 750,
-      "status": "confirmed"
-    },
-    {
-      "booking_id": 5,
-      "carId": 7,
-      "userId": 5,
-      "pickupDate": "5/20/2025, 11:00 AM",
-      "returnDate": "5/22/2025, 11:00 AM",
-      "numberOfDays": 2,
-      "total": 250,
-      "status": "pending"
-    },
-    {
-      "booking_id": 6,
-      "carId": 1,
-      "userId": 6,
-      "pickupDate": "5/7/2025, 3:00 PM",
-      "returnDate": "5/8/2025, 3:00 PM",
-      "numberOfDays": 1,
-      "total": 85,
-      "status": "confirmed"
-    },
-    {
       "booking_id": 7,
       "carId": 5,
       "userId": 7,

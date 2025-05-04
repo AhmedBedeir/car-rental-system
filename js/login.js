@@ -89,7 +89,7 @@ document
       .getElementById("signup-confirm")
       .value.trim();
 
-    // Basic validation
+    // validation
     if (
       !name ||
       !username ||

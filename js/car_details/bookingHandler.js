@@ -32,64 +32,111 @@ export function checkCarAvailability() {
   }
 }
 
-// car is unavailable for whatever reason
-export function displayUnavailableMessage(booking) {
-  // Clear existing alerts first to avoid ui issues
+export function displayUnavailableMessage(
+  booking,
+  targetSelector = ".booking-msg"
+) {
+  try {
+    // Clear existing alerts first to avoid UI issues
+    clearExistingAlerts();
+
+    // Create and configure the alert container
+    const alertContainer = createAlertContainer();
+
+    // Generate appropriate message content
+    const messageContent = generateUnavailableMessage(booking);
+    alertContainer.innerHTML = messageContent;
+
+    // Display the message in the target container
+    displayMessage(alertContainer, targetSelector);
+  } catch (error) {
+    console.error("Failed to display unavailable message:", error);
+    displayFallbackMessage(targetSelector);
+  }
+}
+
+// Helper functions
+
+function clearExistingAlerts() {
   const existingAlerts = document.querySelectorAll(".alert.alert-warning");
   existingAlerts.forEach((alert) => alert.remove());
+}
 
-  const alertContainer = document.createElement("div");
-  alertContainer.className = "alert alert-warning mt-3";
-  alertContainer.role = "alert";
+function createAlertContainer() {
+  const container = document.createElement("div");
+  container.className = "alert alert-warning mt-3";
+  container.role = "alert";
+  return container;
+}
 
-  let messageContent = "";
-
-  if (booking && booking.returnDate) {
-    try {
-      const returnDate = new Date(booking.returnDate);
-      const options = {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: undefined,
-        hour12: true,
-      };
-
-      messageContent = `
-            <h4 class="alert-heading">Car Currently Booked</h4>
-            <p>This vehicle will be available after:</p>
-            <div class="fw-bold mb-2">
-                ${returnDate.toLocaleDateString("en-US", options)}
-            </div>
-            <p>Please check back after this date to rent again.</p>
-        `;
-    } catch (error) {
-      console.error("Invalid return date format:", error);
-      messageContent = `
-            <h4 class="alert-heading">Vehicle Unavailable</h4>
-            <p>This car is currently booked by another user.</p>
-        `;
-    }
-  } else {
-    messageContent = `
-        <h4 class="alert-heading">Vehicle Unavailable</h4>
-        <p>This car is temporarily out of service for maintenance.</p>
-        <p class="mb-0">Please check back later or contact support.</p>
-    `;
+function generateUnavailableMessage(booking) {
+  if (!booking || !booking.returnDate) {
+    return getMaintenanceMessage();
   }
 
-  alertContainer.innerHTML = messageContent;
+  try {
+    return getBookingMessage(booking.returnDate);
+  } catch (error) {
+    console.error("Invalid return date format:", error);
+    return getGenericUnavailableMessage();
+  }
+}
 
-  const carEquipmentContainer = document.getElementById(
-    "car-equipment-container"
-  );
-  if (carEquipmentContainer) {
-    carEquipmentContainer.parentNode.insertBefore(
-      alertContainer,
-      carEquipmentContainer
-    );
+function getBookingMessage(returnDateString) {
+  const returnDate = new Date(returnDateString);
+  const options = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+
+  return `
+    <h4 class="alert-heading">Car Currently Booked</h4>
+    <p>This vehicle will be available after:</p>
+    <div class="fw-bold mb-2">
+      ${returnDate.toLocaleDateString("en-US", options)}
+    </div>
+    <p>Please check back after this date to rent again.</p>
+  `;
+}
+
+function getGenericUnavailableMessage() {
+  return `
+    <h4 class="alert-heading">Vehicle Unavailable</h4>
+    <p>This car is currently booked by another user.</p>
+  `;
+}
+
+function getMaintenanceMessage() {
+  return `
+    <h4 class="alert-heading">Vehicle Unavailable</h4>
+    <p>This car is temporarily out of service for maintenance.</p>
+    <p class="mb-0">Please check back later or contact support.</p>
+  `;
+}
+
+function displayMessage(alertElement, targetSelector) {
+  const targetContainer = document.querySelector(targetSelector);
+  if (!targetContainer) {
+    throw new Error(`Target container not found: ${targetSelector}`);
+  }
+  targetContainer.innerHTML = "";
+  targetContainer.appendChild(alertElement);
+}
+
+function displayFallbackMessage(targetSelector) {
+  const targetContainer = document.querySelector(targetSelector);
+  if (targetContainer) {
+    targetContainer.innerHTML = `
+      <div class="alert alert-danger mt-3" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Unable to display availability information.</p>
+        <p class="mb-0">Please try again later.</p>
+      </div>
+    `;
   }
 }
 

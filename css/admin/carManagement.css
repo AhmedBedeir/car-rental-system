@@ -6,6 +6,10 @@
   -webkit-overflow-scrolling: touch;
 }
 
+#add-car-btn {
+  background-color: var(--main-color);
+}
+
 .cars-table {
   width: 100%;
 }

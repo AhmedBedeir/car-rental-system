@@ -30,36 +30,51 @@ function showCars(cars) {
   function listFeatures(arr) {
     return arr.map((li) => `<li>${li}</li>`).join("");
   }
+  function displayImages(images) {
+    if (!images || images.length === 0)
+      return '<span class="text-muted">No images</span>';
+    return images
+      .map(
+        (img) => `
+          <img src="${img}" class="car-thumbnail" style="object-fit: cover; width: 50px; height: 50px; border-radius: 5px" alt="Car image">
+        `
+      )
+      .join("");
+  }
 
   cars.forEach((car) => {
     const row = document.createElement("tr");
-    row.innerHTML = ` <td>${car.id}</td>
-        <td class="bold bigger">${car.brand}</td>
-        <td class="bold">${car.model}</td>
-        <td class="bold">${car.type}</td>
-        <td><span class="bold">${car.pricePerDay}</span> / Day</td>
-        <td>${
-          car.available
-            ? `<span class="bg-success text-white px-3 py-1 rounded">Available</span>`
-            : `<span class="bg-danger text-white px-3 py-1 rounded">Booked</span>`
-        }</td>
-        <td>
-         ${listFeatures(car.features)}</td>
-        <td>
-        <div>
-        <button class="update-btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" ${
-          car.available ? "" : "disabled"
-        }>
-          <i class="bi bi-pencil-square"></i>
-        </button>
-        <button class="delete-btn btn btn-danger" ${
-          car.available ? "" : "disabled"
-        }>
-          <i class="bi bi-trash-fill"></i>
-        </button>
+    row.innerHTML = `
+  <td>${car.id}</td>
+  <td class="bold bigger">${car.brand}</td>
+  <td class="bold">${car.model}</td>
+  <td class="bold">${car.type}</td>
+  <td><span class="bold">${car.pricePerDay}</span> / Day</td>
+  <td>
+    ${
+      car.available
+        ? `<span class="bg-success text-white px-3 py-1 rounded">Available</span>`
+        : `<span class="bg-danger text-white px-3 py-1 rounded">Booked</span>`
+    }
+  </td>
+  <td>${listFeatures(car.features)}</td>
+  <td class="car-images">${displayImages(car.images)}</td>
+  <td>
+    <div class="d-flex gap-2">
+      <button class="update-btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" ${
+        car.available ? "" : "disabled"
+      }>
+        <i class="bi bi-pencil-square"></i>
+      </button>
+      <button class="delete-btn btn btn-danger" ${
+        car.available ? "" : "disabled"
+      }>
+        <i class="bi bi-trash-fill"></i>
+      </button>
+    </div>
+  </td>
+`;
 
-        </div>
-        </td>`;
     carsTableBody.appendChild(row);
 
     //update button
@@ -89,6 +104,36 @@ function showCars(cars) {
     });
   });
 }
+// Image upload handling
+let imageArr = [];
+const inputImages = document.getElementById("images-upload");
+const imagesPreview = document.getElementById("images-preview");
+
+if (inputImages && imagesPreview) {
+  inputImages.addEventListener("change", function () {
+    imagesPreview.innerHTML = "";
+    imageArr = [];
+
+    const files = inputImages.files;
+
+    if (files.length > 0) {
+      Array.from(files).forEach((file) => {
+        if (!file.type.match("image.*")) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.className = "img-thumbnail m-2";
+          img.style.maxHeight = "150px";
+          imagesPreview.appendChild(img);
+          imageArr.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  });
+}
 
 //modal form for update and create
 const modalForm = document.getElementById("update-form");
@@ -105,23 +150,8 @@ modalForm.addEventListener("submit", async (e) => {
     .value.split(",")
     .map((f) => f.trim())
     .filter(Boolean);
-  const images = () => {
-    let imagesArr = [];
-    const imgUrls = document
-      .getElementById("images")
-      .value.split(",")
-      .map((f) => f.trim())
-      .filter(Boolean);
 
-    if (imgUrls.length === 1) {
-      imagesArr = [imgUrls[0], imgUrls[0], imgUrls[0]];
-    } else if (imgUrls.length === 2) {
-      imagesArr = [imgUrls[0], imgUrls[1], imgUrls[1]];
-    } else {
-      imagesArr = [...imgUrls];
-    }
-    return imagesArr;
-  };
+  const imagesToUse = imageArr.length > 0 ? imageArr : currentCar.images;
 
   // Updated Validation
   if (
@@ -132,8 +162,7 @@ modalForm.addEventListener("submit", async (e) => {
     !type ||
     type === "Select Type" ||
     isNaN(pricePerDay) ||
-    features.length === 0 ||
-    !images
+    features.length === 0
   ) {
     alert("All fields must be filled out correctly.");
     return;
@@ -159,7 +188,7 @@ modalForm.addEventListener("submit", async (e) => {
       pricePerDay,
       features,
       available: true,
-      images: images(),
+      images: imagesToUse,
     };
 
     await reRenderAfterAction(carsClass.addCar(newCar));

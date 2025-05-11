@@ -1,4 +1,5 @@
 import Booking from "../classes/booking.js";
+import Cars from "../classes/Cars.js";
 
 const bookingList = new Booking();
 
@@ -144,7 +145,13 @@ const updateStatus = (bookingId, newStatus) => {
     returnDate < now
   ) {
     booking.car.available = true;
+  } else if (newStatus === "confirmed") {
+    booking.car.available = false;
   }
+  const cars = new Cars();
+  const car = cars.getCarById(String(booking.carId));
+  car.available = false;
+  cars.saveToLocalStorage();
 
   booking.status = newStatus;
 

@@ -9,6 +9,17 @@ const carModels = [
   "Corvette",
   "Tucson",
   "E-Class",
+
+  "S3 Sedan",
+  "318d Touring",
+  "SL 63",
+  "Yaris",
+  "GT Line Plus",
+  "SQ6 e-tron",
+  "CX-60",
+  "TS M/T EyeSight Tuned by STI",
+  "6 N Line",
+  "S6 Avant e-tron",
 ];
 
 const carBrands = [
@@ -22,7 +33,13 @@ const carBrands = [
   "Chevrolet",
   "Hyundai",
   "Mercedes-Benz",
+
+  "Audi",
+  "KIA",
+  "Mazda",
+  "Subaru",
 ];
+
 const carTypes = [
   "Sedan",
   "SUV",
@@ -34,6 +51,24 @@ const carTypes = [
   "Sports",
   "Crossover",
   "Luxury Sedan",
+  "Petrol Sedan",
+  "Diesel Wagon",
+  "Hybrid Convertible",
+  "Hybrid Hatchback",
+  "S Series",
+  "3 Series",
+  "AMG",
+  "Hatchback Hybrid Beyond Zero",
+  "K5",
+  "Q6 SUV",
+  "CX-Series SUV",
+  "WRX",
+  "IONIQ",
+  "Electric SUV",
+  "Hybrid SUV",
+  "Petrol Sports Sedan",
+  "Hybrid Sedan",
+  "Electric Wagon",
 ];
 
-export { carModels, carBrands, carTypes };
+export { carBrands, carModels, carTypes };

@@ -3,33 +3,30 @@ import { showToast } from "./uiHelpers.js";
 
 //Check car is available for booking
 export function checkCarAvailability() {
-  const car = getSelectedCar();
-  const carId = car.id;
-
-  if (car.available === false) {
-    displayUnavailableMessage();
-    hideBookingElements();
-    return;
-  }
-
-  const allBookings = window.bookingClass.getBookings();
-  const today = new Date();
-
-  const activeBooking = allBookings.find((booking) => {
-    if (!booking || booking.carId !== carId) return false;
-    try {
-      const returnDate = new Date(booking.returnDate);
-      const isFutureBooking = returnDate >= today;
-      return isFutureBooking && booking.status === "confirmed"; // Only block confirmed bookings
-    } catch {
-      return false;
-    }
-  });
-
-  if (activeBooking) {
-    displayUnavailableMessage(activeBooking);
-    hideBookingElements();
-  }
+  // const car = getSelectedCar();
+  // const carId = car.id;
+  // if (car.available === false) {
+  //   displayUnavailableMessage();
+  //   hideBookingElements();
+  //   return;
+  // }
+  // const allBookings = window.bookingClass.getBookings();
+  // const today = new Date();
+  // const activeBooking = allBookings.find((booking) => {
+  //   if (!booking || booking.carId !== carId) return false;
+  //   try {
+  //     const returnDate = new Date(booking.returnDate);
+  //     const isFutureBooking = returnDate >= today;
+  //     return isFutureBooking;
+  //     // && booking.status === "confirmed"; // Only block confirmed bookings
+  //   } catch {
+  //     return false;
+  //   }
+  // });
+  // if (activeBooking) {
+  //   displayUnavailableMessage(activeBooking);
+  //   hideBookingElements();
+  // }
 }
 
 export function displayUnavailableMessage(
@@ -193,6 +190,12 @@ export function handleBooking() {
     return showToast("Please select pickup and return dates", "warning");
   }
 
+  if (isCarAlreadyBooked(car.id, pickupDate, returnDate)) {
+    return showToast(
+      "This car is already booked for the selected dates. Please choose another time.",
+      "danger"
+    );
+  }
   if (isSameDay(pickupDate, returnDate)) {
     return showToast(
       "Pickup and return dates cannot be the same day",
@@ -224,6 +227,27 @@ export function handleBooking() {
   bookingClass.saveToLocalStorage();
   checkCarAvailability();
   showToast(`Booking successful! Total: $${totalAmount}`, "success");
+}
+
+// دالة جديدة للتحقق من وجود حجز للسيارة في نفس الفترة
+function isCarAlreadyBooked(carId, pickupDate, returnDate) {
+  const existingBookings = bookingClass.bookings.filter(
+    (booking) => booking.carId === carId
+  );
+
+  return existingBookings.some((booking) => {
+    const bookedPickup = new Date(booking.pickupDate);
+    const bookedReturn = new Date(booking.returnDate);
+    const newPickup = new Date(pickupDate);
+    const newReturn = new Date(returnDate);
+
+    // تحقق إذا كانت الفترات متداخلة
+    return (
+      (newPickup >= bookedPickup && newPickup <= bookedReturn) ||
+      (newReturn >= bookedPickup && newReturn <= bookedReturn) ||
+      (newPickup <= bookedPickup && newReturn >= bookedReturn)
+    );
+  });
 }
 
 //Get dates and sort

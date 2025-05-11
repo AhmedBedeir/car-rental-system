@@ -1,26 +1,26 @@
 [
   {
     "id": "1",
-    "brand": "Toyota",
-    "model": "Camry",
-    "type": "Sedan",
+    "brand": "Audi",
+    "model": "S3 Sedan",
+    "type": "Petrol Sedan",
     "year": 2023,
     "seats": 5,
     "pricePerDay": 85,
     "available": true,
-    "features": ["GPS", "Bluetooth", "Backup Camera"],
+    "features": ["GPS Navigation", "Bluetooth Connectivity", "Rearview Camera"],
     "images": [
-      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d",
-      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb",
-      "https://images.unsplash.com/photo-1550355291-bbee04a92027"
+      "/assets/cars/audi_s3_sedan/cover.jpeg",
+      "/assets/cars/audi_s3_sedan/1.jpeg",
+      "/assets/cars/audi_s3_sedan/2.jpeg"
     ],
-    "description": "Comfortable and fuel-efficient sedan perfect for city driving."
+    "description": "A sporty and fuel-efficient sedan offering a dynamic driving experience with premium features."
   },
   {
     "id": "2",
-    "brand": "Honda",
-    "model": "CR-V",
-    "type": "SUV",
+    "brand": "BMW",
+    "model": "318d Touring",
+    "type": "Diesel Wagon",
     "year": 2022,
     "seats": 5,
     "pricePerDay": 95,
@@ -28,190 +28,191 @@
     "features": [
       "All-Wheel Drive",
       "Apple CarPlay",
-      "Roof Rack",
+      "Roof Rails",
       "Heated Seats"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1609521263047-f8f205293f24",
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+      "/assets/cars/bmw_318d_touring/cover.jpeg",
+      "/assets/cars/bmw_318d_touring/1.jpeg",
+      "/assets/cars/bmw_318d_touring/2.jpeg"
     ],
-    "description": "Versatile SUV with ample cargo space, ideal for family trips and outdoor adventures."
+    "description": "Spacious diesel wagon ideal for families and long road trips with excellent efficiency and tech."
   },
   {
     "id": "3",
-    "brand": "Tesla",
-    "model": "Model 3",
-    "type": "Electric",
+    "brand": "Mazda",
+    "model": "CX-60",
+    "type": "Hybrid SUV",
     "year": 2023,
     "seats": 5,
-    "pricePerDay": 120,
-    "available": false,
+    "pricePerDay": 125,
+    "available": true,
     "features": [
-      "Autopilot",
-      "Premium Sound System",
-      "Supercharger Access",
-      "360° Camera"
+      "Plug-in Hybrid",
+      "All-Wheel Drive",
+      "Adaptive Headlights",
+      "Off-Road Assist"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1560958089-b8a1929cea89",
-      "https://images.unsplash.com/photo-1536700503339-1e4b06520771",
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+      "/assets/cars/mazda_cX-60/cover.jpeg",
+      "/assets/cars/mazda_cX-60/1.jpeg",
+      "/assets/cars/mazda_cX-60/2.jpeg"
     ],
-    "description": "Cutting-edge electric vehicle with impressive range and automated driving features."
+    "description": "Mid-size SUV with plug-in hybrid efficiency and advanced driver assistance technologies."
   },
+
   {
     "id": "4",
-    "brand": "BMW",
-    "model": "X5",
-    "type": "Luxury SUV",
+    "brand": "Toyota",
+    "model": "Yaris",
+    "type": "Hybrid Hatchback",
     "year": 2022,
-    "seats": 7,
+    "seats": 5,
     "pricePerDay": 150,
     "available": true,
     "features": [
-      "Leather Interior",
-      "Panoramic Sunroof",
+      "Leather Seats",
+      "Panoramic Roof",
       "Wireless Charging",
-      "Premium Audio"
+      "JBL Audio"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341",
-      "https://images.unsplash.com/photo-1556189250-72ba954cfc2b",
-      "https://images.unsplash.com/photo-1556800572-1b8aeef2c54f"
+      "/assets/cars/toyota-yaris_hatchback/cover.jpeg",
+      "/assets/cars/toyota-yaris_hatchback/1.jpeg"
     ],
-    "description": "Luxurious SUV combining performance and comfort with sophisticated styling."
+    "description": "Stylish and efficient hybrid hatchback with advanced features and sleek design."
   },
   {
     "id": "5",
-    "brand": "Ford",
-    "model": "F-150",
-    "type": "Truck",
+    "brand": "KIA",
+    "model": "GT Line Plus",
+    "type": "Petrol Sedan",
     "year": 2023,
-    "seats": 6,
+    "seats": 5,
     "pricePerDay": 110,
     "available": true,
     "features": [
-      "4x4",
-      "Towing Package",
-      "Bed Liner",
-      "Large Payload Capacity"
+      "Sport Suspension",
+      "Sunroof",
+      "Wireless Android Auto",
+      "LED Headlights"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+      "/assets/cars/kIA_k5_gT_lINE_pLUS/cover.jpeg",
+      "/assets/cars/kIA_k5_gT_lINE_pLUS/1.jpeg",
+      "/assets/cars/kIA_k5_gT_lINE_pLUS/2.jpeg"
     ],
-    "description": "Powerful pickup truck perfect for hauling and outdoor work projects."
+    "description": "Sporty and stylish sedan with powerful performance and smart connectivity."
   },
   {
     "id": "6",
-    "brand": "Volkswagen",
-    "model": "Golf",
-    "type": "Hatchback",
+    "brand": "Audi",
+    "model": "SQ6 e-tron",
+    "type": "Electric SUV",
     "year": 2022,
     "seats": 5,
     "pricePerDay": 75,
     "available": true,
     "features": [
-      "Fuel Efficient",
+      "Long Range Battery",
       "Android Auto",
-      "Compact Design",
-      "Sport Mode"
+      "Regenerative Braking",
+      "All-Wheel Drive"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf",
-      "https://images.unsplash.com/photo-1617624085810-3df2165bd11b",
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d"
+      "/assets/cars/audi_sQ6_e-tron/cover.jpeg",
+      "/assets/cars/audi_sQ6_e-tron/1.jpeg",
+      "/assets/cars/audi_sQ6_e-tron/2.jpeg"
     ],
-    "description": "Sporty compact hatchback with excellent handling and city-friendly dimensions."
+    "description": "Fully electric SUV offering cutting-edge design, efficiency, and all-wheel performance."
   },
   {
     "id": "7",
-    "brand": "Jeep",
-    "model": "Wrangler",
-    "type": "Off-Road",
+    "brand": "Mercedes-Benz",
+    "model": "SL 63",
+    "type": "Hybrid Convertible",
     "year": 2023,
-    "seats": 4,
-    "pricePerDay": 125,
+    "seats": 2,
+    "pricePerDay": 120,
     "available": true,
     "features": [
-      "Removable Top",
-      "4-Wheel Drive",
-      "Off-Road Tires",
-      "High Clearance"
+      "Adaptive Cruise Control",
+      "Burmester Audio",
+      "Plug-in Hybrid",
+      "360° Surround Camera"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1617624085810-3df2165bd11b",
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d",
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d"
+      "/assets/cars/mercedes_amg_sl_63/cover.jpeg",
+      "/assets/cars/mercedes_amg_sl_63/1.jpeg",
+      "/assets/cars/mercedes_amg_sl_63/2.jpeg"
     ],
-    "description": "Iconic off-road vehicle built for adventure and challenging terrain."
+    "description": "Luxury hybrid convertible with exhilarating performance and state-of-the-art technology."
   },
+
   {
     "id": "8",
-    "brand": "Chevrolet",
-    "model": "Corvette",
-    "type": "Sports",
+    "brand": "Subaru",
+    "model": "TS M/T EyeSight Tuned by STI",
+    "type": "Petrol Sports Sedan",
     "year": 2022,
-    "seats": 2,
+    "seats": 5,
     "pricePerDay": 200,
-    "available": false,
+    "available": true,
     "features": [
-      "V8 Engine",
-      "Performance Suspension",
-      "Sport Mode",
-      "Premium Sound System"
+      "Turbocharged Engine",
+      "Sport Suspension",
+      "Manual Transmission",
+      "STI Performance Package"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1566008885218-90abf9200ddb",
-      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b",
-      "https://images.unsplash.com/photo-1612825173281-9a193378527e"
+      "/assets/cars/subaru/cover.jpeg",
+      "/assets/cars/subaru/1.jpeg",
+      "/assets/cars/subaru/2.jpeg"
     ],
-    "description": "High-performance American sports car with striking design and exhilarating speed."
+    "description": "High-performance sports sedan tuned by STI, built for precision and speed."
   },
   {
     "id": "9",
-    "brand": "Hyundai",
-    "model": "Tucson",
-    "type": "Crossover",
-    "year": 2023,
-    "seats": 5,
-    "pricePerDay": 90,
-    "available": true,
-    "features": [
-      "Lane Assist",
-      "Hybrid Option",
-      "Spacious Interior",
-      "Smart Cruise Control"
-    ],
-    "images": [
-      "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5",
-      "https://images.unsplash.com/photo-1583267746897-2cf415887172",
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d"
-    ],
-    "description": "Modern crossover with advanced safety features and comfortable ride quality."
-  },
-  {
-    "id": "10",
-    "brand": "Mercedes-Benz",
-    "model": "E-Class",
-    "type": "Luxury Sedan",
+    "brand": "Audi",
+    "model": "S6 Avant e-tron",
+    "type": "Electric Wagon",
     "year": 2022,
     "seats": 5,
     "pricePerDay": 175,
     "available": true,
     "features": [
-      "Leather Seats",
-      "Premium Audio",
-      "Driver Assistance Package",
-      "Ambient Lighting"
+      "Ambient Lighting",
+      "Luxury Interior",
+      "Driver Assistance",
+      "Premium Sound"
     ],
     "images": [
-      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8",
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d",
-      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8"
+      "/assets/cars/audi_s6_avant_e-tron/cover.jpeg",
+      "/assets/cars/audi_s6_avant_e-tron/1.jpeg",
+      "/assets/cars/audi_s6_avant_e-tron/2.jpeg"
     ],
-    "description": "Elegant luxury sedan offering exceptional comfort and cutting-edge technology."
+    "description": "Luxury electric wagon combining performance, technology, and elegance in every ride."
+  },
+  {
+    "id": "10",
+    "brand": "Hyundai",
+    "model": "6 N Line",
+    "type": "Hybrid Sedan",
+    "year": 2023,
+    "seats": 5,
+    "pricePerDay": 90,
+    "available": true,
+    "features": [
+      "Lane Keeping Assist",
+      "Hybrid Powertrain",
+      "Spacious Cabin",
+      "Adaptive Cruise Control"
+    ],
+    "images": [
+      "/assets/cars/hyundai/cover.jpeg",
+      "/assets/cars/hyundai/1.jpeg",
+      "/assets/cars/hyundai/2.jpeg"
+    ],
+    "description": "Sporty hybrid sedan with modern safety systems and high fuel efficiency."
   }
 ]

@@ -21,7 +21,7 @@
 }
 
 .footer .social-icons a {
-  color: var(--light-text-color);
+  color: var(--main-color) !important;
   transition: var(--transition);
 }
 

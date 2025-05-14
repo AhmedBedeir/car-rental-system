@@ -1,41 +1,77 @@
-# Car Rental System
+# 🚘 Car Rental System with Admin Dashboard
 
-## Git Workflow Instructions
+A responsive, client-side Car Rental System built with **HTML**, **CSS**, **JavaScript**, and **Bootstrap**. It allows customers to browse and book cars, while admins manage listings, bookings, and reports through a dashboard interface.
+[🌐 Live Demo](https://car-rental-system-chi-two.vercel.app/)
 
-### When a Pull Request is Merged to Main
+## ⚙ Technologies Used
 
-When someone make a pull request from their branch to the main branch and merged, all team members (including the PR author) need to update their branches to incorporate these changes.
+- HTML5 & CSS3
+- JavaScript (ES6+)
+- Bootstrap 5
+- LocalStorage (for data persistence)
+- Chart.js (Admin analytics)
 
-### For All Team Members (Including PR Authors)
+## 🧭 User Flow Diagram
 
-After a PR is merged to main, follow these steps:
+This diagram illustrates the overall navigation and interaction flow within the system.
 
-```bash
-# Switch to your main branch
-git checkout main
+![User Flow Diagram](./docs/userFlow.png)
 
-# Pull the latest changes from remote main
-git pull origin main
+---
 
-# Switch back to your feature branch
-git checkout your-branch
+## 🧱 Class Diagram
 
-# Merge changes from main into your branch
-git merge main
+This diagram shows the main classes and their relationships.
 
-# Resolve any conflicts if necessary
+![Class Diagram](./docs/classDiagrams.png)
 
-# Push your updated branch if needed
-git push origin your-feature-branch
-```
+## ✨ Features
 
-### Before Pushing Your Changes
+### 👥 User Functionality
+- **Registration & Login** with validation
+- Browse car listings
+- Filter/search by brand, model, type, or price
+- View car details
+- **Book cars** with date/time validation
+- View **booking history**
+- Dynamic UI & toast notifications
 
-**IMPORTANT:** Always merge the latest changes from main before pushing your code:
+### 🛠️ Admin Functionality
+- Secure admin login
+- Add, update, or delete car listings
+- View all bookings & manage their status
+- Access visual analytics (cars by brand/model/type, booking status)
+- Admins can't book cars (restricted access)
 
-### Best Practices
+### 📱 Responsive Design
+Fully responsive layout for mobile, tablet, and desktop using Bootstrap.
 
-1. Update your branch regularly to avoid large, difficult merges
-2. Always merge from main before pushing your changes
-3. Communicate with your team when you're making significant changes
-4. Make sure to pull main before creating new branches to start from the latest code
+
+## 🔒 Booking Rules & Validations
+
+- Booking unavailable without login
+- No same-day or overlapping rentals
+- Detects:
+  - Already booked cars
+  - Technical issues or sold vehicles
+- Car availability is updated in real time
+- Prevents duplicate bookings
+- Real-time validation & alerts
+
+
+## 📊 Admin Analytics
+
+Admins can view real-time statistics via Chart.js, including:
+
+- Car availability
+
+- Booking status
+
+- Cars per brand/model/type
+
+## 📌 Team Members
+- Ahmed Bedeir
+- Ahmed Assem
+- Abdelrahman Ali
+- Rahf Hazem
+- Mohamed Shawky

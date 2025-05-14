@@ -2,8 +2,8 @@ export const implementDarkMode = () => {
   const enableDarkMode = () => {
     document.body.classList.add("dark-mode");
     localStorage.setItem("darkMode", "dark");
-    document.querySelector(".dark-icon").classList.add("d-none");
-    document.querySelector(".light-icon").classList.remove("d-none");
+    document.querySelector(".dark-icon")?.classList.add("d-none");
+    document.querySelector(".light-icon")?.classList.remove("d-none");
   };
 
   const disableDarkMode = () => {

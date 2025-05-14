@@ -36,8 +36,8 @@ async function showAlert(type, message) {
     confirmButtonColor: "#3085d6",
     position: "top-end",
     toast: true,
-    background: "var(--background-color)",
-    color: "var(--text-color)",
+    // background: "var(--background-color)",
+    // color: "var(--text-color)",
   };
 
   await Swal.fire(alertConfig);

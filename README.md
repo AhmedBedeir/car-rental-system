@@ -3,6 +3,7 @@
 A responsive, client-side Car Rental System built with **HTML**, **CSS**, **JavaScript**, and **Bootstrap**. It allows customers to browse and book cars, while admins manage listings, bookings, and reports through a dashboard interface.
 
 [🌐 Live Demo](https://car-rental-system-chi-two.vercel.app/)
+![Thumbnail](./docs/Web-Showcase-Project-Presentation%20copy%20(1).jpg)
 
 ## ⚙ Technologies Used
 

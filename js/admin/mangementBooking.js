@@ -151,6 +151,7 @@ const updateStatus = (bookingId, newStatus) => {
   const cars = new Cars();
   const car = cars.getCarById(String(booking.carId));
   car.available = false;
+  console.log(car);
   cars.saveToLocalStorage();
 
   booking.status = newStatus;

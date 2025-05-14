@@ -1,5 +1,5 @@
+import { handleBooking, hideBookingElements, setupBookingSystem } from './bookingHandler.js';
 import { showToast } from './uiHelpers.js';
-import { hideBookingElements, setupBookingSystem, handleBooking } from './bookingHandler.js';
 
 //authorization check and ui update
 export function setupAuthorizationCheck() {
@@ -57,7 +57,7 @@ export function handleGuestUser(rentButton) {
 //Handle authorized user state
 export function handleAuthorizedUser(rentButton, loginSection, currentUser) {
     // Hide the login/signup form section but keep the rent booking 
-    // functionality in case they didnt rent when signingup/logging in
+    // functionality in case they didn't rent when signingup/logging in
     loginSection.style.display = 'none';
     
     const logoutBtn = document.getElementById('logout-btn');

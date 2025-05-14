@@ -225,11 +225,9 @@ export function handleBooking() {
 
   bookingClass.bookings.push(booking);
   bookingClass.saveToLocalStorage();
-  checkCarAvailability();
   showToast(`Booking successful! Total: $${totalAmount}`, "success");
 }
 
-// دالة جديدة للتحقق من وجود حجز للسيارة في نفس الفترة
 function isCarAlreadyBooked(carId, pickupDate, returnDate) {
   const existingBookings = bookingClass.bookings.filter(
     (booking) => booking.carId === carId
@@ -241,7 +239,6 @@ function isCarAlreadyBooked(carId, pickupDate, returnDate) {
     const newPickup = new Date(pickupDate);
     const newReturn = new Date(returnDate);
 
-    // تحقق إذا كانت الفترات متداخلة
     return (
       (newPickup >= bookedPickup && newPickup <= bookedReturn) ||
       (newReturn >= bookedPickup && newReturn <= bookedReturn) ||

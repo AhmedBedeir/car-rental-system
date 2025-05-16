@@ -81,15 +81,16 @@ class Booking {
       if (returnDate < now) {
         if (booking.status === "confirmed") {
           booking.status = "completed";
-          car.available = true;
-        } else if (booking.status === "pending") {
-          car.available = true;
+          // car.available = true;
         }
+        //  else if (booking.status === "pending") {
+        //   car.available = true;
+        // }
       }
 
-      if (booking.status === "cancelled") {
-        car.available = true;
-      }
+      // if (booking.status === "cancelled") {
+      //   car.available = true;
+      // }
 
       cars.saveToLocalStorage();
       booking.car = car;
@@ -123,11 +124,12 @@ class Booking {
         const now = new Date();
 
         if (returnDate < now && booking.status !== "cancelled") {
-          car.available = true;
+          // car.available = true;
           booking.status = "completed";
-        } else {
-          car.available = false;
         }
+        //  else {
+        //   car.available = false;
+        // }
 
         booking.car = car;
       });

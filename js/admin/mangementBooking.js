@@ -1,5 +1,4 @@
 import Booking from "../classes/booking.js";
-import Cars from "../classes/Cars.js";
 
 const bookingList = new Booking();
 
@@ -135,24 +134,26 @@ const updateStatus = (bookingId, newStatus) => {
   }
 
   if (newStatus === "cancelled") {
-    booking.car.available = true;
+    // booking.car.available = true;
     booking.pickupDate = null;
     booking.returnDate = null;
-  } else if (
-    newStatus === "completed" ||
-    booking.pickupDate === null ||
-    booking.returnDate === null ||
-    returnDate < now
-  ) {
-    booking.car.available = true;
-  } else if (newStatus === "confirmed") {
-    booking.car.available = false;
   }
-  const cars = new Cars();
-  const car = cars.getCarById(String(booking.carId));
-  car.available = false;
-  console.log(car);
-  cars.saveToLocalStorage();
+
+  // else if (
+  //   newStatus === "completed" ||
+  //   booking.pickupDate === null ||
+  //   booking.returnDate === null ||
+  //   returnDate < now
+  // ) {
+  //   // booking.car.available = true;
+  // } else if (newStatus === "confirmed") {
+  //   // booking.car.available = false;
+  // }
+  // const cars = new Cars();
+  // const car = cars.getCarById(String(booking.carId));
+  // car.available = false;
+  // console.log(car);
+  // cars.saveToLocalStorage();
 
   booking.status = newStatus;
 
@@ -171,6 +172,7 @@ const updateStatus = (bookingId, newStatus) => {
     selectElement.className = `status-select ${newStatus}`;
     selectElement.value = newStatus;
   }
+  displayBookings();
 
   return true;
 };

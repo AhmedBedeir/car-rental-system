@@ -125,7 +125,7 @@ input {
 }
 .image-container {
   flex: 1;
-  background: linear-gradient(135deg, var(--main-color), #7b5cf0);
+  background: linear-gradient(135deg, var(--main-color));
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -143,7 +143,7 @@ input {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(89, 55, 224, 0.85);
+  background-color: var(--main-color);
   z-index: 1;
 }
 

@@ -49,16 +49,37 @@ This diagram shows the main classes and their relationships.
 Fully responsive layout for mobile, tablet, and desktop using Bootstrap.
 
 
-## 🔒 Booking Rules & Validations
+## 🔒 Validations & Business Rules
 
-- Booking unavailable without login
-- No same-day or overlapping rentals
-- Detects:
-  - Already booked cars
-  - Technical issues or sold vehicles
-- Car availability is updated in real time
-- Prevents duplicate bookings
-- Real-time validation & alerts
+### Booking Rules & Validations:
+
+- Users must be logged in to make a booking.
+- Form validation for registration and login (email, password, and password confirmation).
+- Booking logic prevents:
+  - Same-day bookings (two bookings with the exact pickup and return dates).
+  - Overlapping bookings (same car booked in overlapping date ranges).
+  - Duplicate bookings by the same user for the same car/date.
+  - Booking unavailable cars (e.g., cars marked as booked, under maintenance, or sold).
+
+- Date & time validation:
+  - Pickup date must be earlier than return date.
+  - Booking dates must be in the future.
+
+### Role-based Access & Route Protection:
+
+- Admin-only routes are protected:
+
+  - Normal users are redirected away if they try to access the Admin Dashboard.
+
+  - Bookings cannot be made by admin accounts.
+
+- UI adapts based on user role:
+
+  - Admin users see admin features only.
+
+  - Customers see the booking interface only.
+
+- Toast notifications provide real-time feedback (success/error) for actions like login, booking, form submission, and unauthorized access.
 
 
 ## 📊 Admin Analytics

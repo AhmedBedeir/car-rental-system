@@ -20,6 +20,14 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
 
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="stylesheet" href="./css//navbar.css" />
@@ -33,7 +41,11 @@
     <main class="home-page">
       <!-- Hero Section -->
       <section class="hero-section overflow-hidden">
-        <div class="hero-overlay" id="heroBackground">
+        <div
+          class="hero-overlay"
+          style="background-size: cover"
+          id="heroBackground"
+        >
           <div class="slider-controls">
             <button class="slider-arrow prev-arrow" id="prevSlide">
               <i class="fas fa-chevron-left"></i>
@@ -59,7 +71,10 @@
                   it’s for business, travel, or everyday use – choose comfort,
                   speed, and reliability.
                 </p>
-                <a href="#contact" class="btn btn-primary btn-lg">
+                <a
+                  href="./pages/carListings.html"
+                  class="btn btn-primary btn-lg"
+                >
                   Reserve Your Car Now
                 </a>
               </div>
@@ -119,14 +134,13 @@
       <section id="cars-section" class="py-5">
         <div class="container-xxl px-4 px-lg-5">
           <!-- Section Header -->
-          <div class="text-center mb-5">
-            <h2 class="fw-bold mb-3">Our Premium Fleet</h2>
-            <p class="lead mx-auto" style="max-width: 600px">
+          <div class="section-header">
+            <h2>Our Premium Fleet</h2>
+            <p>
               Explore our collection of meticulously maintained luxury vehicles
               for your next journey
             </p>
           </div>
-
           <!-- Cars Grid -->
           <div id="car-cards-container" class="row g-4"></div>
 
@@ -219,12 +233,393 @@
         </div>
       </section>
 
+      <!-- Sport Car Section -->
+      <section class="sport-car-section">
+        <div class="row m-0 p-0">
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <figure class="overflow-hidden">
+                <img
+                  src="assets/sport_car/luxury-collection-img-1.jpg"
+                  class="w-100"
+                  alt=""
+                />
+                <figcaption>
+                  <p>Sport Car</p>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <figure class="overflow-hidden">
+                <img
+                  src="assets/sport_car/luxury-collection-img-2.jpg"
+                  class="w-100"
+                  alt=""
+                />
+                <figcaption>
+                  <p>Convertible Car</p>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <figure class="overflow-hidden">
+                <img
+                  src="assets/sport_car/luxury-collection-img-3.jpg"
+                  class="w-100"
+                  alt=""
+                />
+                <figcaption>
+                  <p>Sedan Car</p>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="item">
+              <figure class="overflow-hidden">
+                <img
+                  src="assets/sport_car/luxury-collection-img-4.jpg"
+                  class="w-100"
+                  alt=""
+                />
+                <figcaption>
+                  <p>Luxury car</p>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews Section -->
+
+      <section class="reviews-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>What Our Clients Say</h2>
+            <p>
+              Don't just take our word for it. Here's what our clients have to
+              say about our services and their experiences working with us.
+            </p>
+          </div>
+
+          <!-- Swiper Container -->
+          <div class="swiper reviewsSwiper">
+            <div class="swiper-wrapper">
+              <!-- Review Slide 1 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="review-content">
+                    <p>
+                      Great experience! The car was clean and the pickup was on
+                      time - highly recommend for anyone needing a rental.
+                    </p>
+                  </div>
+                  <div class="reviewer-info">
+                    <img
+                      src="https://avatar.iran.liara.run/public/31"
+                      alt="Ahmed Hassan"
+                      class="reviewer-img"
+                    />
+                    <div class="reviewer-details">
+                      <h5>Ahmed Hassan</h5>
+                      <p>client</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review Slide 2 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="review-content">
+                    <p>
+                      Smooth and hassle-free rental process — the staff was
+                      friendly, and the vehicle was in excellent condition.
+                    </p>
+                  </div>
+                  <div class="reviewer-info">
+                    <img
+                      src="https://avatar.iran.liara.run/public/5"
+                      alt="Mohamed Ahemd"
+                      class="reviewer-img"
+                    />
+                    <div class="reviewer-details">
+                      <h5>Mohamed Ahemd</h5>
+                      <p>Client</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review Slide 3 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <div class="review-content">
+                    <p>
+                      Great experience from start to finish! The car was clean,
+                      comfortable, and perfect for our trip.
+                    </p>
+                  </div>
+                  <div class="reviewer-info">
+                    <img
+                      src="https://avatar.iran.liara.run/public/95"
+                      alt="Mai Essam"
+                      class="reviewer-img"
+                    />
+                    <div class="reviewer-details">
+                      <h5>Mai Essam</h5>
+                      <p>CLient</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review Slide 4 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                  <div class="review-content">
+                    <p>
+                      Quick booking, fair prices, and the car performed
+                      perfectly throughout the rental period.
+                    </p>
+                  </div>
+                  <div class="reviewer-info">
+                    <img
+                      src="https://avatar.iran.liara.run/public/36"
+                      alt="Ali Mahmoud"
+                      class="reviewer-img"
+                    />
+                    <div class="reviewer-details">
+                      <h5>Ali Mahmoud</h5>
+                      <p>Client</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review Slide 5 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </div>
+                  <div class="review-content">
+                    <p>
+                      Super easy rental process and the car was clean, modern,
+                      and fuel-efficient — highly recommended!
+                    </p>
+                  </div>
+                  <div class="reviewer-info">
+                    <img
+                      src="https://avatar.iran.liara.run/public/42"
+                      alt="Hassan Ali"
+                      class="reviewer-img"
+                    />
+                    <div class="reviewer-details">
+                      <h5>Hassan Ali"</h5>
+                      <p>Client</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination and Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section class="team-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Meet Our Expert Team</h2>
+            <p>
+              Our team of professionals is dedicated to delivering exceptional
+              results. Get to know the talented individuals who make it all
+              possible.
+            </p>
+          </div>
+
+          <div class="team-grid">
+            <!-- Team Member 1 -->
+            <div class="team-card">
+              <div class="team-img">
+                <span class="highlight-badge">Lead</span>
+                <img
+                  src="https://avatar.iran.liara.run/public/46"
+                  alt="Ahmed Bedair"
+                />
+                <div class="team-social">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+              <div class="team-info">
+                <h4>Ahmed Bedair</h4>
+                <p>Front End Developer</p>
+                <a href="#" class="team-btn">View Profile</a>
+              </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-card">
+              <div class="team-img">
+                <img
+                  src="https://avatar.iran.liara.run/public/3"
+                  alt="Ahmed Assem"
+                />
+                <div class="team-social">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+              <div class="team-info">
+                <h4>Ahmed Assem</h4>
+                <p>Front End Developer</p>
+                <a href="#" class="team-btn">View Profile</a>
+              </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-card">
+              <div class="team-img">
+                <img
+                  src="https://avatar.iran.liara.run/public/36"
+                  alt="Mohamed Shawky"
+                />
+                <div class="team-social">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+              <div class="team-info">
+                <h4>Mohamed Shawky</h4>
+                <p>Front End Developer</p>
+                <a href="#" class="team-btn">View Profile</a>
+              </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="team-card">
+              <div class="team-img">
+                <img
+                  src="https://avatar.iran.liara.run/public/71"
+                  alt="Rahaf Hazzem"
+                />
+                <div class="team-social">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+              </div>
+              <div class="team-info">
+                <h4>Rahaf Hazzem</h4>
+                <p>Front End Developer</p>
+                <a href="#" class="team-btn">View Profile</a>
+              </div>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="team-card">
+              <div class="team-img">
+                <img
+                  src="https://avatar.iran.liara.run/public/36"
+                  alt="Abdelrahman Ali"
+                />
+                <div class="team-social">
+                  <a
+                    target="_blank"
+                    href="https://www.facebook.com/profile.php?id=100009444551318&locale=ar_AR"
+                    ><i class="fab fa-facebook-f"></i
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://x.com/Ody_Ody_1999?t=Dq1HY5rESG-KulH7Xnx7hg&s=09"
+                    ><i class="fab fa-twitter"></i
+                  ></a>
+                  <a
+                    target="_blank"
+                    href="https://www.linkedin.com/in/abdelrahman-ali-b3a343284/"
+                    ><i class="fab fa-linkedin-in"></i
+                  ></a>
+                  <a href="https://www.instagram.com/abdelrhman__1812/"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="team-info">
+                <h4>Abdelrahman Ali</h4>
+                <p>Front End Developer</p>
+                <a
+                  href="https://portfolio-abdelrhman1812s-projects.vercel.app/"
+                  target="_blank"
+                  class="team-btn"
+                  >View Profile</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Stats Section -->
       <section id="stats-section">
         <div class="container-xxl">
-          <div class="section-header text-center">
-            <h2 class="section-title">Our Track Record</h2>
-            <p class="section-subtitle">
+          <div class="section-header">
+            <h2>Our Track Record</h2>
+            <p>
               Trusted by thousands of satisfied customers for their
               transportation needs
             </p>
@@ -279,8 +674,39 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="./js/slider.js"></script>
     <script type="module" src="./js/index.js"></script>
     <script type="module" src="./js/home.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var swiper = new Swiper(".reviewsSwiper", {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+            },
+            992: {
+              slidesPerView: 3,
+            },
+          },
+        });
+      });
+    </script>
   </body>
 </html>

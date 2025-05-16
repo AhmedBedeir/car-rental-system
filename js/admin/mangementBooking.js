@@ -4,7 +4,6 @@ const bookingList = new Booking();
 
 await bookingList.ready;
 
-console.log(bookingList);
 const bookings = bookingList.getBookings();
 
 const bookingTableBody = document.getElementById("booking-data");
@@ -56,18 +55,30 @@ const bookingRow = (booking) => {
 
 const statusDropdown = (booking) => {
   let optionsContainer = "";
-
   const now = new Date();
   const returnDate = booking.returnDate ? new Date(booking.returnDate) : null;
+  const isBookingCompleted = returnDate && returnDate <= now;
+  const isFinalState = ["completed", "cancelled"].includes(booking.status);
 
   for (const option of status_options) {
-    const shouldDisableCompleted =
-      option.value === "completed" && (!returnDate || returnDate > now);
+    const isSelected = booking.status === option.value;
+
+    let shouldDisable = false;
+
+    if (isFinalState) {
+      shouldDisable = option.value !== booking.status;
+    } else if (option.value === "completed") {
+      shouldDisable = !isBookingCompleted;
+    } else if (booking.status === "confirmed" && option.value === "pending") {
+      shouldDisable = true;
+    } else if (booking.status === "pending" && option.value === "completed") {
+      shouldDisable = true;
+    }
 
     optionsContainer += `
       <option value="${option.value}" 
-              ${booking.status === option.value ? "selected" : ""}
-              ${shouldDisableCompleted ? "disabled" : ""}>
+              ${isSelected ? "selected" : ""}
+              ${shouldDisable ? "disabled" : ""}>
         ${option.label}
       </option>
     `;
@@ -76,7 +87,8 @@ const statusDropdown = (booking) => {
   return `
     <select class="status-select ${booking.status}" 
             data-booking-id="${booking.booking_id}"
-            onchange="updateStatus(${booking.booking_id}, this.value)">
+            onchange="updateStatus(${booking.booking_id}, this.value)"
+            ${isFinalState ? "disabled" : ""}>
       ${optionsContainer}
     </select>
   `;
@@ -122,17 +134,26 @@ const updateStatus = (bookingId, newStatus) => {
   }
 
   if (newStatus === "cancelled") {
-    booking.car.available = true;
+    // booking.car.available = true;
     booking.pickupDate = null;
     booking.returnDate = null;
-  } else if (
-    newStatus === "completed" ||
-    booking.pickupDate === null ||
-    booking.returnDate === null ||
-    returnDate < now
-  ) {
-    booking.car.available = true;
   }
+
+  // else if (
+  //   newStatus === "completed" ||
+  //   booking.pickupDate === null ||
+  //   booking.returnDate === null ||
+  //   returnDate < now
+  // ) {
+  //   // booking.car.available = true;
+  // } else if (newStatus === "confirmed") {
+  //   // booking.car.available = false;
+  // }
+  // const cars = new Cars();
+  // const car = cars.getCarById(String(booking.carId));
+  // car.available = false;
+  // console.log(car);
+  // cars.saveToLocalStorage();
 
   booking.status = newStatus;
 
@@ -151,6 +172,7 @@ const updateStatus = (bookingId, newStatus) => {
     selectElement.className = `status-select ${newStatus}`;
     selectElement.value = newStatus;
   }
+  displayBookings();
 
   return true;
 };

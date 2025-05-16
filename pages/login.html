@@ -24,6 +24,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet" href="../css/footer.css" />
@@ -43,9 +47,6 @@
             </button>
           </div>
 
-          
-          
-
           <div class="form active" id="login-form">
             <h2>Welcome back</h2>
             <p class="form-subtitle">Login to access your car rental account</p>
@@ -58,7 +59,6 @@
                   id="login-username"
                   name="username"
                   placeholder="Enter your username or email"
-                  required
                 />
               </div>
 
@@ -69,15 +69,14 @@
                   id="login-password"
                   name="password"
                   placeholder="Enter your password"
-                  required
                 />
               </div>
               <div
-            role="alert"
-            id="login-alert"
-            class="alert"
-            style="display: none"
-          ></div>
+                role="alert"
+                id="login-alert"
+                class="alert"
+                style="display: none"
+              ></div>
               <button type="submit" class="btn-primary">Login</button>
             </form>
 
@@ -105,7 +104,6 @@
                   id="signup-name"
                   name="name"
                   placeholder="Enter your full name"
-                  required
                 />
               </div>
 
@@ -116,7 +114,6 @@
                   id="signup-username"
                   name="username"
                   placeholder="Choose a username"
-                  required
                 />
               </div>
 
@@ -127,7 +124,6 @@
                   id="signup-email"
                   name="email"
                   placeholder="Enter your email"
-                  required
                 />
               </div>
 
@@ -138,7 +134,6 @@
                   id="signup-phone"
                   name="phone"
                   placeholder="Enter your phone number"
-                  required
                 />
               </div>
 
@@ -149,7 +144,6 @@
                   id="signup-password"
                   name="password"
                   placeholder="Create a password"
-                  required
                 />
               </div>
 
@@ -160,15 +154,14 @@
                   id="signup-confirm"
                   name="confirm_password"
                   placeholder="Confirm your password"
-                  required
                 />
               </div>
               <div
-            role="alert"
-            id="signup-alert"
-            class="alert"
-            style="display: none"
-          ></div>
+                role="alert"
+                id="signup-alert"
+                class="alert"
+                style="display: none"
+              ></div>
               <button type="submit" class="btn-primary">Create Account</button>
             </form>
 
@@ -211,6 +204,7 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="module" src="../js/index.js"></script>
     <script type="module" src="../js/login.js"></script>

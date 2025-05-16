@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const backgroundImages = [
-    "assets/hero_section/bg_1.jpg",
-    "assets/hero_section/bg_2.jpg",
+    "    assets/hero_section/hero-bg.jpg",
     "assets/hero_section/bg_3.jpg",
+    "assets/hero_section/bg_2.jpg",
+    "assets/hero_section/bg_1.jpg",
   ];
 
   // Catch elements
@@ -37,8 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       dot.addEventListener("click", () => {
-        if (isAnimating || currentSlide === index) return;
-
         currentSlide = index;
         updateSlider();
       });
@@ -49,7 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateBackground = () => {
     heroBackground.style.background = `url('${backgroundImages[currentSlide]}')`;
-
+    heroBackground.style.backgroundSize = "cover";
+    heroBackground.style.backgroundPosition = "center";
     updateActiveDot();
   };
 
@@ -86,8 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Go to previous slide
   const prevSlide = () => {
-    if (isAnimating) return;
-
     currentSlide =
       (currentSlide - 1 + backgroundImages.length) % backgroundImages.length;
     updateSlider();

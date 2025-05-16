@@ -31,6 +31,37 @@ class Booking {
     }
   }
 
+  // getBookings() {
+  //   this.bookings.forEach((booking) => {
+  //     // User
+  //     const users = new Users();
+  //     const user = users.getUserById(booking.userId);
+  //     console.log(user);
+  //     booking.user = user;
+
+  //     // Car
+  //     const cars = new Cars();
+  //     const car = cars.getCarById(String(booking.carId));
+
+  //     // Check if return date is in the past
+  //     const returnDate = new Date(booking.returnDate);
+  //     const now = new Date();
+
+  //     if (returnDate < now && booking.status === "confirmed") {
+  //       car.available = true;
+  //       booking.status = "completed";
+  //     } else if (booking.status === "cancelled") {
+  //       car.available = true;
+  //     } else if (returnDate < now && booking.status === "pending") {
+  //       car.available = true;
+  //     }
+  //     cars.saveToLocalStorage();
+  //     booking.car = car;
+  //   });
+
+  //   return this.bookings;
+  // }
+
   getBookings() {
     this.bookings.forEach((booking) => {
       // User
@@ -47,24 +78,26 @@ class Booking {
       const returnDate = new Date(booking.returnDate);
       const now = new Date();
 
-      if (
-        (returnDate < now && booking.status === "confirmed") ||
-        (returnDate < now && booking.status === "pending")
-      ) {
-        car.available = true;
-        booking.status = "completed";
-      } else if (booking.status === "cancelled") {
-        car.available = true;
-      } else {
-        car.available = false;
+      if (returnDate < now) {
+        if (booking.status === "confirmed") {
+          booking.status = "completed";
+          // car.available = true;
+        }
+        //  else if (booking.status === "pending") {
+        //   car.available = true;
+        // }
       }
-      // cars.saveToLocalStorage();
+
+      // if (booking.status === "cancelled") {
+      //   car.available = true;
+      // }
+
+      cars.saveToLocalStorage();
       booking.car = car;
     });
 
     return this.bookings;
   }
-
   getBookingDetails(user) {
     console.log(this.bookings);
     try {
@@ -91,11 +124,12 @@ class Booking {
         const now = new Date();
 
         if (returnDate < now && booking.status !== "cancelled") {
-          car.available = true;
+          // car.available = true;
           booking.status = "completed";
-        } else {
-          car.available = false;
         }
+        //  else {
+        //   car.available = false;
+        // }
 
         booking.car = car;
       });

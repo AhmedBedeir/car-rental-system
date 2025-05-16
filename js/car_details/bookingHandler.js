@@ -3,93 +3,137 @@ import { showToast } from "./uiHelpers.js";
 
 //Check car is available for booking
 export function checkCarAvailability() {
-  const car = getSelectedCar();
-  const carId = car.id;
+  // const car = getSelectedCar();
+  // const carId = car.id;
+  // if (car.available === false) {
+  //   displayUnavailableMessage();
+  //   hideBookingElements();
+  //   return;
+  // }
+  // const allBookings = window.bookingClass.getBookings();
+  // const today = new Date();
+  // const activeBooking = allBookings.find((booking) => {
+  //   if (!booking || booking.carId !== carId) return false;
+  //   try {
+  //     const returnDate = new Date(booking.returnDate);
+  //     const isFutureBooking = returnDate >= today;
+  //     return isFutureBooking;
+  //     // && booking.status === "confirmed"; // Only block confirmed bookings
+  //   } catch {
+  //     return false;
+  //   }
+  // });
+  // if (activeBooking) {
+  //   displayUnavailableMessage(activeBooking);
+  //   hideBookingElements();
+  // }
+}
 
-  if (car.available === false) {
-    displayUnavailableMessage();
-    hideBookingElements();
-    return;
-  }
+export function displayUnavailableMessage(
+  booking,
+  targetSelector = ".booking-msg"
+) {
+  try {
+    // Clear existing alerts first to avoid UI issues
+    clearExistingAlerts();
 
-  const allBookings = window.bookingClass.getBookings();
-  const today = new Date();
+    // Create and configure the alert container
+    const alertContainer = createAlertContainer();
 
-  const activeBooking = allBookings.find((booking) => {
-    if (!booking || booking.carId !== carId) return false;
-    try {
-      const returnDate = new Date(booking.returnDate);
-      const isFutureBooking = returnDate >= today;
-      return isFutureBooking && booking.status === "confirmed"; // Only block confirmed bookings
-    } catch {
-      return false;
-    }
-  });
+    // Generate appropriate message content
+    const messageContent = generateUnavailableMessage(booking);
+    alertContainer.innerHTML = messageContent;
 
-  if (activeBooking) {
-    displayUnavailableMessage(activeBooking);
-    hideBookingElements();
+    // Display the message in the target container
+    displayMessage(alertContainer, targetSelector);
+  } catch (error) {
+    console.error("Failed to display unavailable message:", error);
+    displayFallbackMessage(targetSelector);
   }
 }
 
-// car is unavailable for whatever reason
-export function displayUnavailableMessage(booking) {
-  // Clear existing alerts first to avoid ui issues
+// Helper functions
+
+function clearExistingAlerts() {
   const existingAlerts = document.querySelectorAll(".alert.alert-warning");
   existingAlerts.forEach((alert) => alert.remove());
+}
 
-  const alertContainer = document.createElement("div");
-  alertContainer.className = "alert alert-warning mt-3";
-  alertContainer.role = "alert";
+function createAlertContainer() {
+  const container = document.createElement("div");
+  container.className = "alert alert-warning mt-3";
+  container.role = "alert";
+  return container;
+}
 
-  let messageContent = "";
-
-  if (booking && booking.returnDate) {
-    try {
-      const returnDate = new Date(booking.returnDate);
-      const options = {
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        second: undefined,
-        hour12: true,
-      };
-
-      messageContent = `
-            <h4 class="alert-heading">Car Currently Booked</h4>
-            <p>This vehicle will be available after:</p>
-            <div class="fw-bold mb-2">
-                ${returnDate.toLocaleDateString("en-US", options)}
-            </div>
-            <p>Please check back after this date to rent again.</p>
-        `;
-    } catch (error) {
-      console.error("Invalid return date format:", error);
-      messageContent = `
-            <h4 class="alert-heading">Vehicle Unavailable</h4>
-            <p>This car is currently booked by another user.</p>
-        `;
-    }
-  } else {
-    messageContent = `
-        <h4 class="alert-heading">Vehicle Unavailable</h4>
-        <p>This car is temporarily out of service for maintenance.</p>
-        <p class="mb-0">Please check back later or contact support.</p>
-    `;
+function generateUnavailableMessage(booking) {
+  if (!booking || !booking.returnDate) {
+    return getMaintenanceMessage();
   }
 
-  alertContainer.innerHTML = messageContent;
+  try {
+    return getBookingMessage(booking.returnDate);
+  } catch (error) {
+    console.error("Invalid return date format:", error);
+    return getGenericUnavailableMessage();
+  }
+}
 
-  const carEquipmentContainer = document.getElementById(
-    "car-equipment-container"
-  );
-  if (carEquipmentContainer) {
-    carEquipmentContainer.parentNode.insertBefore(
-      alertContainer,
-      carEquipmentContainer
-    );
+function getBookingMessage(returnDateString) {
+  const returnDate = new Date(returnDateString);
+  const options = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  };
+
+  return `
+    <h4 class="alert-heading">Car Currently Booked</h4>
+    <p>This vehicle will be available after:</p>
+    <div class="fw-bold mb-2">
+      ${returnDate.toLocaleDateString("en-US", options)}
+    </div>
+    <p>Please check back after this date to rent again.</p>
+  `;
+}
+
+function getGenericUnavailableMessage() {
+  return `
+    <h4 class="alert-heading">Vehicle Unavailable</h4>
+    <p>This car is currently booked by another user.</p>
+  `;
+}
+
+function getMaintenanceMessage() {
+  return `
+    <h4 class="alert-heading">Vehicle Unavailable</h4>
+    <p>This car is temporarily out of service for maintenance.</p>
+    <p class="mb-0">Please check back later or contact support.</p>
+  `;
+}
+
+function displayMessage(alertElement, targetSelector) {
+  const targetContainer = document.querySelector(targetSelector);
+  if (!targetContainer) {
+    throw new Error(`Target container not found: ${targetSelector}`);
+  }
+  targetContainer.innerHTML = "";
+  targetContainer.appendChild(alertElement);
+}
+
+function displayFallbackMessage(targetSelector) {
+  const targetContainer = document.querySelector(targetSelector);
+  if (targetContainer) {
+    targetContainer.innerHTML = `
+      <div class="alert alert-danger mt-3" role="alert">
+        <h4 class="alert-heading">Error</h4>
+        <p>Unable to display availability information.</p>
+        <p class="mb-0">Please try again later.</p>
+      </div>
+    `;
   }
 }
 
@@ -146,6 +190,12 @@ export function handleBooking() {
     return showToast("Please select pickup and return dates", "warning");
   }
 
+  if (isCarAlreadyBooked(car.id, pickupDate, returnDate)) {
+    return showToast(
+      "This car is already booked for the selected dates. Please choose another time.",
+      "danger"
+    );
+  }
   if (isSameDay(pickupDate, returnDate)) {
     return showToast(
       "Pickup and return dates cannot be the same day",
@@ -175,8 +225,26 @@ export function handleBooking() {
 
   bookingClass.bookings.push(booking);
   bookingClass.saveToLocalStorage();
-  checkCarAvailability();
   showToast(`Booking successful! Total: $${totalAmount}`, "success");
+}
+
+function isCarAlreadyBooked(carId, pickupDate, returnDate) {
+  const existingBookings = bookingClass.bookings.filter(
+    (booking) => booking.carId === carId
+  );
+
+  return existingBookings.some((booking) => {
+    const bookedPickup = new Date(booking.pickupDate);
+    const bookedReturn = new Date(booking.returnDate);
+    const newPickup = new Date(pickupDate);
+    const newReturn = new Date(returnDate);
+
+    return (
+      (newPickup >= bookedPickup && newPickup <= bookedReturn) ||
+      (newReturn >= bookedPickup && newReturn <= bookedReturn) ||
+      (newPickup <= bookedPickup && newReturn >= bookedReturn)
+    );
+  });
 }
 
 //Get dates and sort

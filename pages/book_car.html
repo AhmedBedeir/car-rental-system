@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Booking Form</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .summary {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Car Booking Form</h1>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="carId">Car ID:</label>
+        <input type="text" id="carId" value="2" required />
+      </div>
+
+      <div class="form-group">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" value="11" required />
+      </div>
+
+      <div class="form-group">
+        <label for="pickupDate">Pickup Date:</label>
+        <input
+          type="text"
+          id="pickupDate"
+          class="datepicker"
+          placeholder="Select pickup date"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="returnDate">Return Date:</label>
+        <input
+          type="text"
+          id="returnDate"
+          class="datepicker"
+          placeholder="Select return date"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="dailyRate">Daily Rate ($):</label>
+        <input type="number" id="dailyRate" value="95" required />
+      </div>
+
+      <button type="submit">Book Now</button>
+    </form>
+
+    <div class="summary" id="bookingSummary" style="display: none">
+      <h3>Booking Summary</h3>
+      <pre id="summaryContent"></pre>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../js/book_car.js"></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>

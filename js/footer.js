@@ -4,19 +4,19 @@ const footer = `
     <!-- Contact Row -->
     <div class="row g-4 mb-4">
       <!-- Logo Section -->
-      <div class="col-md-3 d-flex align-items-center">
+      <div class="col-md-4 col-lg-3 d-flex align-items-center">
         <div class="footer-brand">
           <img src="../assets/LogoPurple.svg" alt="Car Rental Logo" style="width: var(--logo-width);;padding:5px;border-radius:var(--border-radius);" />
         </div>
       </div>
 
       <!-- Address Section -->
-      <div class="col-md-3">
+      <div class="col-md-3 col-lg-3">
         <div class="d-flex align-items-center h-100">
           <i class="bi bi-geo-alt-fill fs-4 me-3" style="color: var(--secondary-color);"></i>
           <div>
             <p class="mb-0 fw-bold">Address</p>
-            <p class="mb-0 ">123 Main Street, Cairo</p>
+            <p class="mb-0 ">Mansoura, Egypt</p>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@ const footer = `
           <i class="bi bi-envelope-fill fs-4 me-3" style="color: var(--secondary-color);"></i>
           <div>
             <p class="mb-0 fw-bold">Email</p>
-            <p class="mb-0 ">info@carental.com</p>
+            <p class="mb-0 ">abdelrhmanali1812@gmail.com</p>
           </div>
         </div>
       </div>
@@ -77,11 +77,10 @@ const footer = `
       <div class="col-lg-3 col-md-6">
         <h3 class="h5 mb-3">Useful Links</h3>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="../index.html" class=" text-decoration-none hover-text-primary">Home</a></li>
-          <li class="mb-2"><a href="#" class=" text-decoration-none hover-text-primary">About Us</a></li>
-          <li class="mb-2"><a href="#" class=" text-decoration-none hover-text-primary">Services</a></li>
+          <li class="mb-2"><a href="/" class=" text-decoration-none hover-text-primary">Home</a></li>
+          <li class="mb-2"><a href="../pages/aboutUs.html" class=" text-decoration-none hover-text-primary">About Us</a></li>
+          <li class="mb-2"><a href="../pages/carListings.html" class=" text-decoration-none hover-text-primary">Car List</a></li>
           <li class="mb-2"><a href="../pages/contactUs.html" class=" text-decoration-none hover-text-primary">Contact</a></li>
-          <li><a href="#" class=" text-decoration-none hover-text-primary">Privacy Policy</a></li>
         </ul>
       </div>
 
@@ -89,11 +88,11 @@ const footer = `
       <div class="col-lg-3 col-md-6">
         <h3 class="h5 mb-3">Cars</h3>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="#" class=" text-decoration-none hover-text-primary">Sedan</a></li>
-          <li class="mb-2"><a href="#" class=" text-decoration-none hover-text-primary">SUV</a></li>
-          <li class="mb-2"><a href="#" class=" text-decoration-none hover-text-primary">Coupe</a></li>
-          <li class="mb-2"><a href="#" class=" text-decoration-none hover-text-primary">Convertible</a></li>
-          <li><a href="#" class=" text-decoration-none hover-text-primary">Pickup Truck</a></li>
+          <li class="mb-2"><a href="../pages/carListings.html" class=" text-decoration-none hover-text-primary">Sedan</a></li>
+          <li class="mb-2"><a href="../pages/carListings.html" class=" text-decoration-none hover-text-primary">SUV</a></li>
+          <li class="mb-2"><a href="../pages/carListings.html" class=" text-decoration-none hover-text-primary">Coupe</a></li>
+          <li class="mb-2"><a href="../pages/carListings.html" class=" text-decoration-none hover-text-primary">Convertible</a></li>
+          <li><a href="../pages/carListings.html" class=" text-decoration-none hover-text-primary">Pickup Truck</a></li>
         </ul>
       </div>
     </div>

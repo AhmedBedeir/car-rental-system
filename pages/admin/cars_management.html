@@ -3,15 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../../css/admin/admin_layout.css" />
-    <link rel="stylesheet" href="../../css/admin/carManagement.css" />
-    <link rel="stylesheet" href="../../css/index.css" />
-    <script>
-      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (!currentUser || currentUser?.role === "customer") {
-        window.location.href = "../../index.html";
-      }
-    </script>
     <!-- Bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
@@ -27,6 +18,19 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../css/admin/admin_layout.css" />
+    <link rel="stylesheet" href="../../css/admin/carManagement.css" />
+    <link rel="stylesheet" href="../../css/index.css" />
+    <script>
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (!currentUser || currentUser?.role === "customer") {
+        window.location.href = "../../index.html";
+      }
+    </script>
     <title>Admin | Cars Management</title>
   </head>
 
@@ -113,6 +117,17 @@
         </nav>
 
         <div class="dashboard-content-area">
+          <div class="d-flex justify-content-end">
+            <button
+              id="add-car-btn"
+              class="btn text-white"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              style="margin: 10px"
+            >
+              Add Car
+            </button>
+          </div>
           <!-- Table  -->
           <div class="cars-table-container">
             <table class="cars-table">
@@ -125,20 +140,12 @@
                   <th>Price/Day</th>
                   <th>Availability</th>
                   <th>Features</th>
+                  <th>Image</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody id="cars-data"></tbody>
             </table>
-            <button
-              id="add-car-btn"
-              class="btn btn-warning"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              style="margin: 10px"
-            >
-              Add Car
-            </button>
           </div>
         </div>
       </div>
@@ -167,7 +174,7 @@
             <form id="update-form">
               <input type="hidden" id="car-id" />
               <div class="mb-3">
-                <label for="brand" class="form label">Brand</label>
+                <label for="brand" class="form-label">Brand</label>
                 <select id="brand" class="form-select bg-white text-dark">
                   <option value="">Select Brand</option>
                 </select>
@@ -179,22 +186,30 @@
                 </select>
               </div>
               <div class="mb-3">
-                <label for="model" class="form-label">Type</label>
+                <label for="type" class="form-label">Type</label>
                 <select id="type" class="form-select bg-white text-dark">
                   <option value="">Select Type</option>
                 </select>
               </div>
               <div class="mb-3">
-                <label for="model" class="form-label">Price/Day</label>
-                <input type="text" class="form-control" id="pricePerDay" />
+                <label for="pricePerDay" class="form-label">Price/Day</label>
+                <input type="number" class="form-control" id="pricePerDay" />
               </div>
               <div class="mb-3">
-                <label for="model" class="form-label">Features</label>
+                <label for="features" class="form-label"
+                  >Features (comma separated)</label
+                >
                 <input type="text" class="form-control" id="features" />
               </div>
               <div class="mb-3">
-                <label for="model" class="form-label">Images</label>
-                <input type="text" class="form-control" id="images" />
+                <label for="images-upload" class="form-label">Images</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="images-upload"
+                  multiple
+                />
+                <div id="images-preview" class="mt-2"></div>
               </div>
             </form>
           </div>
@@ -225,6 +240,7 @@
       integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="../../js/admin/sidebar.js"></script>
     <script type="module" src="../../js/admin/carManagement.js"></script>
     <script type="module" src="../../js/index.js"></script>

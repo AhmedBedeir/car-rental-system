@@ -7,11 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const content = document.getElementById("dashboard-content");
   const sidebarCollapse = document.getElementById("sidebarCollapse");
   const logoutButton = document.querySelector(".btn-logout");
-  logoutButton.addEventListener("click", function () {
-    if (confirm("Are you sure you want to log out?")) {
-      users.logout();
-      window.location.href = "../../index.html";
-    }
+  logoutButton.addEventListener("click", () => {
+    Swal.fire({
+      title: "Logout?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        users.logout();
+        window.location.href = "../../index.html";
+      }
+    });
   });
   // Toggle sidebar on button click
   sidebarCollapse.addEventListener("click", function () {

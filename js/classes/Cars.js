@@ -18,16 +18,15 @@ class Cars {
     this.saveToLocalStorage();
   }
 
-  //add new car 
+  //add new car
   addCar(newCar) {
     this.cars.push(newCar);
     this.saveToLocalStorage();
   }
 
-  //update function 
+  //update function
   updateCar(id, updatedData) {
-
-    const carIndex = this.cars.findIndex(car => car.id === id);
+    const carIndex = this.cars.findIndex((car) => car.id === id);
 
     const carData = this.cars[carIndex];
     carData.brand = updatedData.brand;
@@ -35,10 +34,10 @@ class Cars {
     carData.type = updatedData.type;
     carData.pricePerDay = updatedData.pricePerDay;
     carData.features = updatedData.features;
+    carData.images = updatedData.images;
 
     this.saveToLocalStorage();
   }
-  
 
   // handle initial data loading
   async loadInitialData() {
